@@ -275,7 +275,7 @@ className="lg:hidden text-3xl text-pink-600 ml-3"
     </a>
 
     <Link
-      href="/wishlist"jpg
+      href="/wishlist"
       onClick={() => setMenuOpen(false)}
       className="block text-lg font-semibold text-pink-700 hover:text-pink-500"
     >
