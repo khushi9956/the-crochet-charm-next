@@ -177,8 +177,8 @@ const total =
 
           </div>
 
-        </div>
-
+        </div> 
+      </div>
         {/* Order Summary */}
 
         <div className="bg-white rounded-3xl shadow-lg p-8 h-fit sticky top-8">
@@ -240,6 +240,6 @@ const total =
       </div>
 
     </main>
-  </div>
-  );
-}
+    
+ );
+}    
