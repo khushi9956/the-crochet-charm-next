@@ -120,7 +120,7 @@ export default function CartPage() {
                 >
 
                   <img
-                    src={product.image}
+                    src={item.image}
                     alt={item.name}
                     className="w-40 h-40 object-cover rounded-2xl border"
                   />
