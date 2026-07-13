@@ -85,10 +85,10 @@ const toggleWishlist = (product: any) => {
 <div className="relative">
 
   <img
-    src={`https://the-crochet-charm-api.onrender.com${product.image}`}
-    alt={product.name}
-    className="w-full h-40 sm:h-56 md:h-80 object-cover rounded-t-3xl"
-  />
+  src={product.image}
+  alt={product.name}
+  className="w-full h-40 sm:h-56 md:h-80 object-cover rounded-t-3xl"
+/>
 
   <button
     onClick={() => toggleWishlist(product)}

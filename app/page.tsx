@@ -221,7 +221,7 @@ className="lg:hidden text-3xl text-pink-600 ml-3"
           className="flex items-center gap-3 p-3 hover:bg-pink-50"
         >
           <img
-            src={`https://the-crochet-charm-api.onrender.com${product.image}`}
+          src={product.image}
             className="w-12 h-12 rounded-lg object-cover"
           />
 

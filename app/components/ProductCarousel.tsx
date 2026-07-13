@@ -15,8 +15,10 @@ export default function ProductCarousel() {
 useEffect(() => {
   fetch("https://the-crochet-charm-api.onrender.com/api/products/")
     .then((res) => res.json())
-    .then((data) => setProducts(data))
-    .catch((err) => console.log(err));
+    .then((data) => {
+      console.log(data);
+      setProducts(data);
+    });
 }, []);
   return (
     <section

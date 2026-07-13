@@ -87,7 +87,7 @@ if (!product) {
 <div className="bg-white rounded-3xl shadow-xl h-[500px] flex items-center justify-center">
 
       <img
-        src={`https://the-crochet-charm-api.onrender.com${product.image}`}
+        src={product.image}
         alt={product.name}
         className="w-[350px] h-[400px] object-cover rounded-2xl mx-auto "
       />
