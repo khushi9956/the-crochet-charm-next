@@ -307,7 +307,7 @@ className="lg:hidden text-3xl text-pink-600 ml-3"
 
  
 <section
-  className="relative min-h-screen flex items-center justify-center overflow-hidden"
+   className="relative min-h-screen flex items-center justify-center overflow-hidden"
 >
   <div
     className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -316,7 +316,7 @@ className="lg:hidden text-3xl text-pink-600 ml-3"
     }}
   >
   <div className="absolute inset-0 bg-white/25"></div>
- <div className="relative z-10 max-w-4xl w-full">
+<div className="relative z-10 w-full max-w-4xl mx-auto text-center px-6 animate-[fadeIn_1.5s_ease-in]">
   
   <div className="relative z-10 max-w-4xl w-full animate-[fadeIn_1.5s_ease-in]">
      <img
