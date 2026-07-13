@@ -158,16 +158,13 @@ if (!product) {
   🛒 Add to Cart
 </button>
 <Link
-  href="/checkout"
+  href="/checkout?type=buy"
   onClick={() => {
-    localStorage.setItem(
-      "buyNow",
-      JSON.stringify(product)
-    );
+    localStorage.setItem("buyNow", JSON.stringify(product));
   }}
   className="flex-1 bg-green-500 hover:bg-green-600 text-white py-4 rounded-2xl text-center font-semibold text-lg shadow-lg"
 >
-  💚 Order Now
+  💚 Buy Now
 </Link>
 
 </div>

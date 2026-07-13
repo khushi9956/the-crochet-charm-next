@@ -1,10 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 export default function CheckoutPage() {
 
-  const [product, setProduct] = useState<any>(null);
+  const searchParams = useSearchParams();
+
+  const [products, setProducts] = useState<any[]>([]);
+
+  const [loading, setLoading] = useState(true);
 
   const [form, setForm] = useState({
     name: "",
@@ -16,27 +21,73 @@ export default function CheckoutPage() {
   });
 
   useEffect(() => {
-    
-    const data = localStorage.getItem("buyNow");
 
-    if (data) {
-      setProduct(JSON.parse(data));
+    const type = searchParams.get("type");
+
+    if (type === "cart") {
+
+      const cart = JSON.parse(
+        localStorage.getItem("checkoutCart") || "[]"
+      );
+
+      setProducts(cart);
+
+    } else {
+
+      const buy = JSON.parse(
+        localStorage.getItem("buyNow") || "null"
+      );
+
+      if (buy) {
+        setProducts([buy]);
+      }
+
     }
-  }, []);
-  const deliveryCharge = 40;
 
-const total =
-  Number(product?.price || 0) + deliveryCharge;
+    setLoading(false);
+
+  }, [searchParams]);
+
+  const deliveryCharge =
+    products.length > 0 ? 40 : 0;
+
+  const subtotal = products.reduce(
+
+    (sum, item) =>
+
+      sum +
+      Number(item.price) *
+      (item.quantity || 1),
+
+    0
+
+  );
+
+  const total =
+    subtotal + deliveryCharge;
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+
+    e:
+      React.ChangeEvent<
+        HTMLInputElement |
+        HTMLTextAreaElement
+      >
+
   ) => {
+
     setForm({
+
       ...form,
-      [e.target.name]: e.target.value,
+
+      [e.target.name]:
+        e.target.value,
+
     });
+
   };
   const handlePayment = async () => {
+
   if (
     !form.name ||
     !form.phone ||
@@ -49,6 +100,7 @@ const total =
   }
 
   try {
+
     const response = await fetch(
       "https://the-crochet-charm-api.onrender.com/api/create-order/",
       {
@@ -62,23 +114,27 @@ const total =
       }
     );
 
+    if (!response.ok) {
+      throw new Error("Unable to create order");
+    }
+
     const order = await response.json();
 
     const options = {
+
       key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+
       amount: order.amount,
+
       currency: order.currency,
-      name: "The Crochet Charm",
-      description: product.name,
-      image: "/images/logo.png",
+
       order_id: order.id,
 
-      handler: function (response: any) {
-        alert(
-          "Payment Successful!\nPayment ID: " +
-            response.razorpay_payment_id
-        );
-      },
+      name: "The Crochet Charm",
+
+      description: "Handmade Crochet Products",
+
+      image: "/images/logo.png",
 
       prefill: {
         name: form.name,
@@ -87,159 +143,328 @@ const total =
       },
 
       theme: {
-        color: "#ec4899",
+        color: "#db2777",
       },
+
+      handler: async function (response:any){
+
+const verify=await fetch(
+
+"https://the-crochet-charm-api.onrender.com/api/verify-payment/",
+
+{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":"application/json"
+
+},
+
+body:JSON.stringify(response)
+
+}
+
+);
+
+const data=await verify.json();
+
+if(data.success){
+
+alert("Payment Successful ❤️");
+
+localStorage.removeItem("buyNow");
+
+localStorage.removeItem("checkoutCart");
+
+localStorage.removeItem("cart");
+
+window.location.href="/success";
+
+}else{
+
+alert("Payment Verification Failed");
+
+}
+
+}
     };
 
-    const razor = new (window as any).Razorpay(options);
-    razor.open();
+    const razorpay = new (window as any).Razorpay(options);
+
+    razorpay.open();
+
   } catch (error) {
-    console.error(error);
+
+    console.log(error);
+
     alert("Unable to start payment.");
+
   }
+
 };
 
-  if (!product) {
+  if (loading) {
+
     return (
+
       <div className="min-h-screen flex items-center justify-center text-2xl font-bold text-pink-600">
-        Loading...
+
+        Loading Checkout...
+
       </div>
+
     );
+
   }
-
   return (
-    <main className="min-h-screen bg-pink-50 py-12">
 
-      <div className="max-w-6xl mx-auto grid lg:grid-cols-3 gap-10 px-6">
+<main className="min-h-screen bg-pink-50 py-12">
 
-        {/* Checkout Form */}
+<div className="max-w-6xl mx-auto grid lg:grid-cols-3 gap-10 px-6">
 
-        <div className="lg:col-span-2 bg-white rounded-3xl shadow-lg p-8">
+<div className="lg:col-span-2 bg-white rounded-3xl shadow-lg p-8">
 
-          <h1 className="text-4xl font-bold text-pink-700 mb-8">
-            Checkout
-          </h1>
+<h1 className="text-4xl font-bold text-pink-700 mb-8">
 
-          <div className="grid md:grid-cols-2 gap-5">
+Checkout
 
-            <input
-              type="text"
-              name="name"
-              placeholder="Full Name"
-              value={form.name}
-              onChange={handleChange}
-              className="border rounded-xl p-4"
-            />
+</h1>
 
-            <input
-              type="text"
-              name="phone"
-              placeholder="Phone Number"
-              value={form.phone}
-              onChange={handleChange}
-              className="border rounded-xl p-4"
-            />
+<div className="grid md:grid-cols-2 gap-5"></div>
+<input
 
-            <input
-              type="email"
-              name="email"
-              placeholder="Email Address"
-              value={form.email}
-              onChange={handleChange}
-              className="border rounded-xl p-4 md:col-span-2"
-            />
+type="text"
 
-            <textarea
-              name="address"
-              placeholder="Full Address"
-              value={form.address}
-              onChange={handleChange}
-              className="border rounded-xl p-4 md:col-span-2 h-32"
-            />
+name="name"
 
-            <input
-              type="text"
-              name="city"
-              placeholder="City"
-              value={form.city}
-              onChange={handleChange}
-              className="border rounded-xl p-4"
-            />
+placeholder="Full Name"
 
-            <input
-              type="text"
-              name="pincode"
-              placeholder="Pincode"
-              value={form.pincode}
-              onChange={handleChange}
-              className="border rounded-xl p-4"
-            />
+value={form.name}
 
-          </div>
+onChange={handleChange}
 
-        </div> 
+className="border rounded-xl p-4"
+
+/>
+<input
+
+type="text"
+
+name="phone"
+
+placeholder="Phone Number"
+
+value={form.phone}
+
+onChange={handleChange}
+
+className="border rounded-xl p-4"
+
+/>
+<input
+
+type="email"
+
+name="email"
+
+placeholder="Email"
+
+value={form.email}
+
+onChange={handleChange}
+
+className="border rounded-xl p-4 md:col-span-2"
+
+/>
+<textarea
+
+name="address"
+
+placeholder="Complete Address"
+
+value={form.address}
+
+onChange={handleChange}
+
+className="border rounded-xl p-4 h-32 md:col-span-2"
+
+/>
+<input
+
+type="text"
+
+name="city"
+
+placeholder="City"
+
+value={form.city}
+
+onChange={handleChange}
+
+className="border rounded-xl p-4"
+
+/>
+<input
+
+type="text"
+
+name="pincode"
+
+placeholder="Pincode"
+
+value={form.pincode}
+
+onChange={handleChange}
+
+className="border rounded-xl p-4"
+
+/>
+        </div>
+
       </div>
-        {/* Order Summary */}
 
-        <div className="bg-white rounded-3xl shadow-lg p-8 h-fit sticky top-8">
+      {/* Order Summary */}
 
-          <h2 className="text-2xl font-bold text-pink-700 mb-6">
-            Order Summary
-          </h2>
+      <div className="bg-white rounded-3xl shadow-lg p-8 h-fit sticky top-8">
 
-          <div className="flex items-center gap-4 mb-6">
+        <h2 className="text-3xl font-bold text-pink-700 mb-8">
 
-            <img
-           src={product.image}
-              alt={product.name}
-              className="w-24 h-24 object-cover rounded-xl border"
-            />
-            
+          Order Summary
 
-            <div>
+        </h2>
 
-              <h3 className="font-bold text-lg">
-                {product.name}
-              </h3>
+        <div className="space-y-6">
 
-              <p className="text-pink-600 text-xl font-bold">
-                ₹{product.price}
-              </p>
+          {products.map((item) => (
+
+            <div
+              key={item.id}
+              className="flex items-center gap-4 border-b pb-5"
+            >
+
+              <img
+                src={item.image}
+                alt={item.name}
+                className="w-24 h-24 rounded-2xl object-cover border"
+              />
+
+              <div className="flex-1">
+
+                <h3 className="font-bold text-lg">
+
+                  {item.name}
+
+                </h3>
+
+                <p className="text-pink-600 font-semibold">
+
+                  ₹{item.price}
+
+                </p>
+
+                <p className="text-gray-500 text-sm">
+
+                  Qty : {item.quantity || 1}
+
+                </p>
+
+              </div>
 
             </div>
 
+          ))}
+
+        </div>
+
+        <div className="mt-8 space-y-4">
+
+          <div className="flex justify-between">
+
+            <span>Subtotal</span>
+
+            <span>₹{subtotal}</span>
+
           </div>
 
-          <div className="flex justify-between mb-3">
-  <span>Delivery Charges</span>
-  <span className="font-semibold">
-    ₹{deliveryCharge}
-  </span>
-</div>
+          <div className="flex justify-between">
 
-          <hr className="my-5"/>
+            <span>Delivery Charges</span>
+
+            <span>₹{deliveryCharge}</span>
+
+          </div>
+
+          <hr />
 
           <div className="flex justify-between text-2xl font-bold">
 
             <span>Total</span>
 
-            <span>
-  ₹{total}
-</span>
+            <span className="text-pink-700">
+
+              ₹{total}
+
+            </span>
+
           </div>
-                    <button
-          onClick={handlePayment}
 
-        
-
+        </div>
+        <button
+  onClick={handlePayment}
   className="w-full mt-8 bg-green-500 hover:bg-green-600 text-white py-4 rounded-2xl text-lg font-semibold transition"
 >
-  💳 Pay Now
+  💳 Pay Securely
 </button>
+handler: async function (response:any){
 
+const verify=await fetch(
+
+"https://the-crochet-charm-api.onrender.com/api/verify-payment/",
+
+{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":"application/json"
+
+},
+
+body:JSON.stringify(response)
+
+}
+
+);
+
+const data=await verify.json();
+
+if(data.success){
+
+alert("Payment Successful ❤️");
+
+localStorage.removeItem("buyNow");
+
+localStorage.removeItem("checkoutCart");
+
+localStorage.removeItem("cart");
+
+window.location.href="/success";
+
+}else{
+
+alert("Payment Verification Failed");
+
+}
+
+}
       </div>
 
-    </main>
-    
- );
-}    
+    </div>
+
+  </main>
+
+);
+}
