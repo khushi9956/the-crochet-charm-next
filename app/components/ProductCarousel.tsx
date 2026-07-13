@@ -64,10 +64,10 @@ useEffect(() => {
     <SwiperSlide key={product.id}>
       <Link href={`/products/${product.id}`}>
         <img
-          src={`https://the-crochet-charm-api.onrender.com${product.image}`}
-          alt={product.name}
-         className="w-full h-48 sm:h-64 md:h-80 lg:h-[420px] object-cover rounded-3xl"
-        />
+  src={product.image}
+  alt={product.name}
+  className="w-full h-48 sm:h-64 md:h-80 lg:h-[420px] object-cover rounded-3xl"
+/>
       </Link>
     </SwiperSlide>
   ))}
