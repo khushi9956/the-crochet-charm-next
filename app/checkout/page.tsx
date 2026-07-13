@@ -36,6 +36,68 @@ const total =
       [e.target.name]: e.target.value,
     });
   };
+  const handlePayment = async () => {
+  if (
+    !form.name ||
+    !form.phone ||
+    !form.address ||
+    !form.city ||
+    !form.pincode
+  ) {
+    alert("Please fill all required fields.");
+    return;
+  }
+
+  try {
+    const response = await fetch(
+      "https://the-crochet-charm-api.onrender.com/api/create-order/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          amount: total * 100,
+        }),
+      }
+    );
+
+    const order = await response.json();
+
+    const options = {
+      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+      amount: order.amount,
+      currency: order.currency,
+      name: "The Crochet Charm",
+      description: product.name,
+      image: "/images/logo.png",
+      order_id: order.id,
+
+      handler: function (response: any) {
+        alert(
+          "Payment Successful!\nPayment ID: " +
+            response.razorpay_payment_id
+        );
+      },
+
+      prefill: {
+        name: form.name,
+        email: form.email,
+        contact: form.phone,
+      },
+
+      theme: {
+        color: "#ec4899",
+      },
+    };
+
+    const razor = new (window as any).Razorpay(options);
+    razor.open();
+  } catch (error) {
+    console.error(error);
+    alert("Unable to start payment.");
+  }
+};
 
   if (!product) {
     return (
@@ -166,56 +228,14 @@ const total =
 </span>
           </div>
                     <button
-            onClick={() => {
+          onClick={handlePayment}
 
-              if (
-                !form.name ||
-                !form.phone ||
-                !form.address ||
-                !form.city ||
-                !form.pincode
-              ) {
-                alert("Please fill all required fields.");
-                return;
-              }
+        
 
-              const message = `
-🌸 *New Order - The Crochet Charm*
-
-🛍️ Product: ${product.name}
-💰 Price: ₹${product.price}
-💰 Product Price: ₹${product.price}
-🚚 Delivery Charges: ₹${deliveryCharge}
-💳 Total Amount: ₹${total}
-
-👤 Customer Details
-
-Name: ${form.name}
-Phone: ${form.phone}
-Email: ${form.email}
-
-📍 Address:
-${form.address}
-
-🏙️ City: ${form.city}
-📮 Pincode: ${form.pincode}
-
-Thank you ❤️
-              `;
-
-              window.open(
-                `https://wa.me/919519499698?text=${encodeURIComponent(
-                  message
-                )}`,
-                "_blank"
-              );
-            }}
-            className="w-full mt-8 bg-green-500 hover:bg-green-600 text-white py-4 rounded-2xl text-lg font-semibold transition"
-          >
-            💚 Place Order
-          </button>
-
-        </div>
+  className="w-full mt-8 bg-green-500 hover:bg-green-600 text-white py-4 rounded-2xl text-lg font-semibold transition"
+>
+  💳 Pay Now
+</button>
 
       </div>
 
