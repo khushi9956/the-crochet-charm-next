@@ -240,5 +240,6 @@ const total =
       </div>
 
     </main>
+  </div>
   );
 }
