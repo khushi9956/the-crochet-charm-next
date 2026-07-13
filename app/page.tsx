@@ -30,7 +30,7 @@ const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
 
   try {
-    const response = await fetch("http://127.0.0.1:8000/api/contact/", {
+    const response = await fetch("https://the-crochet-charm-api.onrender.com/api/contact/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -221,7 +221,7 @@ className="lg:hidden text-3xl text-pink-600 ml-3"
           className="flex items-center gap-3 p-3 hover:bg-pink-50"
         >
           <img
-            src={`http://127.0.0.1:8000${product.image}`}
+            src={`https://the-crochet-charm-api.onrender.com${product.image}`}
             className="w-12 h-12 rounded-lg object-cover"
           />
 
@@ -307,12 +307,14 @@ className="lg:hidden text-3xl text-pink-600 ml-3"
 
  
 <section
-  className="relative min-h-[90vh] md:min-h-screen flex items-center justify-center text-center px-5 py-12 bg-cover bg-top md:bg-center bg-no-repeat"
-  style={{
-    backgroundImage: "url('/images/klara-kulikova-DTNy4OXaDSo-unsplash.jpg')",
-  }}
-
+  className="relative min-h-screen flex items-center justify-center overflow-hidden"
 >
+  <div
+    className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+    style={{
+      backgroundImage: "url('/images/background.jpg')",
+    }}
+  >
   <div className="absolute inset-0 bg-white/25"></div>
  <div className="relative z-10 max-w-4xl w-full">
   
@@ -399,7 +401,7 @@ hover:scale-105"        >
         </div>
         </div>
     </div>
-    
+    </div>
   </section>
 
 <ProductCarousel />

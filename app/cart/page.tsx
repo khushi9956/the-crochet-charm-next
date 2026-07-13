@@ -120,7 +120,7 @@ export default function CartPage() {
                 >
 
                   <img
-                    src={`http://127.0.0.1:8000${item.image}`}
+                    src={`https://the-crochet-charm-api.onrender.com${item.image}`}
                     alt={item.name}
                     className="w-40 h-40 object-cover rounded-2xl border"
                   />

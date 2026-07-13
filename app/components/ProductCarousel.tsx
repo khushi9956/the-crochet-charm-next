@@ -13,7 +13,7 @@ export default function ProductCarousel() {
     const [products, setProducts] = useState([]);
 
 useEffect(() => {
-  fetch("http://127.0.0.1:8000/api/products/")
+  fetch("https://the-crochet-charm-api.onrender.com/api/products/")
     .then((res) => res.json())
     .then((data) => setProducts(data))
     .catch((err) => console.log(err));
@@ -64,7 +64,7 @@ useEffect(() => {
     <SwiperSlide key={product.id}>
       <Link href={`/products/${product.id}`}>
         <img
-          src={`http://127.0.0.1:8000${product.image}`}
+          src={`https://the-crochet-charm-api.onrender.com${product.image}`}
           alt={product.name}
          className="w-full h-48 sm:h-64 md:h-80 lg:h-[420px] object-cover rounded-3xl"
         />

@@ -12,7 +12,7 @@ export default function ProductDetails() {
   const [product, setProduct] = useState<any>(null);
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/api/products/${id}/`)
+    fetch(`https://the-crochet-charm-api.onrender.com/api/products/${id}/`)
       .then((res) => res.json())
       .then((data) => setProduct(data))
       .catch((err) => console.log(err));
@@ -87,7 +87,7 @@ if (!product) {
 <div className="bg-white rounded-3xl shadow-xl h-[500px] flex items-center justify-center">
 
       <img
-        src={`http://127.0.0.1:8000${product.image}`}
+        src={`https://the-crochet-charm-api.onrender.com${product.image}`}
         alt={product.name}
         className="w-[350px] h-[400px] object-cover rounded-2xl mx-auto "
       />

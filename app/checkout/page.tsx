@@ -128,7 +128,7 @@ const total =
           <div className="flex items-center gap-4 mb-6">
 
             <img
-              src={`http://127.0.0.1:8000${product.image}`}
+              src={`https://the-crochet-charm-api.onrender.com${product.image}`}
               alt={product.name}
               className="w-24 h-24 object-cover rounded-xl border"
             />

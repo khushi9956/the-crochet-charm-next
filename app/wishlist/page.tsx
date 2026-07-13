@@ -62,7 +62,7 @@ export default function WishlistPage() {
               >
 
                 <img
-                  src={`http://127.0.0.1:8000${item.image}`}
+                  src={`https://the-crochet-charm-api.onrender.com${item.image}`}
                   alt={item.name}
                   className="w-full h-72 object-cover"
                 />

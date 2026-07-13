@@ -8,7 +8,7 @@ export default function ProductsPage() {
   const [products, setProducts] = useState<any[]>([]);
 const [wishlist, setWishlist] = useState<any[]>([]);
 useEffect(() => {
-  fetch("http://127.0.0.1:8000/api/products/")
+  fetch("https://the-crochet-charm-api.onrender.com/api/products/")
     .then((res) => res.json())
     .then((data) => setProducts(data))
     .catch((err) => console.log(err));
@@ -85,7 +85,7 @@ const toggleWishlist = (product: any) => {
 <div className="relative">
 
   <img
-    src={`http://127.0.0.1:8000${product.image}`}
+    src={`https://the-crochet-charm-api.onrender.com${product.image}`}
     alt={product.name}
     className="w-full h-40 sm:h-56 md:h-80 object-cover rounded-t-3xl"
   />
