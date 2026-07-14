@@ -92,11 +92,13 @@ export default function CheckoutPage() {
     alert("Please fill all required fields.");
     return;
   }
+  
 
   try {
 
     const response = await fetch(
       "https://the-crochet-charm-api.onrender.com/api/create-order/",
+      
       {
         method: "POST",
         headers: {
@@ -113,7 +115,9 @@ export default function CheckoutPage() {
     }
 
     const order = await response.json();
-    console.log(order);
+    alert("Order ID: " + order.id);
+    
+    console.log("Order:", order);
     const options = {
 
       key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
@@ -190,13 +194,16 @@ alert("Payment Verification Failed");
     razorpay.open();
 
   } 
-  catch (error: any) {
+ catch (error: any) {
+  console.error("Payment Error:", error);
 
-  console.error(error);
-
-  alert(JSON.stringify(error));
-
+  if (error instanceof Error) {
+    alert(error.message);
+  } else {
+    alert(String(error));
+  }
 }
+
 
 };
   if (loading) {
