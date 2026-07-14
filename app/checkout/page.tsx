@@ -81,6 +81,7 @@ export default function CheckoutPage() {
 
   };
   const handlePayment = async () => {
+    alert("Pay button clicked");
 
   if (
     !form.name ||
@@ -412,13 +413,13 @@ className="border rounded-xl p-4"
           </div>
 
         </div>
-        <button
+    <button
+  type="button"
   onClick={handlePayment}
   className="w-full mt-8 bg-pink-500 hover:bg-pink-600 text-white py-4 rounded-2xl text-lg font-semibold transition"
 >
-  💳 Pay now
+  💳 Pay Now
 </button>
-
       </div>
 
     </div>
