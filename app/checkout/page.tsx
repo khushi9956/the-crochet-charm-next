@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 export default function CheckoutPage() {
 
-  const searchParams = useSearchParams();
+  
 
   const [products, setProducts] = useState<any[]>([]);
 
