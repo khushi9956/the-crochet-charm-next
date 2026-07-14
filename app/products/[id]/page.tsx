@@ -158,7 +158,7 @@ if (!product) {
   🛒 Add to Cart
 </button>
 <Link
-  href="/checkout?type=buy"
+  href="/checkout"
   onClick={() => {
     localStorage.setItem("buyNow", JSON.stringify(product));
   }}

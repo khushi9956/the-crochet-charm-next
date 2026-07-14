@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+
 
 export default function CheckoutPage() {
 
@@ -20,33 +20,27 @@ export default function CheckoutPage() {
     pincode: "",
   });
 
-  useEffect(() => {
+ useEffect(() => {
+  const checkoutCart = JSON.parse(
+    localStorage.getItem("checkoutCart") || "[]"
+  );
 
-    const type = searchParams.get("type");
+  if (checkoutCart.length > 0) {
+    setProducts(checkoutCart);
+  } else {
+    const buy = JSON.parse(
+      localStorage.getItem("buyNow") || "null"
+    );
 
-    if (type === "cart") {
-
-      const cart = JSON.parse(
-        localStorage.getItem("checkoutCart") || "[]"
-      );
-
-      setProducts(cart);
-
-    } else {
-
-      const buy = JSON.parse(
-        localStorage.getItem("buyNow") || "null"
-      );
-
-      if (buy) {
-        setProducts([buy]);
-      }
-
+    if (buy) {
+      setProducts([buy]);
     }
+  }
 
-    setLoading(false);
+  setLoading(false);
+}, []);
 
-  }, [searchParams]);
+  
 
   const deliveryCharge =
     products.length > 0 ? 40 : 0;
