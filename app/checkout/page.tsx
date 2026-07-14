@@ -113,7 +113,7 @@ export default function CheckoutPage() {
     }
 
     const order = await response.json();
-
+    console.log(order);
     const options = {
 
       key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
@@ -189,16 +189,16 @@ alert("Payment Verification Failed");
 
     razorpay.open();
 
-  } catch (error) {
+  } 
+  catch (error: any) {
 
-    console.log(error);
+  console.error(error);
 
-    alert("Unable to start payment.");
+  alert(JSON.stringify(error));
 
-  }
+}
 
 };
-
   if (loading) {
 
     return (

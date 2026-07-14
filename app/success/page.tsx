@@ -4,7 +4,7 @@ return(
 
 <div className="min-h-screen flex flex-col justify-center items-center bg-pink-50">
 
-<h1 className="text-5xl font-bold text-green-600">
+<h1 className="text-5xl font-bold text-pink-600">
 
 🎉 Payment Successful
 
