@@ -218,6 +218,7 @@ export default function CartPage() {
               </div>
 
               <Link
+              className="w-full mt-8 bg-pink-500 hover:bg-pink-600 text-white py-4 rounded-2xl text-lg font-semibold transition border border-pink-600 text-center "
   href="/checkout?type=cart"
   onClick={() => {
     localStorage.setItem("checkoutCart", JSON.stringify(cart));

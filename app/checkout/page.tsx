@@ -232,7 +232,7 @@ Checkout
 
 </h1>
 
-<div className="grid md:grid-cols-2 gap-5"></div>
+<div className="grid md:grid-cols-2 gap-5">
 <input
 
 type="text"
@@ -413,53 +413,11 @@ className="border rounded-xl p-4"
         </div>
         <button
   onClick={handlePayment}
-  className="w-full mt-8 bg-green-500 hover:bg-green-600 text-white py-4 rounded-2xl text-lg font-semibold transition"
+  className="w-full mt-8 bg-pink-500 hover:bg-pink-600 text-white py-4 rounded-2xl text-lg font-semibold transition"
 >
-  💳 Pay Securely
+  💳 Pay now
 </button>
-handler: async function (response:any){
 
-const verify=await fetch(
-
-"https://the-crochet-charm-api.onrender.com/api/verify-payment/",
-
-{
-
-method:"POST",
-
-headers:{
-
-"Content-Type":"application/json"
-
-},
-
-body:JSON.stringify(response)
-
-}
-
-);
-
-const data=await verify.json();
-
-if(data.success){
-
-alert("Payment Successful ❤️");
-
-localStorage.removeItem("buyNow");
-
-localStorage.removeItem("checkoutCart");
-
-localStorage.removeItem("cart");
-
-window.location.href="/success";
-
-}else{
-
-alert("Payment Verification Failed");
-
-}
-
-}
       </div>
 
     </div>
