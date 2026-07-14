@@ -108,6 +108,7 @@ export default function CheckoutPage() {
         body: JSON.stringify({
           amount: total * 100,
         }),
+        
       }
     );
 
