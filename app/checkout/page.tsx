@@ -81,8 +81,7 @@ export default function CheckoutPage() {
 
   };
   const handlePayment = async () => {
-    alert("Pay button clicked");
-
+  
   if (
     !form.name ||
     !form.phone ||
@@ -121,7 +120,7 @@ if (!response.ok) {
 }
 
 const order = JSON.parse(text);
-    alert("Order ID: " + order.id);
+  
     
     console.log("Order:", order);
     const options = {
