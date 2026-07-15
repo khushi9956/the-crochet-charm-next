@@ -98,24 +98,29 @@ export default function CheckoutPage() {
   try {
 
     const response = await fetch(
-      "https://the-crochet-charm-api.onrender.com/api/create-order/",
-      
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          amount: total * 100,
-        }),
-      }
-    );
+  "https://the-crochet-charm-api.onrender.com/api/create-order/",
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      amount: total * 100,
+    }),
+  }
+);
 
-    if (!response.ok) {
-      throw new Error("Unable to create order");
-    }
+console.log("Status:", response.status);
 
-    const order = await response.json();
+const text = await response.text();
+console.log("Response:", text);
+
+if (!response.ok) {
+  alert(text);
+  return;
+}
+
+const order = JSON.parse(text);
     alert("Order ID: " + order.id);
     
     console.log("Order:", order);
