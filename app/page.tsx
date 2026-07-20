@@ -454,42 +454,7 @@ hover:scale-105"        >
   <h2 className="text-4xl font-bold text-center mb-8 text-pink-700">
     Contact Us
   </h2>
-  <div>
-
-  <h2 className="text-4xl font-bold text-pink-700 mb-6">
-    Get in Touch 💖
-  </h2>
-
-  <p className="text-gray-600 mb-8">
-    We'd love to hear from you! Feel free to contact us for custom crochet
-    orders, questions, or collaborations.
-  </p>
-
-  <div className="space-y-6">
-
-    <div className="bg-pink-50 rounded-2xl p-5">
-      <h3 className="font-bold text-pink-600 text-lg">
-        📧 Email
-      </h3>
-
-      <p className="text-gray-700 mt-2">
-        thecrochetcharmshop@gmail.com
-      </p>
-    </div>
-
-    <div className="bg-pink-50 rounded-2xl p-5">
-      <h3 className="font-bold text-pink-600 text-lg">
-        📞 Phone
-      </h3>
-
-      <p className="text-gray-700 mt-2">
-        +91 9519499698
-      </p>
-    </div>
-
-  </div>
-
-</div>
+ 
 <h2 className="text-4xl font-bold text-center mb-8 text-pink-700">
   Send Message
 </h2>
