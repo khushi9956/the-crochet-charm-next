@@ -143,11 +143,12 @@ export default function Footer() {
       </a>
 
       <a
-        href="mailto:thecrochetcharms@gmail.com"
-        className="text-pink-600 hover:text-pink-700 hover:scale-125 transition duration-300"
-      >
-        <FaEnvelope size={28}/>
-      </a>
+  href="https://mail.google.com/mail/?view=cm&fs=1&to=thecrochetcharms@gmail.com"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <FaEnvelope size={28} />
+</a>
 
       <a
         href="https://wa.me/919519499698"
