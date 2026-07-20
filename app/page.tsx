@@ -450,8 +450,7 @@ hover:scale-105"        >
 >
 <div className="max-w-6xl mx-auto bg-white rounded-3xl shadow-xl p-10">
 
- <div className="grid lg:grid-cols-2 gap-12 items-center">
-
+  <div className="grid lg:grid-cols-2 gap-12 items-center">
   {/* Left Side */}
   <div>
     <h2 className="text-4xl font-bold text-pink-700 mb-6">
@@ -479,9 +478,42 @@ hover:scale-105"        >
   {/* Right Side */}
   <form
     onSubmit={handleSubmit}
-    className="space-y-5 bg-white p-8 rounded-2xl shadow-lg"
+    className="space-y-5 bg-pink-50 p-8 rounded-2xl shadow-md"
   >
-  
+
+    <input
+      type="text"
+      placeholder="Your Name"
+      value={formData.name}
+      onChange={(e) =>
+        setFormData({ ...formData, name: e.target.value })
+      }
+      className="w-full p-3 border border-pink-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"
+      required
+    />
+
+    <input
+      type="email"
+      placeholder="Your Email"
+      value={formData.email}
+      onChange={(e) =>
+        setFormData({ ...formData, email: e.target.value })
+      }
+      className="w-full p-3 border border-pink-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"
+      required
+    />
+
+    <textarea
+      placeholder="Your Message"
+      rows={5}
+      value={formData.message}
+      onChange={(e) =>
+        setFormData({ ...formData, message: e.target.value })
+      }
+      className="w-full p-3 border border-pink-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"
+      required
+    />
+
     <button
       type="submit"
       className="w-full bg-pink-600 hover:bg-pink-700 text-white py-3 rounded-xl font-semibold transition duration-300"
