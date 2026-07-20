@@ -32,41 +32,40 @@ const handleSubmit = async (e: React.FormEvent) => {
 
   try {
     const response = await fetch("https://the-crochet-charm-api.onrender.com/api/contact/", {
+      
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
     });
+console.log(response.status);
 
-    if (response.ok) {
-      Swal.fire({
-        icon: "success",
-        title: "Message Sent 💖",
-        text: "Thank you! Your message has been sent successfully. We will contact you soon. 🧶✨",
-        confirmButtonColor: "#db2777",
-      });
+const data = await response.json();
 
-      setFormData({
-        name: "",
-        email: "",
-        message: "",
-      });
-    } else {
-      Swal.fire({
-        icon: "error",
-        title: "Oops!",
-        text: "Something went wrong.",
-      });
-    }
-  } catch (error) {
-    Swal.fire({
-      icon: "error",
-      title: "Server Error",
-      text: "Unable to connect to the server.",
-    });
-  }
-};
+console.log(data);
+
+
+if (response.ok && data.success) {
+  Swal.fire({
+    icon: "success",
+    title: "Message Sent 💖",
+    text: data.message,
+    confirmButtonColor: "#db2777",
+  });
+
+  setFormData({
+    name: "",
+    email: "",
+    message: "",
+  });
+} else {
+  Swal.fire({
+    icon: "error",
+    title: "Oops!",
+    text: data.error || "Something went wrong.",
+  });
+}
 const loaderRef = useRef(null);
 const [loading, setLoading] = useState(true);
 
