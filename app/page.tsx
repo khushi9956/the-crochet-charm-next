@@ -191,11 +191,12 @@ return (
   </span>
 </Link>
 <Link
-  href="/my-orders"
-  className="bg-pink-600 text-white w-5 h-5 rounded-full text-xs flex items-center justify-center"
+  href="/wishlist"
+  className="flex items-center gap-2 px-4 py-2 rounded-full bg-pink-50 hover:bg-pink-100 transition"
 >
-  My Orders
-</Link>
+  
+  <span>My Orders</span>
+  </Link>
       </div>
 <button
   onClick={() => setMenuOpen(!menuOpen)}
