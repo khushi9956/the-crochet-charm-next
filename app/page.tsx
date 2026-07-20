@@ -210,7 +210,7 @@ className="lg:hidden text-3xl text-pink-600 ml-3"
   placeholder="Search handmade products..."
   value={search}
   onChange={(e) => setSearch(e.target.value)}
-  className="border border-pink-200 rounded-full px-5 py-2 w-72 focus:outline-none focus:ring-2 focus:ring-pink-400"
+  className="border border-pink-200 rounded-full px-5 py-2 w-50 focus:outline-none focus:ring-2 focus:ring-pink-400"
 />
        <button className="bg-pink-600 hover:bg-pink-700 text-white px-5 rounded-full transition">
   Search

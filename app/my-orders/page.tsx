@@ -190,7 +190,7 @@ export default function MyOrdersPage() {
 
                 <div className="text-right">
 
-                  <span className="bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm">
+                  <span className="bg-green-100 text-greem-700 px-4 py-2 rounded-full text-sm">
                     {order.payment_status}
                   </span>
 
