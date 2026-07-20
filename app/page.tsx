@@ -455,9 +455,6 @@ hover:scale-105"        >
     Contact Us
   </h2>
  
-<h2 className="text-4xl font-bold text-center mb-8 text-pink-700">
-  Send Message
-</h2>
   <form
  
   onSubmit={handleSubmit}
