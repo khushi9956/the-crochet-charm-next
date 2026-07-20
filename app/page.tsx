@@ -66,6 +66,13 @@ if (response.ok && data.success) {
     text: data.error || "Something went wrong.",
   });
 }
+} catch (error) {
+  Swal.fire({
+    icon: "error",
+    title: "Server Error",
+    text: "Unable to connect to the server.",
+  });
+}
 const loaderRef = useRef(null);
 const [loading, setLoading] = useState(true);
 
@@ -535,4 +542,4 @@ hover:scale-105"        >
 <Footer />
 </main>   
 );
-}
+  }
