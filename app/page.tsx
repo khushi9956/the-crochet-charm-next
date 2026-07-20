@@ -192,7 +192,7 @@ return (
 </Link>
 <Link
   href="/my-orders"
-  className="hover:text-pink-600 transition"
+  className="bg-pink-600 text-white w-5 h-5 rounded-full text-xs flex items-center justify-center"
 >
   My Orders
 </Link>
