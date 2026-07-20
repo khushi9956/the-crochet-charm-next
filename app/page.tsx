@@ -450,7 +450,7 @@ hover:scale-105"        >
 >
 <div className="max-w-6xl mx-auto bg-white rounded-3xl shadow-xl p-10">
 
-  <div className="grid lg:grid-cols-2 gap-12 items-center">
+ <div className="grid lg:grid-cols-2 gap-12 items-center">
 
   {/* Left Side */}
   <div>
@@ -458,77 +458,39 @@ hover:scale-105"        >
       Contact Us
     </h2>
 
-    <p className="text-gray-600 leading-7 mb-8">
+    <p className="text-gray-600 leading-8 text-lg">
       We'd love to hear from you! Whether you have a question about our
-      handmade crochet products, custom orders, or your recent purchase,
-      we're here to help.
+      handmade crochet creations, custom orders, or need assistance with
+      your purchase, simply fill out the form and we'll get back to you as
+      soon as possible.
     </p>
 
-    <div className="space-y-5">
+    <div className="mt-8 p-5 rounded-2xl bg-pink-50 border border-pink-100">
+      <p className="text-pink-700 font-semibold">
+        💌 We usually respond within 24 hours.
+      </p>
 
-      <div className="flex items-center gap-3">
-        <span className="text-2xl">📧</span>
-        <span className="text-gray-700">thecrochetcharms@gmail.com</span>
-      </div>
-
-      <div className="flex items-center gap-3">
-        <span className="text-2xl">📱</span>
-        <span className="text-gray-700">+91 9519499698</span>
-      </div>
-
-      <div className="flex items-center gap-3">
-        <span className="text-2xl">📷</span>
-        <span className="text-gray-700">@thecrochetcharms</span>
-      </div>
-
+      <p className="text-gray-600 mt-2">
+        Thank you for supporting handmade creations. ❤️
+      </p>
     </div>
   </div>
 
   {/* Right Side */}
   <form
     onSubmit={handleSubmit}
-    className="space-y-5 bg-pink-50 p-8 rounded-2xl shadow-md"
+    className="space-y-5 bg-white p-8 rounded-2xl shadow-lg"
   >
-
-    <input
-      type="text"
-      placeholder="Your Name"
-      value={formData.name}
-      onChange={(e) =>
-        setFormData({ ...formData, name: e.target.value })
-      }
-      className="w-full p-3 border border-pink-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"
-      required
-    />
-
-    <input
-      type="email"
-      placeholder="Your Email"
-      value={formData.email}
-      onChange={(e) =>
-        setFormData({ ...formData, email: e.target.value })
-      }
-      className="w-full p-3 border border-pink-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"
-      required
-    />
-
-    <textarea
-      placeholder="Your Message"
-      rows={5}
-      value={formData.message}
-      onChange={(e) =>
-        setFormData({ ...formData, message: e.target.value })
-      }
-      className="w-full p-3 border border-pink-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"
-      required
-    />
-
+  
     <button
       type="submit"
       className="w-full bg-pink-600 hover:bg-pink-700 text-white py-3 rounded-xl font-semibold transition duration-300"
     >
       Send Message
     </button>
+    <p className="text-center text-sm text-gray-500">
+  We respect your privacy. Your information is never shared with third parties.
+</p>
 
   </form>
 
