@@ -8,6 +8,7 @@ import WhyChooseUs from "./components/WhyChooseUs";
 import ProductCarousel from "./components/ProductCarousel";
 import FloatingWhatsapp from "./components/FloatingWhatsapp";
 import Link from "next/link";
+import Footer from "./components/Footer";
 import { FaBars, FaTimes } from "react-icons/fa";  
 import { FaShoppingCart, FaHeart } from "react-icons/fa";
   

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 export default function CheckoutPage() {
 
-  
+
 
   const [products, setProducts] = useState<any[]>([]);
 
@@ -21,27 +21,27 @@ export default function CheckoutPage() {
     pincode: "",
   });
 
- useEffect(() => {
-  const checkoutCart = JSON.parse(
-    localStorage.getItem("checkoutCart") || "[]"
-  );
-
-  if (checkoutCart.length > 0) {
-    setProducts(checkoutCart);
-  } else {
-    const buy = JSON.parse(
-      localStorage.getItem("buyNow") || "null"
+  useEffect(() => {
+    const checkoutCart = JSON.parse(
+      localStorage.getItem("checkoutCart") || "[]"
     );
 
-    if (buy) {
-      setProducts([buy]);
+    if (checkoutCart.length > 0) {
+      setProducts(checkoutCart);
+    } else {
+      const buy = JSON.parse(
+        localStorage.getItem("buyNow") || "null"
+      );
+
+      if (buy) {
+        setProducts([buy]);
+      }
     }
-  }
 
-  setLoading(false);
-}, []);
+    setLoading(false);
+  }, []);
 
-  
+
 
   const deliveryCharge =
     products.length > 0 ? 40 : 0;
@@ -82,139 +82,130 @@ export default function CheckoutPage() {
 
   };
   const handlePayment = async () => {
-  
-  if (
-    !form.name ||
-    !form.phone ||
-    !form.address ||
-    !form.city ||
-    !form.pincode
-  ) {
-    alert("Please fill all required fields.");
-    return;
-  }
-  
 
-  try {
-
-    const response = await fetch(
-  "https://the-crochet-charm-api.onrender.com/api/create-order/",
-  {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      amount: total * 100,
-    }),
-  }
-);
-
-console.log("Status:", response.status);
-
-const text = await response.text();
-console.log("Response:", text);
-
-if (!response.ok) {
-  alert(text);
-  return;
-}
-
-const order = JSON.parse(text);
-  
-    
-    console.log("Order:", order);
-    const options = {
-
-      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-
-      amount: order.amount,
-
-      currency: order.currency,
-
-      order_id: order.id,
-
-      name: "The Crochet Charm",
-
-      description: "Handmade Crochet Products",
-
-      image: "/images/logo.png",
-
-      prefill: {
-        name: form.name,
-        email: form.email,
-        contact: form.phone,
-      },
-
-      theme: {
-        color: "#db2777",
-      },
-
-      handler: async function (response:any){
-
-const verify=await fetch(
-
-"https://the-crochet-charm-api.onrender.com/api/verify-payment/",
-
-{
-
-method:"POST",
-
-headers:{
-
-"Content-Type":"application/json"
-
-},
-
-body: JSON.stringify({
-  razorpay_order_id: response.razorpay_order_id,
-  razorpay_payment_id: response.razorpay_payment_id,
-  razorpay_signature: response.razorpay_signature,
-
-  customer: form,
-
-  products: products.map((item) => ({
-    id: item.id,
-    quantity: item.quantity || 1,
-    price: item.price,
-  })),
-
-  subtotal,
-  delivery_charge: deliveryCharge,
-  total,
-  }),
-  }
-);
-
-const data=await verify.json();
-
-if (data.success) {
-
-  localStorage.removeItem("buyNow");
-  localStorage.removeItem("checkoutCart");
-  localStorage.removeItem("cart");
-
-  window.location.href = `/success?order=${data.order_number}`;
-
-}
-
-    const razorpay = new (window as any).Razorpay(options);
-
-    razorpay.open();
-
-  } 
- catch (error: any) {
-  console.error("Payment Error:", error);
-
-  if (error instanceof Error) {
-    alert(error.message);
-  } else {
-    alert(String(error));
-  }
-}
+    if (
+      !form.name ||
+      !form.phone ||
+      !form.address ||
+      !form.city ||
+      !form.pincode
+    ) {
+      alert("Please fill all required fields.");
+      return;
+    }
 
 
-};
+    try {
+
+      const response = await fetch(
+        "https://the-crochet-charm-api.onrender.com/api/create-order/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            amount: total * 100,
+          }),
+        }
+      );
+
+      console.log("Status:", response.status);
+
+      const text = await response.text();
+      console.log("Response:", text);
+
+      if (!response.ok) {
+        alert(text);
+        return;
+      }
+
+      const order = JSON.parse(text);
+
+
+      console.log("Order:", order);
+      const options = {
+
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+
+        amount: order.amount,
+
+        currency: order.currency,
+
+        order_id: order.id,
+
+        name: "The Crochet Charm",
+
+        description: "Handmade Crochet Products",
+
+        image: "/images/logo.png",
+
+        prefill: {
+          name: form.name,
+          email: form.email,
+          contact: form.phone,
+        },
+
+        theme: {
+          color: "#db2777",
+        },
+        handler: async (response: any) => {
+          const verify = await fetch(
+            "https://the-crochet-charm-api.onrender.com/api/verify-payment/",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature,
+
+                customer: form,
+
+                products: products.map((item) => ({
+                  id: item.id,
+                  quantity: item.quantity || 1,
+                  price: item.price,
+                })),
+
+                subtotal,
+                delivery_charge: deliveryCharge,
+                total,
+              }),
+            }
+          );
+
+          const data = await verify.json();
+
+          if (data.success) {
+            localStorage.removeItem("buyNow");
+            localStorage.removeItem("checkoutCart");
+            localStorage.removeItem("cart");
+
+            window.location.href = `/success?order=${data.order_number}`;
+          }
+        },
+      };
+
+      const razorpay = new (window as any).Razorpay(options);
+
+      razorpay.open();
+
+    }
+    catch (error: any) {
+      console.error("Payment Error:", error);
+
+      if (error instanceof Error) {
+        alert(error.message);
+      } else {
+        alert(String(error));
+      }
+    }
+
+
+  };
   if (loading) {
 
     return (
@@ -230,217 +221,217 @@ if (data.success) {
   }
   return (
 
-<main className="min-h-screen bg-pink-50 py-12">
+    <main className="min-h-screen bg-pink-50 py-12">
 
-<div className="max-w-6xl mx-auto grid lg:grid-cols-3 gap-10 px-6">
+      <div className="max-w-6xl mx-auto grid lg:grid-cols-3 gap-10 px-6">
 
-<div className="lg:col-span-2 bg-white rounded-3xl shadow-lg p-8">
+        <div className="lg:col-span-2 bg-white rounded-3xl shadow-lg p-8">
 
-<h1 className="text-4xl font-bold text-pink-700 mb-8">
+          <h1 className="text-4xl font-bold text-pink-700 mb-8">
 
-Checkout
+            Checkout
 
-</h1>
+          </h1>
 
-<div className="grid md:grid-cols-2 gap-5">
-<input
+          <div className="grid md:grid-cols-2 gap-5">
+            <input
 
-type="text"
+              type="text"
 
-name="name"
+              name="name"
 
-placeholder="Full Name"
+              placeholder="Full Name"
 
-value={form.name}
+              value={form.name}
 
-onChange={handleChange}
+              onChange={handleChange}
 
-className="border rounded-xl p-4"
+              className="border rounded-xl p-4"
 
-/>
-<input
+            />
+            <input
 
-type="text"
+              type="text"
 
-name="phone"
+              name="phone"
 
-placeholder="Phone Number"
+              placeholder="Phone Number"
 
-value={form.phone}
+              value={form.phone}
 
-onChange={handleChange}
+              onChange={handleChange}
 
-className="border rounded-xl p-4"
+              className="border rounded-xl p-4"
 
-/>
-<input
+            />
+            <input
 
-type="email"
+              type="email"
 
-name="email"
+              name="email"
 
-placeholder="Email"
+              placeholder="Email"
 
-value={form.email}
+              value={form.email}
 
-onChange={handleChange}
+              onChange={handleChange}
 
-className="border rounded-xl p-4 md:col-span-2"
+              className="border rounded-xl p-4 md:col-span-2"
 
-/>
-<textarea
+            />
+            <textarea
 
-name="address"
+              name="address"
 
-placeholder="Complete Address"
+              placeholder="Complete Address"
 
-value={form.address}
+              value={form.address}
 
-onChange={handleChange}
+              onChange={handleChange}
 
-className="border rounded-xl p-4 h-32 md:col-span-2"
+              className="border rounded-xl p-4 h-32 md:col-span-2"
 
-/>
-<input
+            />
+            <input
 
-type="text"
+              type="text"
 
-name="city"
+              name="city"
 
-placeholder="City"
+              placeholder="City"
 
-value={form.city}
+              value={form.city}
 
-onChange={handleChange}
+              onChange={handleChange}
 
-className="border rounded-xl p-4"
+              className="border rounded-xl p-4"
 
-/>
-<input
-  type="text"
-  name="state"
-  placeholder="State"
-  value={form.state}
-  onChange={handleChange}
-  className="border rounded-xl p-4"
-/>
-<input
+            />
+            <input
+              type="text"
+              name="state"
+              placeholder="State"
+              value={form.state}
+              onChange={handleChange}
+              className="border rounded-xl p-4"
+            />
+            <input
 
-type="text"
+              type="text"
 
-name="pincode"
+              name="pincode"
 
-placeholder="Pincode"
+              placeholder="Pincode"
 
-value={form.pincode}
+              value={form.pincode}
 
-onChange={handleChange}
+              onChange={handleChange}
 
-className="border rounded-xl p-4"
+              className="border rounded-xl p-4"
 
-/>
+            />
+          </div>
+
         </div>
 
-      </div>
+        {/* Order Summary */}
 
-      {/* Order Summary */}
+        <div className="bg-white rounded-3xl shadow-lg p-8 h-fit sticky top-8">
 
-      <div className="bg-white rounded-3xl shadow-lg p-8 h-fit sticky top-8">
+          <h2 className="text-3xl font-bold text-pink-700 mb-8">
 
-        <h2 className="text-3xl font-bold text-pink-700 mb-8">
+            Order Summary
 
-          Order Summary
+          </h2>
 
-        </h2>
+          <div className="space-y-6">
 
-        <div className="space-y-6">
+            {products.map((item) => (
 
-          {products.map((item) => (
+              <div
+                key={item.id}
+                className="flex items-center gap-4 border-b pb-5"
+              >
 
-            <div
-              key={item.id}
-              className="flex items-center gap-4 border-b pb-5"
-            >
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="w-24 h-24 rounded-2xl object-cover border"
+                />
 
-              <img
-                src={item.image}
-                alt={item.name}
-                className="w-24 h-24 rounded-2xl object-cover border"
-              />
+                <div className="flex-1">
 
-              <div className="flex-1">
+                  <h3 className="font-bold text-lg">
 
-                <h3 className="font-bold text-lg">
+                    {item.name}
 
-                  {item.name}
+                  </h3>
 
-                </h3>
+                  <p className="text-pink-600 font-semibold">
 
-                <p className="text-pink-600 font-semibold">
+                    ₹{item.price}
 
-                  ₹{item.price}
+                  </p>
 
-                </p>
+                  <p className="text-gray-500 text-sm">
 
-                <p className="text-gray-500 text-sm">
+                    Qty : {item.quantity || 1}
 
-                  Qty : {item.quantity || 1}
+                  </p>
 
-                </p>
+                </div>
 
               </div>
 
+            ))}
+
+          </div>
+
+          <div className="mt-8 space-y-4">
+
+            <div className="flex justify-between">
+
+              <span>Subtotal</span>
+
+              <span>₹{subtotal}</span>
+
             </div>
 
-          ))}
+            <div className="flex justify-between">
 
+              <span>Delivery Charges</span>
+
+              <span>₹{deliveryCharge}</span>
+
+            </div>
+
+            <hr />
+
+            <div className="flex justify-between text-2xl font-bold">
+
+              <span>Total</span>
+
+              <span className="text-pink-700">
+
+                ₹{total}
+
+              </span>
+
+            </div>
+
+          </div>
+          <button
+            type="button"
+            onClick={handlePayment}
+            className="w-full mt-8 bg-pink-500 hover:bg-pink-600 text-white py-4 rounded-2xl text-lg font-semibold transition"
+          >
+            💳 Pay Now
+          </button>
         </div>
 
-        <div className="mt-8 space-y-4">
-
-          <div className="flex justify-between">
-
-            <span>Subtotal</span>
-
-            <span>₹{subtotal}</span>
-
-          </div>
-
-          <div className="flex justify-between">
-
-            <span>Delivery Charges</span>
-
-            <span>₹{deliveryCharge}</span>
-
-          </div>
-
-          <hr />
-
-          <div className="flex justify-between text-2xl font-bold">
-
-            <span>Total</span>
-
-            <span className="text-pink-700">
-
-              ₹{total}
-
-            </span>
-
-          </div>
-
-        </div>
-    <button
-  type="button"
-  onClick={handlePayment}
-  className="w-full mt-8 bg-pink-500 hover:bg-pink-600 text-white py-4 rounded-2xl text-lg font-semibold transition"
->
-  💳 Pay Now
-</button>
       </div>
 
-    </div>
+    </main>
 
-  </main>
-
-);
+  );
 }
