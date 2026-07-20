@@ -450,56 +450,88 @@ hover:scale-105"        >
 >
 <div className="max-w-6xl mx-auto bg-white rounded-3xl shadow-xl p-10">
 
-  <div className="grid lg:grid-cols-2 gap-12 items-start bg-center">
-  <h2 className="text-4xl font-bold text-center mb-8 text-pink-700">
-    Contact Us
-  </h2>
- 
+  <div className="grid lg:grid-cols-2 gap-12 items-center">
+
+  {/* Left Side */}
+  <div>
+    <h2 className="text-4xl font-bold text-pink-700 mb-6">
+      Contact Us
+    </h2>
+
+    <p className="text-gray-600 leading-7 mb-8">
+      We'd love to hear from you! Whether you have a question about our
+      handmade crochet products, custom orders, or your recent purchase,
+      we're here to help.
+    </p>
+
+    <div className="space-y-5">
+
+      <div className="flex items-center gap-3">
+        <span className="text-2xl">📧</span>
+        <span className="text-gray-700">thecrochetcharms@gmail.com</span>
+      </div>
+
+      <div className="flex items-center gap-3">
+        <span className="text-2xl">📱</span>
+        <span className="text-gray-700">+91 9519499698</span>
+      </div>
+
+      <div className="flex items-center gap-3">
+        <span className="text-2xl">📷</span>
+        <span className="text-gray-700">@thecrochetcharms</span>
+      </div>
+
+    </div>
+  </div>
+
+  {/* Right Side */}
   <form
- 
-  onSubmit={handleSubmit}
-  className="space-y-4 text-center text-pink-700"
->
-    <input
-  type="text"
-  placeholder="Your Name"
-  value={formData.name}
-  onChange={(e) =>
-    setFormData({ ...formData, name: e.target.value })
-  }
-  className="w-full p-3 border rounded-xl"
-  required
-/>
+    onSubmit={handleSubmit}
+    className="space-y-5 bg-pink-50 p-8 rounded-2xl shadow-md"
+  >
 
     <input
-  type="email"
-  placeholder="Your Email"
-  value={formData.email}
-  onChange={(e) =>
-    setFormData({ ...formData, email: e.target.value })
-  }
-  className="w-full p-3 border rounded-xl"
-  required
-/>
+      type="text"
+      placeholder="Your Name"
+      value={formData.name}
+      onChange={(e) =>
+        setFormData({ ...formData, name: e.target.value })
+      }
+      className="w-full p-3 border border-pink-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"
+      required
+    />
+
+    <input
+      type="email"
+      placeholder="Your Email"
+      value={formData.email}
+      onChange={(e) =>
+        setFormData({ ...formData, email: e.target.value })
+      }
+      className="w-full p-3 border border-pink-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"
+      required
+    />
 
     <textarea
-  placeholder="Message"
-  rows={5}
-  value={formData.message}
-  onChange={(e) =>
-    setFormData({ ...formData, message: e.target.value })
-  }
-  className="w-full p-3 border rounded-xl"
-  required
-/>
+      placeholder="Your Message"
+      rows={5}
+      value={formData.message}
+      onChange={(e) =>
+        setFormData({ ...formData, message: e.target.value })
+      }
+      className="w-full p-3 border border-pink-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"
+      required
+    />
 
-   <button
-  type="submit"
-  className="w-full bg-pink-600 hover:bg-pink-700 text-white py-3 rounded-xl font-semibold transition"
->
-  Send Message
-</button>
+    <button
+      type="submit"
+      className="w-full bg-pink-600 hover:bg-pink-700 text-white py-3 rounded-xl font-semibold transition duration-300"
+    >
+      Send Message
+    </button>
+
   </form>
+
   </div>
 
   </div>
