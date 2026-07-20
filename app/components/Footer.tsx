@@ -14,7 +14,7 @@ import {
 } from "react-icons/fa";
 export default function Footer() {
   return (
-   <footer className="bg-gradient-to-b from-pink-400 to-white border-t border-pink-600 mt-20 shadow-[0_-8px_25px_rgba(236,72,153,0.08)]">
+   <footer className="bg-gradient-to-b from-pink-300 to-white border-t border-pink-400 mt-20 shadow-[0_-8px_25px_rgba(236,72,153,0.08)]">
 
       <div className="max-w-7xl mx-auto px-6 py-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
 
