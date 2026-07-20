@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
+import Footer from "./components/Footer";
 import WhyChooseUs from "./components/WhyChooseUs";
 import ProductCarousel from "./components/ProductCarousel";
 import FloatingWhatsapp from "./components/FloatingWhatsapp";
@@ -540,10 +541,11 @@ hover:scale-105"        >
   </div>
 
   </div>
-  <Footer />
+
 </section>
 
 <FloatingWhatsapp />
+<Footer />
 </main>   
 );
 }
