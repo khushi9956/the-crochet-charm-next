@@ -540,8 +540,9 @@ hover:scale-105"        >
   </div>
 
   </div>
+  <Footer />
 </section>
-<footer />
+
 <FloatingWhatsapp />
 </main>   
 );
