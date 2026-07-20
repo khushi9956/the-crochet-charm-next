@@ -450,7 +450,7 @@ hover:scale-105"        >
 >
 <div className="max-w-6xl mx-auto bg-white rounded-3xl shadow-xl p-10">
 
-  <div className="grid lg:grid-cols-2 gap-12 items-start">
+  <div className="grid lg:grid-cols-2 gap-12 items-start bg-center">
   <h2 className="text-4xl font-bold text-center mb-8 text-pink-700">
     Contact Us
   </h2>
