@@ -542,4 +542,5 @@ hover:scale-105"        >
 <Footer />
 </main>   
 );
-  }
+}
+}
