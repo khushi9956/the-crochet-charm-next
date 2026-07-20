@@ -542,47 +542,7 @@ hover:scale-105"        >
 
   </div>
 </section>
-<Footer />
-{/* <footer className="w-full bg-gradient-to-r from-pink-50 via-pink-100 to-pink-50  py-12">
 
-  <div className=" w-full max-w-6xl mx-auto px-6 text-center">
-
-   
-    <h2 className="text-3xl font-bold text-pink-700 mt-5">
-      The Crochet Charm
-    </h2>
-
-    <p className="text-gray-600 mt-3">
-      Handmade with Love 🧶💖
-    </p>
-
-    <div className="flex justify-center gap-5 mt-8 flex-wrap">
-
-      <a
-        href="https://instagram.com/thecrochetcharms"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="inline-flex items-center gap-3 bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 text-white px-6 py-3 rounded-full shadow-lg hover:scale-105 transition"
->
-  <FaInstagram className="text-2xl" />
-  Follow us on Instagram
-</a>
-
-      
-
-    </div>
-
-    <div className="mt-10 border-t border-pink-200 pt-6">
-
-      <p className="text-gray-500 text-sm">
-        © 2026 The Crochet Charm. All Rights Reserved.
-      </p>
-
-    </div>
-
-  </div>
-
-</footer> */}
 <FloatingWhatsapp />
 </main>   
 );
