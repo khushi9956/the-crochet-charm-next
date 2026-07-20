@@ -17,6 +17,7 @@ export default function CheckoutPage() {
     email: "",
     address: "",
     city: "",
+    state: "",
     pincode: "",
   });
 
@@ -165,34 +166,37 @@ headers:{
 
 },
 
-body:JSON.stringify(response)
+body: JSON.stringify({
+  razorpay_order_id: response.razorpay_order_id,
+  razorpay_payment_id: response.razorpay_payment_id,
+  razorpay_signature: response.razorpay_signature,
 
-}
+  customer: form,
 
+  products: products.map((item) => ({
+    id: item.id,
+    quantity: item.quantity || 1,
+    price: item.price,
+  })),
+
+  subtotal,
+  delivery_charge: deliveryCharge,
+  total,
+  }),
+  }
 );
 
 const data=await verify.json();
 
-if(data.success){
+if (data.success) {
 
-alert("Payment Successful ❤️");
+  localStorage.removeItem("buyNow");
+  localStorage.removeItem("checkoutCart");
+  localStorage.removeItem("cart");
 
-localStorage.removeItem("buyNow");
-
-localStorage.removeItem("checkoutCart");
-
-localStorage.removeItem("cart");
-
-window.location.href="/success";
-
-}else{
-
-alert("Payment Verification Failed");
+  window.location.href = `/success?order=${data.order_number}`;
 
 }
-
-}
-    };
 
     const razorpay = new (window as any).Razorpay(options);
 
@@ -311,6 +315,14 @@ onChange={handleChange}
 
 className="border rounded-xl p-4"
 
+/>
+<input
+  type="text"
+  name="state"
+  placeholder="State"
+  value={form.state}
+  onChange={handleChange}
+  className="border rounded-xl p-4"
 />
 <input
 

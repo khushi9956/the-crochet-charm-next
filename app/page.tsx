@@ -189,6 +189,12 @@ return (
     {cartCount}
   </span>
 </Link>
+<Link
+  href="/my-orders"
+  className="hover:text-pink-600 transition"
+>
+  My Orders
+</Link>
       </div>
 <button
   onClick={() => setMenuOpen(!menuOpen)}
@@ -534,7 +540,8 @@ hover:scale-105"        >
 
   </div>
 </section>
-<footer className="w-full bg-gradient-to-r from-pink-50 via-pink-100 to-pink-50  py-12">
+<Footer />
+{/* <footer className="w-full bg-gradient-to-r from-pink-50 via-pink-100 to-pink-50  py-12">
 
   <div className=" w-full max-w-6xl mx-auto px-6 text-center">
 
@@ -573,7 +580,7 @@ hover:scale-105"        >
 
   </div>
 
-</footer>
+</footer> */}
 <FloatingWhatsapp />
 </main>   
 );
