@@ -72,6 +72,7 @@ if (response.ok && data.success) {
     title: "Server Error",
     text: "Unable to connect to the server.",
   });
+  };  
 }
 const loaderRef = useRef(null);
 const [loading, setLoading] = useState(true);
@@ -484,8 +485,10 @@ hover:scale-105"        >
   {/* Right Side */}
   <form
     onSubmit={handleSubmit}
+    
     className="space-y-5 bg-pink-50 p-8 rounded-2xl shadow-md"
   >
+    
 
     <input
       type="text"
@@ -530,6 +533,7 @@ hover:scale-105"        >
   We respect your privacy. Your information is never shared with third parties.
 </p>
 
+
   </form>
 
   </div>
@@ -540,7 +544,6 @@ hover:scale-105"        >
 
 <FloatingWhatsapp />
 <Footer />
-</main>   
+</main>
 );
-}
 }

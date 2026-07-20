@@ -1,0 +1,50 @@
+[33m59aa335[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m Fix contact form syntax and success popup
+[33mf278e0a[m Fix handleSubmit syntax
+[33m62fe08b[m Fix contact form success response
+[33m8ac332d[m update email
+[33m66331be[m Redesign Contact Us section and improve footer UI
+[33m4410831[m Redesign Contact Us section and improve footer UI
+[33med1fa74[m update contact section
+[33m6ba5dec[m Improve footer UI and update website design
+[33mb846a3b[m Improve footer UI and update website design
+[33m0a43e5e[m Improve footer UI and update website design
+[33m4507d77[m Improve footer UI and update website design
+[33m5407d82[m Improve footer UI and update website design
+[33m9d47c71[m update footer
+[33m3653c79[m insert footer
+[33m7d13179[m Improve footer design and responsiveness
+[33m63ff1c3[m update footer
+[33m0e568ee[m footer
+[33md812222[m update My orders
+[33m819c7cc[m add box to my border
+[33m24d0f77[m change search buttion size
+[33m55e7695[m Rename footer to Footer
+[33mc3be462[m Temp rename footer
+[33mcce3d36[m Update footer and layout
+[33m4b502ae[m Add My Orders, Footer, Order Details and Policy Pages
+[33m65e4041[m Fix checkout page
+[33mb3767dc[m Debug Razorpay create order
+[33mbed8899[m Fix environment variables and Razorpay
+[33mdb43396[m Debug Razorpay create order
+[33m108d25d[m Update checkout and Razorpay payment flow
+[33m6060838[m Update checkout and Razorpay integration
+[33mdeef4ea[m Fix Razorpay checkout and payment verification
+[33m30ddf13[m Fix checkout prerender
+[33mb7e4f60[m Fix checkout prerender
+[33md6cfda9[m Fix checkout page
+[33m780158d[m Add Razorpay payment verification
+[33m3c1b650[m Fix cart image variable
+[33m6dfd79e[m image src
+[33m0c46df9[m Integrate Razorpay checkout
+[33maa0f7bf[m Integrate Razorpay checkout
+[33m3f1fa6c[m Integrate Razorpay checkout
+[33mc57a1b6[m Remove Windows packages
+[33m8b75547[m Remove Windows-only packages
+[33m97cb8a4[m Fix Cloudinary image URLs
+[33m59d3504[m Fix Cloudinary image URLs
+[33mdc2f6c5[m Fix hero section alignment
+[33m259bf17[m Fix hero background section
+[33m9c7d690[m Add public images
+[33mc800902[m Fix wishlist link typo
+[33m01bb60f[m Final version before deployment
+[33ma0f66b6[m Initial Next.js site
