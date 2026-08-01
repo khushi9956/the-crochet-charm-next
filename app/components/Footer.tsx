@@ -14,9 +14,9 @@ import {
 } from "react-icons/fa";
 export default function Footer() {
   return (
-   <footer className="bg-gradient-to-b from-pink-300 to-white border-t border-pink-400 mt-20 shadow-[0_-8px_25px_rgba(236,72,153,0.08)]">
+   <footer className="bg-gradient-to-b from-pink-100 to-white border-t border-pink-400 mt-20 shadow-[0_-8px_25px_rgba(236,72,153,0.08)]">
 
-      <div className="max-w-7xl mx-auto px-6 py-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
 
   {/* Brand */}
   <div>
@@ -35,21 +35,7 @@ export default function Footer() {
 and personalized creations crafted with love for every special moment.
     </p>
   </div>
-<div className="flex flex-wrap gap-2 mt-5">
 
-  <span className="bg-pink-100 text-pink-700 px-3 py-1 rounded-full text-sm">
-    🧶 Handmade
-  </span>
-
-  <span className="bg-pink-100 text-pink-700 px-3 py-1 rounded-full text-sm">
-    🚚 PAN India
-  </span>
-
-  <span className="bg-pink-100 text-pink-700 px-3 py-1 rounded-full text-sm">
-    💖 Custom Orders
-  </span>
-
-</div>
   {/* Quick Links */}
   <div>
     <h3 className="font-bold text-xl text-pink-700 mb-5hover:translate-x-1">
@@ -153,7 +139,7 @@ and personalized creations crafted with love for every special moment.
         href="https://instagram.com/thecrochetcharms"
         target="_blank"
         rel="noopener noreferrer"
-        className="text-pink-600 hover:text-pink-700 hover:scale-125 transition duration-300"
+        className="w-11 h-11 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 hover:bg-pink-600 hover:text-white transition duration-300"
       >
         <FaInstagram size={28}/>
       </a>
@@ -162,6 +148,7 @@ and personalized creations crafted with love for every special moment.
   href="https://mail.google.com/mail/?view=cm&fs=1&to=thecrochetcharms@gmail.com"
   target="_blank"
   rel="noopener noreferrer"
+  className="w-11 h-11 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 hover:bg-pink-600 hover:text-white transition duration-300"
 >
   <FaEnvelope size={28} />
 </a>
@@ -170,7 +157,7 @@ and personalized creations crafted with love for every special moment.
         href="https://wa.me/919519499698"
         target="_blank"
         rel="noopener noreferrer"
-        className="text-pink-600 hover:text-green-500 hover:scale-125 transition duration-300"
+       className="w-11 h-11 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 hover:bg-pink-600 hover:text-white transition duration-300"
       >
         <FaWhatsapp size={28}/>
       </a>
@@ -187,7 +174,6 @@ and personalized creations crafted with love for every special moment.
 
 🧶 Handmade with ❤️ in India
 
-Thank you for supporting small handmade businesses.
 
 </div>
 
