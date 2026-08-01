@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Confetti from "react-confetti";
+
 interface SuccessPageProps {
   searchParams: Promise<{
     order?: string;
@@ -15,7 +15,7 @@ export default async function SuccessPage({
     <main className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-white flex items-center justify-center px-4 py-10">
 
       <div className="w-full max-w-2xl bg-white rounded-[30px] shadow-2xl overflow-hidden">
-<Confetti recycle={false} numberOfPieces={250} />
+
         {/* Top Banner */}
         <div className="bg-gradient-to-r from-pink-500 to-rose-500 text-white text-center py-10">
 
