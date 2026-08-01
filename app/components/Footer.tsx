@@ -16,7 +16,7 @@ export default function Footer() {
   return (
    <footer className="bg-gradient-to-b from-pink-100 to-white border-t border-pink-400 mt-20 shadow-[0_-8px_25px_rgba(236,72,153,0.08)]">
 
-      <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div className="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
 
   {/* Brand */}
   <div>
@@ -93,28 +93,36 @@ and personalized creations crafted with love for every special moment.
     <h3 className="font-bold hover:translate-x-1 text-xl text-pink-700 mb-5">
       Policies
     </h3>
-
-    <ul className="space-y-3">
+<ul className="space-y-4">
 
       <li>
-        <Link href="/shipping-policy" className="flex items-center gap-2 text-gray-600 hover:text-pink-600 transition">
-          <FaShippingFast />
-          Shipping Policy
-        </Link>
+       <Link
+  href="/shipping-policy"
+  className="flex items-center gap-3 text-gray-600 hover:text-pink-600 transition"
+>
+  <FaShippingFast className="w-5 h-5 flex-shrink-0" />
+  <span>Shipping Policy</span>
+</Link>
       </li>
 
       <li>
-        <Link href="/refund-policy" className="hover:translate-x-1 flex items-center gap-2 text-gray-600 hover:text-pink-600 transition">
-          <FaUndoAlt />
-          Refund Policy
-        </Link>
+        <Link
+  href="/refund-policy"
+  className="flex items-center gap-3 text-gray-600 hover:text-pink-600 transition"
+>
+  <FaUndoAlt className="w-5 h-5 flex-shrink-0" />
+  <span>Refund Policy</span>
+</Link>
       </li>
 
       <li>
-        <Link href="/privacy-policy" className="hover:translate-x-1flex items-center gap-2 text-gray-600 hover:text-pink-600 transition">
-          <FaShieldAlt />
-          Privacy Policy
-        </Link>
+       <Link
+  href="/privacy-policy"
+  className="flex items-center gap-3 text-gray-600 hover:text-pink-600 transition"
+>
+  <FaShieldAlt className="w-5 h-5 flex-shrink-0" />
+  <span>Privacy Policy</span>
+</Link>
       </li>
 
       <li>

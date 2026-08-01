@@ -379,6 +379,35 @@ className="lg:hidden text-3xl text-pink-600 ml-3"
   </div>
 
 </section>
+<section className="py-10 bg-white">
+  <div className="max-w-6xl mx-auto px-6">
+
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+
+      <div className="bg-pink-50 rounded-3xl p-6 text-center shadow-md hover:-translate-y-2 hover:shadow-xl transition duration-300">
+        <h3 className="text-3xl font-bold text-pink-600">500+</h3>
+        <p className="text-gray-600 mt-2">Happy Customers</p>
+      </div>
+
+      <div className="bg-pink-50 rounded-3xl p-6 text-center shadow-md hover:-translate-y-2 hover:shadow-xl transition duration-300">
+        <h3 className="text-3xl font-bold text-pink-600">1000+</h3>
+        <p className="text-gray-600 mt-2">Handmade Products</p>
+      </div>
+
+      <div className="bg-pink-50 rounded-3xl p-6 text-center shadow-md hover:-translate-y-2 hover:shadow-xl transition duration-300">
+        <h3 className="text-3xl font-bold text-pink-600">4.9★</h3>
+        <p className="text-gray-600 mt-2">Customer Rating</p>
+      </div>
+
+      <div className="bg-pink-50 rounded-3xl p-6 text-center shadow-md hover:-translate-y-2 hover:shadow-xl transition duration-300">
+        <h3 className="text-3xl font-bold text-pink-600">🇮🇳</h3>
+        <p className="text-gray-600 mt-2">PAN India Delivery</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
 
 <ProductCarousel />
  
