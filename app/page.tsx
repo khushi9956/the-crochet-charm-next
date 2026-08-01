@@ -321,10 +321,8 @@ className="lg:hidden text-3xl text-pink-600 ml-3"
 <section
    className="relative min-h-screen flex items-center justify-center overflow-hidden"
 >
-  <div
-    className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-    style={{
-      backgroundImage: "url('/images/background.jpg')",
+  <div className="absolute inset-0 bg-gradient-to-r from-white/70 via-pink-50/40 to-white/20"
+     style={{backgroundImage: "url('/images/background.jpg')",
     }}
   >
   <div className="absolute inset-0 bg-white/25"></div>
@@ -356,80 +354,42 @@ text-pink-700
 drop-shadow-md">
       The Crochet Charm 🌸
       </h1>
-
-     <p className="mt-5
-text-lg
-sm:text-xl
-md:text-2xl
-font-medium
-text-gray-800
-max-w-2xl
-mx-auto
-leading-relaxed
-">
-        Premium Handmade Crochet Gifts, Bouquets, Hair Accessories & Personalized Creations Made With Love ❤️
-      </p>
-
+<p className="mt-3 text-pink-600 text-xl md:text-2xl font-semibold">
+  Handmade With Love 🧶
+</p>
+      <p className="mt-6 text-lg md:text-2xl text-gray-700 leading-8 max-w-3xl mx-auto">
+  Discover beautifully handcrafted crochet bouquets, flowers,
+  hair accessories and personalized gifts that make every
+  occasion memorable.
+</p>
      <div className="mt-8 flex flex-col sm:flex-row justify-center gap-5">
-        <a
-          href="#products"
-          className="
-w-full
-sm:w-auto
-bg-yellow-500
-hover:bg-yellow-600
-text-white
-px-10
-py-4
-rounded-full
-font-semibold
-shadow-lg
-transition
-hover:scale-105
-"
-        >
-          Shop Now
-        </a>
+<div className="mt-10 flex flex-col sm:flex-row justify-center gap-5">
 
-        <a
-          href="#contact"
-          className="w-full
-sm:w-auto
-bg-white
-border-2
-border-pink-400
-text-pink-700
-px-10
-py-4
-rounded-full
-font-semibold
-shadow-lg
-transition
-hover:bg-pink-50
-hover:scale-105"        >
-          Custom Order
-        </a>
-        <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+  <a
+    href="#products"
+    className="bg-pink-600 hover:bg-pink-700 text-white px-10 py-4 rounded-full font-bold shadow-xl transition hover:scale-105"
+  >
+    🛍 Shop Collection
+  </a>
 
-  <div className="bg-white/80 backdrop-blur rounded-xl p-4 shadow">
-    <p className="text-3xl">🧶</p>
-    <p className="font-semibold mt-2">100% Handmade</p>
-  </div>
+  <a
+    href="#contact"
+    className="border-2 border-pink-600 bg-white text-pink-600 hover:bg-pink-50 px-10 py-4 rounded-full font-bold shadow-xl transition hover:scale-105"
+  >
+    💖 Custom Order
+  </a>
 
-  <div className="bg-white/80 backdrop-blur rounded-xl p-4 shadow">
-    <p className="text-3xl">🚚</p>
-    <p className="font-semibold mt-2">Fast Delivery</p>
-  </div>
+</div>
+       <div className="mt-10 flex flex-wrap justify-center gap-6 text-gray-700 font-medium">
 
-  <div className="bg-white/80 backdrop-blur rounded-xl p-4 shadow">
-    <p className="text-3xl">🎁</p>
-    <p className="font-semibold mt-2">Gift Packing</p>
-  </div>
+  <span>🧶 100% Handmade</span>
 
-  <div className="bg-white/80 backdrop-blur rounded-xl p-4 shadow">
-    <p className="text-3xl">💖</p>
-    <p className="font-semibold mt-2">Made With Love</p>
-  </div>
+  <span>🚚 PAN India Delivery</span>
+
+  <span>🎁 Perfect for Gifting</span>
+
+  <span>⭐ Premium Quality</span>
+
 
 </div>
         </div>
@@ -510,27 +470,84 @@ hover:scale-105"        >
     </div>
   </div>
 </section>
-<section className="py-20 bg-gradient-to-r from-pink-500 to-rose-500">
-  <div className="max-w-3xl mx-auto text-center px-6">
+<section className="py-20 bg-gradient-to-r from-pink-100 to-rose-100">
+  <div className="max-w-5xl mx-auto text-center px-6">
 
-    <h2 className="text-4xl font-bold text-white">
-      Stay Updated 🌸
+    <h2 className="text-4xl md:text-5xl font-bold text-pink-700">
+      Looking for a Custom Crochet Gift? 💖
     </h2>
 
-    <p className="text-pink-100 mt-4">
-      Subscribe to receive updates on new handmade collections and special offers.
+    <p className="mt-6 text-lg text-gray-600 leading-8 max-w-3xl mx-auto">
+      We create personalized crochet bouquets, keychains, hair accessories,
+      gifts, and more—made especially for you with love and care.
     </p>
 
-    <div className="flex flex-col md:flex-row gap-4 mt-8">
-      <input
-        type="email"
-        placeholder="Enter your email"
-        className="flex-1 px-5 py-4 rounded-full outline-none"
-      />
+    <div className="mt-10 flex flex-col sm:flex-row justify-center gap-5">
 
-      <button className="bg-white text-pink-600 font-bold px-8 py-4 rounded-full hover:bg-pink-100 transition">
-        Subscribe
-      </button>
+      <a
+        href="#contact"
+        className="bg-pink-600 hover:bg-pink-700 text-white px-8 py-4 rounded-full font-semibold shadow-lg transition"
+      >
+        💌 Place a Custom Order
+      </a>
+
+      <a
+        href="https://wa.me/91YOURNUMBER"
+        target="_blank"
+        className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-full font-semibold shadow-lg transition"
+      >
+        💬 Chat on WhatsApp
+      </a>
+
+    </div>
+
+  </div>
+</section>
+<section className="py-20 bg-white">
+  <div className="max-w-5xl mx-auto px-6">
+
+    <h2 className="text-4xl font-bold text-center text-pink-700">
+      Frequently Asked Questions
+    </h2>
+
+    <div className="mt-12 space-y-6">
+
+      <div className="bg-pink-50 rounded-2xl p-6">
+        <h3 className="font-bold text-lg">
+          ❓ Do you take custom crochet orders?
+        </h3>
+        <p className="mt-2 text-gray-600">
+          Yes! We create personalized crochet gifts, bouquets, keychains, hair accessories and much more.
+        </p>
+      </div>
+
+      <div className="bg-pink-50 rounded-2xl p-6">
+        <h3 className="font-bold text-lg">
+          🚚 How long does delivery take?
+        </h3>
+        <p className="mt-2 text-gray-600">
+          Orders are usually delivered within 6-8 business days.
+        </p>
+      </div>
+
+      <div className="bg-pink-50 rounded-2xl p-6">
+        <h3 className="font-bold text-lg">
+          💳 Which payment methods are available?
+        </h3>
+        <p className="mt-2 text-gray-600">
+          Secure online payments are available through Razorpay.
+        </p>
+      </div>
+
+      <div className="bg-pink-50 rounded-2xl p-6">
+        <h3 className="font-bold text-lg">
+          🎁 Are all products handmade?
+        </h3>
+        <p className="mt-2 text-gray-600">
+          Yes, every crochet creation is handmade with love and attention to detail.
+        </p>
+      </div>
+
     </div>
 
   </div>

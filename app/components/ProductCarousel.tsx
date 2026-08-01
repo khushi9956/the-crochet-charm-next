@@ -76,35 +76,15 @@ useEffect(() => {
         />
       </Link>
 
-      <span className="absolute top-4 left-4 bg-pink-600 text-white text-xs px-3 py-1 rounded-full">
-        Bestseller
-      </span>
-
+    
       <button className="absolute top-4 right-4 bg-white p-3 rounded-full shadow-lg hover:bg-pink-600 hover:text-white transition">
         <FaHeart />
       </button>
 
     </div>
 
-    <div className="p-5">
+    
 
-      <h3 className="font-bold text-lg text-gray-800 line-clamp-2">
-        {product.name}
-      </h3>
-
-      <p className="text-pink-600 font-bold text-xl mt-2">
-        ₹{product.price}
-      </p>
-
-      <Link
-        href={`/products/${product.id}`}
-        className="mt-5 flex items-center justify-center gap-2 bg-pink-600 hover:bg-pink-700 text-white py-3 rounded-2xl font-semibold transition"
-      >
-        <FaShoppingCart />
-        View Product
-      </Link>
-
-    </div>
 
   </div>
 </SwiperSlide>
