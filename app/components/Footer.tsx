@@ -16,7 +16,7 @@ export default function Footer() {
   return (
    <footer className="bg-gradient-to-b from-pink-100 to-white border-t border-pink-400 mt-20 shadow-[0_-8px_25px_rgba(236,72,153,0.08)]">
 
-      <div className="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div className="max-w-5xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
 
   {/* Brand */}
   <div>
