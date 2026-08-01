@@ -331,25 +331,24 @@ className="lg:hidden text-3xl text-pink-600 ml-3"
   />
 
   {/* Overlay */}
-  <div className="absolute inset-0 bg-white/50"></div>
+<div className="absolute inset-0 bg-white/35"></div>
 
   {/* Content */}
   <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
 
     {/* Logo */}
     <img
-      src="/images/logo.png"
-      alt="The Crochet Charm"
-      className="w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 mx-auto rounded-full bg-white p-2 shadow-2xl"
-    />
-
+  src="/images/logo.png"
+  alt="The Crochet Charm"
+  className="w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 mx-auto mb-6 rounded-full bg-white p-2 shadow-2xl"
+/>
     {/* Heading */}
-    <h1 className="mt-8 text-4xl sm:text-5xl md:text-6xl font-extrabold text-pink-700">
-      The Crochet Charm 🌸
+    <h1 className="mt-8 text-3xl sm:text-5xl md:text-6xl font-extrabold text-pink-700">
+      The Crochet Charm 
     </h1>
 
     <p className="mt-4 text-xl md:text-2xl font-semibold text-pink-600">
-      Handmade With Love 🧶
+      Handmade With Love 
     </p>
 
     <p className="mt-6 max-w-3xl mx-auto text-gray-700 text-lg md:text-xl leading-8">
@@ -378,8 +377,8 @@ className="lg:hidden text-3xl text-pink-600 ml-3"
     </div>
 
     {/* Trust Badges */}
-    <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
-
+  
+  <div className="bg-white/90 backdrop-blur-md rounded-2xl p-5 shadow-xl hover:-translate-y-2 transition duration-300">
       <div className="bg-white/80 backdrop-blur rounded-2xl p-4 shadow-md">
         <div className="text-3xl">🧶</div>
         <p className="mt-2 font-semibold text-gray-700">
