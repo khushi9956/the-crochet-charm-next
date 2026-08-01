@@ -45,31 +45,43 @@ and personalized creations crafted with love for every special moment.
     <ul className="space-y-3 hover:translate-x-1">
 
       <li>
-        <Link href="/" className="hover:translate-x-1 flex items-center gap-2 text-gray-600 hover:text-pink-600 transition">
-          <FaHome />
-          Home
-        </Link>
+     <Link
+  href="/"
+  className="flex items-center gap-3 text-gray-600 hover:text-pink-600 transition"
+>
+  <FaHome className="w-5 h-5 flex-shrink-0" />
+  <span>Home</span>
+</Link>
       </li>
 
       <li>
-        <Link href="/products" className="hover:translate-x-1 flex items-center gap-2 text-gray-600 hover:text-pink-600 transition">
-          <FaBoxOpen />
-          Products
-        </Link>
+        <Link
+  href="/products"
+  className="flex items-center gap-3 text-gray-600 hover:text-pink-600 transition"
+>
+  <FaBoxOpen className="w-5 h-5 flex-shrink-0" />
+  <span>Products</span>
+</Link>
       </li>
 
       <li>
-        <Link href="/my-orders" className="hover:translate-x-1flex items-center gap-2 text-gray-600 hover:text-pink-600 transition">
-          <FaBoxOpen />
-          My Orders
-        </Link>
+        <Link
+  href="/my-orders"
+  className="flex items-center gap-3 text-gray-600 hover:text-pink-600 transition"
+>
+  <FaBoxOpen className="w-5 h-5 flex-shrink-0" />
+  <span>My Orders</span>
+</Link>
       </li>
 
       <li>
-        <Link href="/#contact" className="hover:translate-x-1flex items-center gap-2 text-gray-600 hover:text-pink-600 transition">
-          <FaPhoneAlt />
-          Contact
-        </Link>
+       <Link
+  href="/#contact"
+  className="flex items-center gap-3 text-gray-600 hover:text-pink-600 transition"
+>
+  <FaPhoneAlt className="w-5 h-5 flex-shrink-0" />
+  <span>Contact</span>
+</Link>
       </li>
 
     </ul>
