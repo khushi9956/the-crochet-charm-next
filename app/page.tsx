@@ -376,39 +376,6 @@ className="lg:hidden text-3xl text-pink-600 ml-3"
 
     </div>
 
-    {/* Trust Badges */}
-  
-  <div className="bg-white/90 backdrop-blur-md rounded-2xl p-5 shadow-xl hover:-translate-y-2 transition duration-300">
-      <div className="bg-white/80 backdrop-blur rounded-2xl p-4 shadow-md">
-        <div className="text-3xl">🧶</div>
-        <p className="mt-2 font-semibold text-gray-700">
-          100% Handmade
-        </p>
-      </div>
-
-      <div className="bg-white/80 backdrop-blur rounded-2xl p-4 shadow-md">
-        <div className="text-3xl">🚚</div>
-        <p className="mt-2 font-semibold text-gray-700">
-          PAN India Delivery
-        </p>
-      </div>
-
-      <div className="bg-white/80 backdrop-blur rounded-2xl p-4 shadow-md">
-        <div className="text-3xl">🎁</div>
-        <p className="mt-2 font-semibold text-gray-700">
-          Gift Ready
-        </p>
-      </div>
-
-      <div className="bg-white/80 backdrop-blur rounded-2xl p-4 shadow-md">
-        <div className="text-3xl">⭐</div>
-        <p className="mt-2 font-semibold text-gray-700">
-          Premium Quality
-        </p>
-      </div>
-
-    </div>
-
   </div>
 
 </section>
