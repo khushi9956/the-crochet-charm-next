@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import Link from "next/link";
-
+import { FaHeart, FaShoppingCart } from "react-icons/fa";
 import "swiper/css";
 
 
@@ -38,10 +38,10 @@ useEffect(() => {
         <Swiper
   modules={[Autoplay]}
   autoplay={{
-    delay: 2200,
+    delay: 3000,
     disableOnInteraction: false,
   }}
-  loop={false}
+  loop={true}
   spaceBetween={25}
  breakpoints={{
   0: {
@@ -64,14 +64,50 @@ useEffect(() => {
 >
   {products.map((product: any) => (
     <SwiperSlide key={product.id}>
+  <div className="group bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500">
+
+    <div className="relative overflow-hidden">
+
       <Link href={`/products/${product.id}`}>
         <img
-  src={product.image}
-  alt={product.name}
-  className="w-full h-48 sm:h-64 md:h-80 lg:h-[420px] object-cover rounded-3xl"
-/>
+          src={product.image}
+          alt={product.name}
+          className="w-full h-48 sm:h-64 md:h-80 lg:h-[420px] object-cover transition-transform duration-500 group-hover:scale-110"
+        />
       </Link>
-    </SwiperSlide>
+
+      <span className="absolute top-4 left-4 bg-pink-600 text-white text-xs px-3 py-1 rounded-full">
+        Bestseller
+      </span>
+
+      <button className="absolute top-4 right-4 bg-white p-3 rounded-full shadow-lg hover:bg-pink-600 hover:text-white transition">
+        <FaHeart />
+      </button>
+
+    </div>
+
+    <div className="p-5">
+
+      <h3 className="font-bold text-lg text-gray-800 line-clamp-2">
+        {product.name}
+      </h3>
+
+      <p className="text-pink-600 font-bold text-xl mt-2">
+        ₹{product.price}
+      </p>
+
+      <Link
+        href={`/products/${product.id}`}
+        className="mt-5 flex items-center justify-center gap-2 bg-pink-600 hover:bg-pink-700 text-white py-3 rounded-2xl font-semibold transition"
+      >
+        <FaShoppingCart />
+        View Product
+      </Link>
+
+    </div>
+
+  </div>
+</SwiperSlide>
   ))}
 </Swiper>
 <div className="flex justify-center mt-12">

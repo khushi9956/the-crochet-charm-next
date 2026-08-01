@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+import Confetti from "react-confetti";
 interface SuccessPageProps {
   searchParams: Promise<{
     order?: string;
@@ -15,7 +15,7 @@ export default async function SuccessPage({
     <main className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-white flex items-center justify-center px-4 py-10">
 
       <div className="w-full max-w-2xl bg-white rounded-[30px] shadow-2xl overflow-hidden">
-
+<Confetti recycle={false} numberOfPieces={250} />
         {/* Top Banner */}
         <div className="bg-gradient-to-r from-pink-500 to-rose-500 text-white text-center py-10">
 
@@ -52,6 +52,15 @@ export default async function SuccessPage({
               <p className="text-gray-500 uppercase tracking-widest text-sm">
                 Order Number
               </p>
+              <div className="mt-6 bg-green-50 border border-green-200 rounded-xl p-4 text-center">
+  <h4 className="font-bold text-green-700">
+    📧 Confirmation Email Sent
+  </h4>
+
+  <p className="text-sm text-gray-600 mt-2">
+    We've sent your order confirmation to your email.
+  </p>
+</div>
 
               <h3 className="text-3xl font-bold text-pink-600 mt-2">
                 {order}
@@ -107,6 +116,21 @@ export default async function SuccessPage({
             </div>
 
           </div>
+          <div className="mt-8 bg-amber-50 border border-amber-200 rounded-2xl p-5 text-center">
+
+  <h4 className="font-bold text-lg">
+    🚚 Estimated Delivery
+  </h4>
+
+  <p className="text-gray-600 mt-2">
+    Your handmade products will arrive in
+  </p>
+
+  <p className="text-2xl font-bold text-pink-600 mt-2">
+    3–7 Business Days
+  </p>
+
+</div>
 
           {/* Buttons */}
 
@@ -129,9 +153,31 @@ export default async function SuccessPage({
             >
               Continue Shopping
             </Link>
-
+<a
+  href="https://wa.me/919519499698"
+  target="_blank"
+  className="block mt-5 bg-green-600 hover:bg-green-700 text-white text-center py-4 rounded-2xl font-semibold"
+>
+  💬 Contact on WhatsApp
+</a>
           </div>
+<div className="mt-10 border-t border-pink-100 pt-6 text-center">
 
+  <h3 className="text-2xl font-bold text-pink-600">
+    🌸 Thank You! 🌸
+  </h3>
+
+  <p className="mt-3 text-gray-600 leading-7">
+    Every crochet piece is lovingly handmade just for you.
+    Thank you for supporting a small handmade business.
+    Your purchase truly means the world to us. ❤️
+  </p>
+
+  <p className="mt-4 italic text-pink-500 font-medium">
+    "Every stitch is made with love."
+  </p>
+
+</div>
         </div>
 
       </div>

@@ -221,7 +221,7 @@ className="lg:hidden text-3xl text-pink-600 ml-3"
   className="border border-pink-200 rounded-full px-5 py-2 w-50 focus:outline-none focus:ring-2 focus:ring-pink-400"
 />
        <button className="bg-pink-600 hover:bg-pink-700 text-white px-5 rounded-full transition">
-  Search
+ 🔍 Search
 </button>
         {search && (
   <div className="absolute mt-2 w-64 bg-white rounded-xl shadow-xl border max-h-80 overflow-y-auto z-50">
@@ -312,10 +312,7 @@ className="lg:hidden text-3xl text-pink-600 ml-3"
 
   <div className="announcement-wrapper">
   <div className="announcement-track">
-    🚚 Free Shipping on Orders Above ₹1500 ✨
-    🧶 Custom Crochet Orders Available ✨
-    🎁 Handmade with Love ✨
-    💖 DM Us for Personalized Gifts ✨
+    🎉 Rakhi Sale | 🚚 Free Shipping Above ₹1500 | 🎁 Handmade With Love | 💖 Custom Orders Available | 🌸 Premium Crochet Gifts
   </div>
 </div>
   {/* Hero */}
@@ -357,7 +354,7 @@ font-extrabold
 leading-tight
 text-pink-700
 drop-shadow-md">
-        The Crochet Charm
+      The Crochet Charm 🌸
       </h1>
 
      <p className="mt-5
@@ -370,8 +367,7 @@ max-w-2xl
 mx-auto
 leading-relaxed
 ">
-        Handmade Crochet Gifts, Bouquets,
-         & Personalized Creations
+        Premium Handmade Crochet Gifts, Bouquets, Hair Accessories & Personalized Creations Made With Love ❤️
       </p>
 
      <div className="mt-8 flex flex-col sm:flex-row justify-center gap-5">
@@ -413,6 +409,29 @@ hover:bg-pink-50
 hover:scale-105"        >
           Custom Order
         </a>
+        <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+
+  <div className="bg-white/80 backdrop-blur rounded-xl p-4 shadow">
+    <p className="text-3xl">🧶</p>
+    <p className="font-semibold mt-2">100% Handmade</p>
+  </div>
+
+  <div className="bg-white/80 backdrop-blur rounded-xl p-4 shadow">
+    <p className="text-3xl">🚚</p>
+    <p className="font-semibold mt-2">Fast Delivery</p>
+  </div>
+
+  <div className="bg-white/80 backdrop-blur rounded-xl p-4 shadow">
+    <p className="text-3xl">🎁</p>
+    <p className="font-semibold mt-2">Gift Packing</p>
+  </div>
+
+  <div className="bg-white/80 backdrop-blur rounded-xl p-4 shadow">
+    <p className="text-3xl">💖</p>
+    <p className="font-semibold mt-2">Made With Love</p>
+  </div>
+
+</div>
         </div>
         </div>
     </div>
@@ -451,6 +470,71 @@ hover:scale-105"        >
 </div>
 </section>
   <WhyChooseUs />
+  <section className="py-24 bg-white">
+  <div className="max-w-6xl mx-auto px-6">
+
+    <h2 className="text-5xl font-bold text-center text-pink-700">
+      What Our Customers Say ❤️
+    </h2>
+
+    <p className="text-center text-gray-500 mt-4">
+      Loved by crochet lovers across India.
+    </p>
+
+    <div className="grid md:grid-cols-3 gap-8 mt-14">
+
+      <div className="bg-pink-50 rounded-3xl p-8 shadow-lg">
+        <div className="text-yellow-400 text-2xl">★★★★★</div>
+        <p className="mt-4 text-gray-600 italic">
+          "The bouquet was absolutely beautiful. The quality exceeded my expectations!"
+        </p>
+        <h4 className="mt-6 font-bold text-pink-700">— Priya S.</h4>
+      </div>
+
+      <div className="bg-pink-50 rounded-3xl p-8 shadow-lg">
+        <div className="text-yellow-400 text-2xl">★★★★★</div>
+        <p className="mt-4 text-gray-600 italic">
+          "Beautiful handmade products and excellent packaging. Highly recommended!"
+        </p>
+        <h4 className="mt-6 font-bold text-pink-700">— Anjali M.</h4>
+      </div>
+
+      <div className="bg-pink-50 rounded-3xl p-8 shadow-lg">
+        <div className="text-yellow-400 text-2xl">★★★★★</div>
+        <p className="mt-4 text-gray-600 italic">
+          "The custom crochet gift was perfect. Thank you so much!"
+        </p>
+        <h4 className="mt-6 font-bold text-pink-700">— Riya K.</h4>
+      </div>
+
+    </div>
+  </div>
+</section>
+<section className="py-20 bg-gradient-to-r from-pink-500 to-rose-500">
+  <div className="max-w-3xl mx-auto text-center px-6">
+
+    <h2 className="text-4xl font-bold text-white">
+      Stay Updated 🌸
+    </h2>
+
+    <p className="text-pink-100 mt-4">
+      Subscribe to receive updates on new handmade collections and special offers.
+    </p>
+
+    <div className="flex flex-col md:flex-row gap-4 mt-8">
+      <input
+        type="email"
+        placeholder="Enter your email"
+        className="flex-1 px-5 py-4 rounded-full outline-none"
+      />
+
+      <button className="bg-white text-pink-600 font-bold px-8 py-4 rounded-full hover:bg-pink-100 transition">
+        Subscribe
+      </button>
+    </div>
+
+  </div>
+</section>
 <section
   id="contact"
    className="w-full bg-gradient-to-r bg-pink-50 py-24"
