@@ -198,7 +198,7 @@ return (
   </span>
 </Link>
 <Link
-  href="/wishlist"
+  href="/my-orders"
   className="flex items-center gap-2 px-4 py-2 rounded-full bg-pink-50 hover:bg-pink-100 transition"
 >
   
@@ -315,88 +315,104 @@ className="lg:hidden text-3xl text-pink-600 ml-3"
     🎉 Rakhi Sale | 🚚 Free Shipping Above ₹1500 | 🎁 Handmade With Love | 💖 Custom Orders Available | 🌸 Premium Crochet Gifts
   </div>
 </div>
-  {/* Hero */}
+ {/* Hero Section */}
 
- 
-<section
-   className="relative min-h-screen flex items-center justify-center overflow-hidden"
->
-  <div className="absolute inset-0 bg-gradient-to-r from-white/70 via-pink-50/40 to-white/20"
-     style={{backgroundImage: "url('/images/background.jpg')",
+<section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+
+  {/* Background Image */}
+  <div
+    className="absolute inset-0"
+    style={{
+      backgroundImage: "url('/images/background.jpg')",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
     }}
-  >
-  <div className="absolute inset-0 bg-white/25"></div>
-<div className="relative z-10 w-full max-w-4xl mx-auto text-center px-6 animate-[fadeIn_1.5s_ease-in]">
-  
-  <div className="relative z-10 max-w-4xl w-full animate-[fadeIn_1.5s_ease-in]">
-     <img
-  src="/images/logo.png"
-  alt="The Crochet Charm Logo"
-  className="
-w-28 h-28
-sm:w-36 sm:h-36
-md:w-52 md:h-52
-mx-auto
-mb-6
-rounded-full
-bg-white/90
-p-2
-shadow-xl
-"
-/>
+  />
 
-      <h1 className="text-4xl
-sm:text-5xl
-md:text-7xl
-font-extrabold
-leading-tight
-text-pink-700
-drop-shadow-md">
+  {/* Overlay */}
+  <div className="absolute inset-0 bg-white/50"></div>
+
+  {/* Content */}
+  <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+
+    {/* Logo */}
+    <img
+      src="/images/logo.png"
+      alt="The Crochet Charm"
+      className="w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 mx-auto rounded-full bg-white p-2 shadow-2xl"
+    />
+
+    {/* Heading */}
+    <h1 className="mt-8 text-4xl sm:text-5xl md:text-6xl font-extrabold text-pink-700">
       The Crochet Charm 🌸
-      </h1>
-<p className="mt-3 text-pink-600 text-xl md:text-2xl font-semibold">
-  Handmade With Love 🧶
-</p>
-      <p className="mt-6 text-lg md:text-2xl text-gray-700 leading-8 max-w-3xl mx-auto">
-  Discover beautifully handcrafted crochet bouquets, flowers,
-  hair accessories and personalized gifts that make every
-  occasion memorable.
-</p>
-     <div className="mt-8 flex flex-col sm:flex-row justify-center gap-5">
-<div className="mt-10 flex flex-col sm:flex-row justify-center gap-5">
+    </h1>
 
-  <a
-    href="#products"
-    className="bg-pink-600 hover:bg-pink-700 text-white px-10 py-4 rounded-full font-bold shadow-xl transition hover:scale-105"
-  >
-    🛍 Shop Collection
-  </a>
+    <p className="mt-4 text-xl md:text-2xl font-semibold text-pink-600">
+      Handmade With Love 🧶
+    </p>
 
-  <a
-    href="#contact"
-    className="border-2 border-pink-600 bg-white text-pink-600 hover:bg-pink-50 px-10 py-4 rounded-full font-bold shadow-xl transition hover:scale-105"
-  >
-    💖 Custom Order
-  </a>
+    <p className="mt-6 max-w-3xl mx-auto text-gray-700 text-lg md:text-xl leading-8">
+      Discover beautifully handcrafted crochet bouquets, flowers,
+      hair accessories and personalized gifts made with love for every
+      special occasion.
+    </p>
 
-</div>
-       <div className="mt-10 flex flex-wrap justify-center gap-6 text-gray-700 font-medium">
+    {/* Buttons */}
+    <div className="mt-10 flex flex-col sm:flex-row justify-center gap-5">
 
-  <span>🧶 100% Handmade</span>
+      <a
+        href="#products"
+        className="bg-pink-600 hover:bg-pink-700 text-white px-8 py-4 rounded-full font-bold shadow-lg transition duration-300 hover:scale-105"
+      >
+        🛍 Shop Now
+      </a>
 
-  <span>🚚 PAN India Delivery</span>
+      <a
+        href="#contact"
+        className="bg-white border-2 border-pink-600 text-pink-600 hover:bg-pink-50 px-8 py-4 rounded-full font-bold shadow-lg transition duration-300 hover:scale-105"
+      >
+        💖 Custom Order
+      </a>
 
-  <span>🎁 Perfect for Gifting</span>
-
-  <span>⭐ Premium Quality</span>
-
-
-</div>
-        </div>
-        </div>
     </div>
+
+    {/* Trust Badges */}
+    <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
+
+      <div className="bg-white/80 backdrop-blur rounded-2xl p-4 shadow-md">
+        <div className="text-3xl">🧶</div>
+        <p className="mt-2 font-semibold text-gray-700">
+          100% Handmade
+        </p>
+      </div>
+
+      <div className="bg-white/80 backdrop-blur rounded-2xl p-4 shadow-md">
+        <div className="text-3xl">🚚</div>
+        <p className="mt-2 font-semibold text-gray-700">
+          PAN India Delivery
+        </p>
+      </div>
+
+      <div className="bg-white/80 backdrop-blur rounded-2xl p-4 shadow-md">
+        <div className="text-3xl">🎁</div>
+        <p className="mt-2 font-semibold text-gray-700">
+          Gift Ready
+        </p>
+      </div>
+
+      <div className="bg-white/80 backdrop-blur rounded-2xl p-4 shadow-md">
+        <div className="text-3xl">⭐</div>
+        <p className="mt-2 font-semibold text-gray-700">
+          Premium Quality
+        </p>
+      </div>
+
     </div>
-  </section>
+
+  </div>
+
+</section>
 
 <ProductCarousel />
  
