@@ -18,7 +18,9 @@ export const metadata: Metadata = {
 
   description:
     "Shop premium handmade crochet bouquets, flowers, keychains, hair accessories and personalized gifts. Custom crochet orders available across India.",
-
+verification: {
+  google: "sgF4PuKskRteLC1UNuG1dayioUqNth5WnNcVnuhas6c",
+},
   keywords: [
     "crochet",
     "handmade gifts",
