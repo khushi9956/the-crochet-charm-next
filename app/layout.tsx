@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
-
+import { GoogleAnalytics } from "@next/third-parties/google";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -90,6 +90,7 @@ export default function RootLayout({
         </main>
 
         <Script src="https://checkout.razorpay.com/v1/checkout.js" />
+        <GoogleAnalytics gaId="G-0C5LF2GLS2" />
       </body>
     </html>
   );
