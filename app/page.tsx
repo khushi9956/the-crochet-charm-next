@@ -3,25 +3,13 @@
 import Swal from "sweetalert2";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import Footer from "./components/Footer";
 import WhyChooseUs from "./components/WhyChooseUs";
 import ProductCarousel from "./components/ProductCarousel";
 import FloatingWhatsapp from "./components/FloatingWhatsapp";
-import Link from "next/link";
-import { FaBars, FaTimes } from "react-icons/fa";  
-import { FaShoppingCart, FaHeart } from "react-icons/fa";
   
 
 export default function Home() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [cartCount, setCartCount] = useState(0);
-  const [wishlistCount, setWishlistCount] = useState(0);
-  const [search, setSearch] = useState("");
-const [products, setProducts] = useState<any[]>([]);
-const filteredProducts = products.filter((product: any) =>
-  product.name.toLowerCase().includes(search.toLowerCase())
-);
   const [formData, setFormData] = useState({
   name: "",
   email: "",
@@ -74,247 +62,58 @@ if (response.ok && data.success) {
   });
   };  
 }
-const loaderRef = useRef(null);
-const [loading, setLoading] = useState(true);
+const loaderRef = useRef<HTMLDivElement>(null);
+const [showLoader, setShowLoader] = useState(true);
+const [isAnimating, setIsAnimating] = useState(false);
 
 useEffect(() => {
-
-const timer = setTimeout(() => {
-
-  gsap.to(loaderRef.current, {
-    x: "-100%",
-    duration: 1.5,
-    ease: "power4.inOut",
-    onComplete: () => {
-      setLoading(false);
-    }
-  });
-
-}, 4000);
-
-
-return () => clearTimeout(timer);
-
-
-}, []);
-
-useEffect(() => {
-  const updateCounts = () => {
-    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-    const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
-
-    setCartCount(cart.length);
-    setWishlistCount(wishlist.length);
-  };
-
-  updateCounts();
-
-  window.addEventListener("cartUpdated", updateCounts);
-  window.addEventListener("wishlistUpdated", updateCounts);
-
-  return () => {
-    window.removeEventListener("cartUpdated", updateCounts);
-    window.removeEventListener("wishlistUpdated", updateCounts);
-  };
-}, []);
-if (loading) {
-return (
-<div
-ref={loaderRef}
-className="loader-screen"
-style={{
-backgroundColor: "light pink",
-backgroundSize: "cover",
-backgroundPosition: "center",
-}}
-> <div className="loader-content" >
-    <img
-      src="/images/logo.png"
-      alt="The Crochet Charm"
-      className="loader-logo"
-    />
-
-    <h1 className="loader-title">
-      The Crochet Charm
-    </h1>
-
-    <p className="loader-text">
-      Handcrafting Something Beautiful...
-    </p>
-
-  </div>
-</div>
-
-
-);
-}
-return (
-<main> 
-  <nav className="bg-white shadow-md py-4">
-    <div className="max-w-7xl mx-auto px-4 md:px-5 flex justify-between items-center">
-      <Link href="/">
-  <img
-    src="/images/logo.png"
-    alt="The Crochet Charm"
- className="h-12 md:h-14 w-auto"
-  />
-</Link>
-
-     <div className="hidden lg:flex items-center gap-8 text-[16px] font-semibold text-[#7b2958]">
-        <Link href="/" className="hover:text-pink-600 transition">
-  Home
-</Link>
-      <a href="#products" className="hover:text-pink-600">
-  Products
-</a>
-
-<a href="#about" className="hover:text-pink-600">
-  About
-</a>
-
-<a href="#contact" className="hover:text-pink-600">
-  Contact
-</a>
-<Link
-  href="/wishlist"
-  className="flex items-center gap-2 px-4 py-2 rounded-full bg-pink-50 hover:bg-pink-100 transition"
->
-  ❤️
-  <span>Wishlist</span>
-
-  <span className="bg-pink-600 text-white w-5 h-5 rounded-full text-xs flex items-center justify-center">
-    {wishlistCount}
-  </span>
-</Link>
-<Link
-  href="/cart"
-  className="flex items-center gap-2 px-4 py-2 rounded-full bg-pink-600 text-white hover:bg-pink-700 transition"
->
-  🛒
-  <span>Cart</span>
-
-  <span className="bg-white text-pink-600 w-5 h-5 rounded-full text-xs flex items-center justify-center">
-    {cartCount}
-  </span>
-</Link>
-<Link
-  href="/my-orders"
-  className="flex items-center gap-2 px-4 py-2 rounded-full bg-pink-50 hover:bg-pink-100 transition"
->
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   
-  <span>My Orders</span>
-  </Link>
-      </div>
-<button
-  onClick={() => setMenuOpen(!menuOpen)}
-className="lg:hidden text-3xl text-pink-600 ml-3"
->
-  {menuOpen ? <FaTimes /> : <FaBars />}
-</button>
-     <div className="hidden md:flex gap-2 relative">
-        
-        <input
-  type="text"
-  placeholder="Search handmade products..."
-  value={search}
-  onChange={(e) => setSearch(e.target.value)}
-  className="border border-pink-200 rounded-full px-5 py-2 w-50 focus:outline-none focus:ring-2 focus:ring-pink-400"
-/>
-       <button className="bg-pink-600 hover:bg-pink-700 text-white px-5 rounded-full transition">
- 🔍 Search
-</button>
-        {search && (
-  <div className="absolute mt-2 w-64 bg-white rounded-xl shadow-xl border max-h-80 overflow-y-auto z-50">
+  if (prefersReducedMotion || sessionStorage.getItem("crochetCharmIntroSeen")) {
+    setShowLoader(false);
+    window.dispatchEvent(new Event("loaderComplete"));
+    return;
+  }
 
-    {filteredProducts.length === 0 ? (
-      <p className="p-4 text-gray-500">No products found</p>
-    ) : (
-      filteredProducts.map((product: any) => (
-        <a
-          key={product.id}
-          href={`/products/${product.id}`}
-          className="flex items-center gap-3 p-3 hover:bg-pink-50"
-        >
-          <img
-          src={product.image}
-            className="w-12 h-12 rounded-lg object-cover"
-          />
+  const timer = setTimeout(() => {
+    setIsAnimating(true);
+    
+    setTimeout(() => {
+      setShowLoader(false);
+      sessionStorage.setItem("crochetCharmIntroSeen", "1");
+      window.dispatchEvent(new Event("loaderComplete"));
+    }, 800);
+  }, 2200);
 
-          <div>
-            <p className="font-semibold">{product.name}</p>
-            <p className="text-pink-600">₹{product.price}</p>
-          </div>
-        </a>
-        
-      ))
-    )}
+  return () => clearTimeout(timer);
+}, []);
 
-  </div>
-)}
+return (
+<>
+  {showLoader && (
+    <div
+      ref={loaderRef}
+      className="loader-screen"
+      style={{
+        background: "linear-gradient(135deg, #FFF8FB 0%, #FFE4EC 100%)",
+      }}
+    >
+      <div className={`loader-content ${isAnimating ? "loader-exit" : ""}`}>
+        <img
+          src="/images/logo.png"
+          alt="The Crochet Charm"
+          className="loader-logo"
+        />
+        <h1 className="loader-title">The Crochet Charm</h1>
+        <p className="loader-text">Handmade With Love</p>
+        <svg className="loader-stitch" viewBox="0 0 120 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 10 L15 10 L20 15 L25 5 L30 15 L35 5 L40 15 L45 5 L50 15 L55 5 L60 15 L65 5 L70 15 L75 5 L80 15 L85 5 L90 15 L95 5 L100 15 L105 5 L110 15 L120 10" stroke="#C94B6A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" opacity="0.5"/>
+        </svg>
       </div>
     </div>
-  </nav>
-{menuOpen && (
-  <div className="lg:hidden bg-white shadow-xl rounded-b-2xl px-6 py-6 space-y-5 animate-fadeIn">
+  )}
 
-    <Link
-      href="/"
-      onClick={() => setMenuOpen(false)}
-      className="block text-lg font-semibold text-pink-700 hover:text-pink-500"
-    >
-      🏠 Home
-    </Link>
-
-    <a
-      href="#products"
-      onClick={() => setMenuOpen(false)}
-      className="block text-lg font-semibold text-pink-700 hover:text-pink-500"
-    >
-      🛍️ Products
-    </a>
-
-    <a
-      href="#about"
-      onClick={() => setMenuOpen(false)}
-      className="block text-lg font-semibold text-pink-700 hover:text-pink-500"
-    >
-      💖 About
-    </a>
-
-    <a
-      href="#contact"
-      onClick={() => setMenuOpen(false)}
-      className="block text-lg font-semibold text-pink-700 hover:text-pink-500"
-    >
-      📞 Contact
-    </a>
-
-    <Link
-      href="/wishlist"
-      onClick={() => setMenuOpen(false)}
-      className="block text-lg font-semibold text-pink-700 hover:text-pink-500"
-    >
-      ❤️ Wishlist ({wishlistCount})
-    </Link>
-
-    <Link
-      href="/cart"
-      onClick={() => setMenuOpen(false)}
-      className="block text-lg font-semibold text-pink-700 hover:text-pink-500"
-    >
-      🛒 Cart ({cartCount})
-    </Link>
-
-  </div>
-)}
-
-  {/* Announcement */}
-
-  <div className="announcement-wrapper">
-  <div className="announcement-track">
-    🎉 Rakhi Sale | 🚚 Free Shipping Above ₹1500 | 🎁 Handmade With Love | 💖 Custom Orders Available | 🌸 Premium Crochet Gifts
-  </div>
-</div>
+ {/* Hero Section */}
  {/* Hero Section */}
 
 <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -656,6 +455,6 @@ className="lg:hidden text-3xl text-pink-600 ml-3"
 
 <FloatingWhatsapp />
 <Footer />
-</main>
+</>
 );
 }
