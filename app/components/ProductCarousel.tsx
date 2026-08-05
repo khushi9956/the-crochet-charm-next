@@ -1,103 +1,157 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
 import Link from "next/link";
-import { FaHeart, FaShoppingCart } from "react-icons/fa";
-import "swiper/css";
-
-
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 export default function ProductCarousel() {
-    const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<any[]>([]);
+  const [wishlist, setWishlist] = useState<any[]>([]);
 
-useEffect(() => {
-  fetch("https://the-crochet-charm-api.onrender.com/api/products/")
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-      setProducts(data);
-    });
-}, []);
+  useEffect(() => {
+    fetch("https://the-crochet-charm-api.onrender.com/api/products/")
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setProducts(data);
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("wishlist") || "[]");
+    setWishlist(data);
+  }, []);
+
+  const toggleWishlist = (e: React.MouseEvent, product: any) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    let updated = [...wishlist];
+    const exists = updated.find((item) => item.id === product.id);
+
+    if (exists) {
+      updated = updated.filter((item) => item.id !== product.id);
+    } else {
+      updated.push(product);
+    }
+
+    setWishlist(updated);
+    localStorage.setItem("wishlist", JSON.stringify(updated));
+    window.dispatchEvent(new Event("wishlistUpdated"));
+  };
+
+  const displayProducts = products.slice(0, 4);
+
   return (
-    <section
-      id="products"
-      className="py-14 md:py-24 bg-gradient-to-b from-pink-50 to-white"
-    >
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="products" className="products-section">
+      <div className="products-inner">
 
-        <h2 className="text-5xl font-bold text-center text-pink-700">
+        {/* Section Header */}
+        <div className="products-eyebrow">
+          <span className="products-eyebrow-line" aria-hidden="true" />
+          <svg className="products-eyebrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#A84F40" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 3a9 9 0 0 0 9 9" />
+            <path d="M3 12a9 9 0 0 0 9 9" />
+          </svg>
+          <span className="products-eyebrow-text">CUSTOMER FAVORITES</span>
+          <span className="products-eyebrow-line" aria-hidden="true" />
+        </div>
+
+        <h2 className="products-heading">
           Popular Products
         </h2>
 
-        <p className="text-center text-gray-500 mt-4 mb-14">
-          Handmade creations crafted with love 💖
+        <p className="products-sub">
+          Discover some of our most-loved handmade creations.
         </p>
 
-        <Swiper
-  modules={[Autoplay]}
-  autoplay={{
-    delay: 3000,
-    disableOnInteraction: false,
-  }}
-  loop={true}
-  spaceBetween={25}
- breakpoints={{
-  0: {
-    slidesPerView: 2,
-    spaceBetween: 12,
-  },
-  640: {
-    slidesPerView: 2,
-    spaceBetween: 15,
-  },
-  768: {
-    slidesPerView: 3,
-    spaceBetween: 20,
-  },
-  1024: {
-    slidesPerView: 4,
-    spaceBetween: 25,
-  },
-}}
->
-  {products.map((product: any) => (
-    <SwiperSlide key={product.id}>
-  <div className="group bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500">
+        {/* Product Grid */}
+        <div className="products-grid">
+          {displayProducts.map((product: any) => {
+            const isWishlisted = wishlist.some((item: any) => item.id === product.id);
+            const categoryName = typeof product.category === "string" 
+              ? product.category 
+              : product.category_name || product.category?.name || null;
 
-    <div className="relative overflow-hidden">
+            return (
+              <div key={product.id} className="product-card">
+                <div className="product-card-img-wrap">
+                  <Link href={`/products/${product.id}`} className="block w-full h-full">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="product-card-img"
+                    />
+                  </Link>
+                  <button
+                    className={`product-wishlist-btn ${isWishlisted ? "is-active" : ""}`}
+                    onClick={(e) => toggleWishlist(e, product)}
+                    aria-label="Add to wishlist"
+                  >
+                    {isWishlisted ? (
+                      <FaHeart size={16} className="text-[#A84F40]" />
+                    ) : (
+                      <FaRegHeart size={16} className="text-[#A84F40]" />
+                    )}
+                  </button>
+                </div>
 
-      <Link href={`/products/${product.id}`}>
-        <img
-          src={product.image}
-          alt={product.name}
-          className="w-full h-48 sm:h-64 md:h-80 lg:h-[420px] object-cover transition-transform duration-500 group-hover:scale-110"
-        />
-      </Link>
+                <div className="product-card-info">
+                  {categoryName && (
+                    <span className="product-card-category">
+                      {categoryName.toUpperCase()}
+                    </span>
+                  )}
+                  <h3 className="product-card-name">
+                    <Link href={`/products/${product.id}`}>{product.name}</Link>
+                  </h3>
+                  <div className="product-card-price">
+                    &#8377;{product.price}
+                  </div>
 
-    
-      <button className="absolute top-4 right-4 bg-white p-3 rounded-full shadow-lg hover:bg-pink-600 hover:text-white transition">
-        <FaHeart />
-      </button>
+                  <Link href={`/products/${product.id}`} className="product-card-btn">
+                    <span>View Product</span>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                      <polyline points="12 5 19 12 12 19" />
+                    </svg>
+                  </Link>
+                </div>
+              </div>
+            );
+          })}
+        </div>
 
-    </div>
+        {/* View All Products CTA */}
+        <div className="products-view-all-wrap">
+          <div className="products-flourish" aria-hidden="true">
+            <span className="products-flourish-line" />
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.4 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+              <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
+            </svg>
+          </div>
 
-    
+          <Link href="/products" className="products-view-all-btn">
+            <span>View All Products</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </Link>
 
+          <div className="products-flourish" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" style={{ transform: "scaleX(-1)" }}>
+              <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.4 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+              <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
+            </svg>
+            <span className="products-flourish-line" />
+          </div>
+        </div>
 
-  </div>
-</SwiperSlide>
-  ))}
-</Swiper>
-<div className="flex justify-center mt-12">
-  <a
-    href="/products"
-    className="inline-flex items-center gap-2 bg-pink-600 hover:bg-pink-700 text-white px-6 md:px-8 py-3 md:py-4 rounded-full text-base md:text-lg font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
-  >
-    ✨ View All Products
-  </a>
-</div>
       </div>
     </section>
   );
