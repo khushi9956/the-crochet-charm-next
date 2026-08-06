@@ -865,6 +865,10 @@ body {
     transform: none !important;
     animation: none !important;
   }
+  [style*="productsPulse"] {
+    animation: none !important;
+    opacity: 0.7 !important;
+  }
 }/* ═══════════════════════════════════════════════════
    TRUST STRIP
 ═══════════════════════════════════════════════════ */
@@ -1214,6 +1218,11 @@ body {
 /* ═══════════════════════════════════════════════════
    POPULAR PRODUCTS SECTION
 ═══════════════════════════════════════════════════ */
+
+@keyframes productsPulse {
+  0%, 100% { opacity: 0.55; }
+  50%      { opacity: 1; }
+}
 
 .products-section {
   background: #FFF9F3;

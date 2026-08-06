@@ -1,23 +1,78 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+
+const API_URL = "https://the-crochet-charm-api.onrender.com/api/products/";
+const MAX_RETRIES = 3;
+const BASE_DELAY_MS = 1200;
+const FETCH_TIMEOUT_MS = 12000;
+
+async function fetchProductsWithRetry(
+  attempt: number,
+  signal: AbortSignal,
+): Promise<any[]> {
+  if (signal.aborted) return [];
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+  const onParentAbort = () => controller.abort();
+  signal.addEventListener("abort", onParentAbort);
+
+  try {
+    const res = await fetch(API_URL, { signal: controller.signal });
+    clearTimeout(timeoutId);
+    const data = await res.json();
+
+    if (Array.isArray(data) && data.length > 0) return data;
+
+    if (attempt < MAX_RETRIES - 1) {
+      await new Promise((r) => setTimeout(r, BASE_DELAY_MS * Math.pow(2, attempt)));
+      return fetchProductsWithRetry(attempt + 1, signal);
+    }
+    return data;
+  } catch (err: any) {
+    clearTimeout(timeoutId);
+    if (err?.name === "AbortError" && signal.aborted) return [];
+    if (attempt < MAX_RETRIES - 1) {
+      await new Promise((r) => setTimeout(r, BASE_DELAY_MS * Math.pow(2, attempt)));
+      return fetchProductsWithRetry(attempt + 1, signal);
+    }
+    return [];
+  } finally {
+    signal.removeEventListener("abort", onParentAbort);
+  }
+}
 
 export default function ProductCarousel() {
   const [products, setProducts] = useState<any[]>([]);
   const [wishlist, setWishlist] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [loadFailed, setLoadFailed] = useState(false);
+
+  const loadProducts = useCallback(() => {
+    const controller = new AbortController();
+    setLoading(true);
+    setLoadFailed(false);
+
+    fetchProductsWithRetry(0, controller.signal).then((data) => {
+      if (controller.signal.aborted) return;
+      if (Array.isArray(data) && data.length > 0) {
+        setProducts(data);
+        setLoadFailed(false);
+      } else {
+        setLoadFailed(true);
+      }
+      setLoading(false);
+    });
+
+    return () => controller.abort();
+  }, []);
 
   useEffect(() => {
-    fetch("https://the-crochet-charm-api.onrender.com/api/products/")
-      .then((res) => res.json())
-      .then((data) => {
-        if (Array.isArray(data)) {
-          setProducts(data);
-        }
-      })
-      .catch((err) => console.log(err));
-  }, []);
+    const cleanup = loadProducts();
+    return cleanup;
+  }, [loadProducts]);
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("wishlist") || "[]");
@@ -70,7 +125,42 @@ export default function ProductCarousel() {
 
         {/* Product Grid */}
         <div className="products-grid">
-          {displayProducts.map((product: any) => {
+          {loading && Array.from({ length: 4 }).map((_, i) => (
+            <div key={`skeleton-${i}`} className="product-card" style={{ pointerEvents: "none" }}>
+              <div className="product-card-img-wrap" style={{ background: "#f0e4d8", animation: "productsPulse 1.4s ease-in-out infinite" }} />
+              <div className="product-card-info">
+                <div style={{ width: "40%", height: 10, borderRadius: 4, background: "#ecdccb", marginBottom: 8 }} />
+                <div style={{ width: "80%", height: 16, borderRadius: 4, background: "#ecdccb", marginBottom: 8 }} />
+                <div style={{ width: "30%", height: 22, borderRadius: 4, background: "#ecdccb", marginBottom: 14 }} />
+                <div style={{ width: "100%", height: 44, borderRadius: 8, background: "#ecdccb" }} />
+              </div>
+            </div>
+          ))}
+
+          {!loading && loadFailed && (
+            <div style={{ gridColumn: "1 / -1", textAlign: "center", padding: "48px 16px" }}>
+              <p style={{ color: "#5F4A40", marginBottom: 12 }}>
+                Unable to load products right now.
+              </p>
+              <button
+                onClick={loadProducts}
+                style={{
+                  background: "#A84F40",
+                  color: "#FFF9F3",
+                  border: "none",
+                  padding: "10px 24px",
+                  borderRadius: 8,
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  fontSize: 14,
+                }}
+              >
+                Try Again
+              </button>
+            </div>
+          )}
+
+          {!loading && !loadFailed && displayProducts.map((product: any) => {
             const isWishlisted = wishlist.some((item: any) => item.id === product.id);
             const categoryName = typeof product.category === "string" 
               ? product.category 
