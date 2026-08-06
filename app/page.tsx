@@ -341,7 +341,7 @@ export default function Home() {
           >
             ── OUR STORY ──
           </p>
-          <h2 className="text-5xl font-bold text-center" style={{ color: "#4A3024" }}>About The Crochet Charm</h2>
+          <h2 className="text-4xl mb-5 font-bold text-center" style={{ color: "#4A3024" }}>About The Crochet Charm</h2>
           <p className="text-center text-lg leading-8" style={{ color: "#5F4A40" }}>
             At The Crochet Charm, every stitch is made with love, creativity, and attention to detail.
             We specialize in handmade crochet creations, including beautiful bouquets, hair accessories,
@@ -363,7 +363,7 @@ export default function Home() {
       {/* ── Testimonials ── */}
       <section className="py-24" style={{ background: "#FFF9F3" }}>
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-5xl font-bold text-center" style={{ color: "#4A3024" }}>What Our Customers Say ❤️</h2>
+          <h2 className="text-4xl font-bold text-center" style={{ color: "#4A3024" }}>What Our Customers Say ❤️</h2>
           <p className="text-center mt-4" style={{ color: "#5F4A40" }}>Loved by crochet lovers across India.</p>
           <div className="grid md:grid-cols-3 gap-8 mt-14">
             <div className="rounded-3xl p-8 shadow-lg" style={{ background: "#F8EEE4", border: "1px solid rgba(168,79,64,0.1)" }}>
@@ -394,7 +394,7 @@ export default function Home() {
       {/* ── Custom Order CTA ── */}
       <section className="py-20" style={{ background: "#F8EEE4" }}>
         <div className="max-w-5xl mx-auto text-center px-6">
-          <h2 className="text-4xl md:text-5xl font-bold" style={{ color: "#4A3024" }}>Looking for a Custom Crochet Gift? 💖</h2>
+          <h2 className="text-4xl md:text-4xl font-bold" style={{ color: "#4A3024" }}>Looking for a Custom Crochet Gift? 💖</h2>
           <p className="mt-6 text-lg leading-8 max-w-3xl mx-auto" style={{ color: "#5F4A40" }}>
             We create personalized crochet bouquets, keychains, hair accessories, gifts, and more—made
             especially for you with love and care.
