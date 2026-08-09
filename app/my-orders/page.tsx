@@ -37,17 +37,17 @@ export default function MyOrdersPage() {
   };
 
   return (
-    <main className="min-h-screen bg-pink-50 py-10 px-4">
+    <main className="min-h-screen bg-[#FFF9F3] py-10 px-4">
 
       <div className="max-w-5xl mx-auto">
 
-        <h1 className="text-4xl font-bold text-center text-pink-600 mb-10">
+        <h1 className="text-4xl font-bold text-center text-[#A84F40] mb-10">
           My Orders
         </h1>
 
-        <div className="bg-white rounded-3xl shadow-lg p-6 mb-8">
+        <div className="bg-white rounded-3xl shadow-lg p-6 mb-8 border border-[#EED2BD]">
 
-          <h2 className="text-xl font-semibold mb-4">
+          <h2 className="text-xl font-semibold mb-4 text-[#4A3024]">
             Find Your Orders
           </h2>
 
@@ -56,14 +56,14 @@ export default function MyOrdersPage() {
             <input
               type="email"
               placeholder="Enter your email"
-              className="flex-1 border rounded-xl p-4 outline-none"
+              className="flex-1 border border-[#EED2BD] rounded-xl p-4 outline-none bg-[#FFF9F3] text-[#4A3024] placeholder-[#5F4A40]"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
 
             <button
               onClick={fetchOrders}
-              className="bg-pink-600 hover:bg-pink-700 text-white px-8 rounded-xl"
+              className="bg-[#A84F40] hover:bg-[#923F31] text-white px-8 rounded-xl"
             >
               {loading ? "Loading..." : "Find Orders"}
             </button>
@@ -74,13 +74,13 @@ export default function MyOrdersPage() {
 
         {orders.length === 0 && !loading && (
 
-          <div className="bg-white rounded-3xl shadow-lg p-10 text-center">
+          <div className="bg-white rounded-3xl shadow-lg p-10 text-center border border-[#EED2BD]">
 
-            <h2 className="text-2xl font-bold text-gray-500">
+            <h2 className="text-2xl font-bold text-[#5F4A40]">
               No Orders Found
             </h2>
 
-            <p className="text-gray-400 mt-2">
+            <p className="text-[#5F4A40] mt-2">
               Place your first order to see it here.
             </p>
 
@@ -94,31 +94,31 @@ export default function MyOrdersPage() {
 
             <div
               key={order.order_number}
-              className="bg-white rounded-3xl shadow-lg p-6"
+              className="bg-white rounded-3xl shadow-lg p-6 border border-[#EED2BD]"
             >
 
               <div className="flex flex-col md:flex-row justify-between gap-6">
 
                 <div>
 
-                  <h2 className="text-2xl font-bold text-pink-600">
+                  <h2 className="text-2xl font-bold text-[#A84F40]">
                     {order.order_number}
                   </h2>
 
-                  <p className="mt-2">
+                  <p className="mt-2 text-[#5F4A40]">
                     Customer : {order.customer_name}
                   </p>
 
-                  <p>
+                  <p className="text-[#5F4A40]">
                     Total : ₹{order.total}
                   </p>
 
                 </div>
                 {/* Order Tracking */}
 
-<div className="bg-white rounded-2xl shadow-md p-6 mb-6">
+<div className="bg-white rounded-2xl shadow-md p-6 mb-6 border border-[#EED2BD]">
 
-  <h2 className="text-xl font-bold text-pink-600 mb-6">
+  <h2 className="text-xl font-bold text-[#A84F40] mb-6">
     Order Tracking
   </h2>
 
@@ -130,10 +130,10 @@ export default function MyOrdersPage() {
       </div>
 
       <div>
-        <h3 className="font-semibold">
+        <h3 className="font-semibold text-[#4A3024]">
           Order Confirmed
         </h3>
-        <p className="text-gray-500 text-sm">
+        <p className="text-[#5F4A40] text-sm">
           Your payment has been received.
         </p>
       </div>
@@ -145,10 +145,10 @@ export default function MyOrdersPage() {
       </div>
 
       <div>
-        <h3 className="font-semibold">
+        <h3 className="font-semibold text-[#4A3024]">
           Preparing
         </h3>
-        <p className="text-gray-500 text-sm">
+        <p className="text-[#5F4A40] text-sm">
           Handmade crochet product is being prepared.
         </p>
       </div>
@@ -160,10 +160,10 @@ export default function MyOrdersPage() {
       </div>
 
       <div>
-        <h3 className="font-semibold">
+        <h3 className="font-semibold text-[#4A3024]">
           Shipped
         </h3>
-        <p className="text-gray-500 text-sm">
+        <p className="text-[#5F4A40] text-sm">
           Your parcel will be shipped soon.
         </p>
       </div>
@@ -175,10 +175,10 @@ export default function MyOrdersPage() {
       </div>
 
       <div>
-        <h3 className="font-semibold">
+        <h3 className="font-semibold text-[#4A3024]">
           Delivered
         </h3>
-        <p className="text-gray-500 text-sm">
+        <p className="text-[#5F4A40] text-sm">
           Package delivered successfully.
         </p>
       </div>
@@ -190,7 +190,7 @@ export default function MyOrdersPage() {
 
                 <div className="text-right">
 
-                  <span className="bg-green-100 text-greem-700 px-4 py-2 rounded-full text-sm">
+                  <span className="bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm">
                     {order.payment_status}
                   </span>
 
@@ -206,7 +206,7 @@ export default function MyOrdersPage() {
 
               <Link
                 href={`/order/${order.order_number}`}
-                className="inline-block mt-6 bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-xl transition"
+                className="inline-block mt-6 bg-[#A84F40] hover:bg-[#923F31] text-white px-6 py-3 rounded-xl transition"
               >
                 View Details
               </Link>

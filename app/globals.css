@@ -9,14 +9,14 @@ body {
 }
 
 body {
-  background: #fff8fb;
+  background: #FFF9F3;
   color: #171717;
   font-family: Arial, Helvetica, sans-serif;
   overflow-x: hidden;
 }
 
 :root {
-  --background: #ffffff;
+  --background: #FFF9F3;
   --foreground: #171717;
 }
 
@@ -157,12 +157,12 @@ body {
   left: 50%;
   width: 0;
   height: 1.5px;
-  background: #C94B6A;
+  background: #A84F40;
   transition: width 0.25s ease, left 0.25s ease;
 }
 
 .nav-link:hover {
-  color: #C94B6A !important;
+  color: #A84F40 !important;
 }
 
 .nav-link:hover::after {
@@ -198,10 +198,10 @@ body {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 20% 30%, #f8c8dc 0%, transparent 20%),
-    radial-gradient(circle at 80% 20%, #fddde6 0%, transparent 18%),
-    radial-gradient(circle at 70% 80%, #f8c8dc 0%, transparent 20%),
-    radial-gradient(circle at 10% 85%, #fddde6 0%, transparent 18%);
+    radial-gradient(circle at 20% 30%, #F8EEE4 0%, transparent 20%),
+    radial-gradient(circle at 80% 20%, #EED2BD 0%, transparent 18%),
+    radial-gradient(circle at 70% 80%, #F8EEE4 0%, transparent 20%),
+    radial-gradient(circle at 10% 85%, #EED2BD 0%, transparent 18%);
   opacity: 0.5;
 }
 
@@ -238,8 +238,8 @@ body {
   border-radius: 50%;
   margin: 0 auto;
   box-shadow:
-    0 0 30px rgba(255, 182, 193, 0.5),
-    0 0 60px rgba(255, 182, 193, 0.3);
+    0 0 30px rgba(168, 79, 64, 0.3),
+    0 0 60px rgba(168, 79, 64, 0.15);
   animation: logoGentleFloat 2.5s ease-in-out infinite;
 }
 
@@ -247,13 +247,13 @@ body {
   margin-top: 20px;
   font-size: 3rem;
   font-weight: 800;
-  color: #a33c72;
+  color: #4A3024;
   letter-spacing: 0.02em;
 }
 
 .loader-text {
   margin-top: 12px;
-  color: #C94B6A;
+  color: #A84F40;
   font-size: 1.1rem;
   font-weight: 500;
   letter-spacing: 0.05em;

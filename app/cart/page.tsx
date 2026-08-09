@@ -78,29 +78,29 @@ export default function CartPage() {
   };
 
   return (
-    <main className="min-h-screen bg-pink-50 py-12">
+    <main className="min-h-screen bg-[#FFF9F3] py-12">
 
       <div className="max-w-7xl mx-auto px-6">
 
-        <h1 className="text-4xl font-bold text-pink-700 mb-10">
+        <h1 className="text-4xl font-bold text-[#4A3024] mb-10">
           🛒 Shopping Cart
         </h1>
 
         {cart.length === 0 ? (
 
-          <div className="bg-white rounded-3xl shadow-lg p-10 text-center">
+          <div className="bg-white rounded-3xl shadow-lg p-10 text-center border border-[#EED2BD]">
 
-            <h2 className="text-3xl font-bold text-pink-700">
+            <h2 className="text-3xl font-bold text-[#4A3024]">
               Your Cart is Empty 🛍️
             </h2>
 
-            <p className="text-gray-500 mt-3 mb-8">
+            <p className="text-[#5F4A40] mt-3 mb-8">
               Looks like you haven't added anything yet.
             </p>
 
             <Link
               href="/products"
-              className="bg-pink-600 hover:bg-pink-700 text-white px-8 py-3 rounded-xl"
+              className="bg-[#A84F40] hover:bg-[#923F31] text-white px-8 py-3 rounded-xl"
             >
               Continue Shopping
             </Link>
@@ -116,43 +116,43 @@ export default function CartPage() {
 
                 <div
                   key={item.id}
-                  className="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition p-6 flex flex-col md:flex-row gap-6 items-center"
+                  className="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition p-6 flex flex-col md:flex-row gap-6 items-center border border-[#EED2BD]"
                 >
 
                   <img
                     src={item.image}
                     alt={item.name}
-                    className="w-40 h-40 object-cover rounded-2xl border"
+                    className="w-40 h-40 object-cover rounded-2xl border border-[#EED2BD]"
                   />
 
                   <div className="flex-1 w-full">
 
-                    <h2 className="text-2xl font-bold text-gray-800">
+                    <h2 className="text-2xl font-bold text-[#4A3024]">
                       {item.name}
                     </h2>
 
-                    <p className="text-pink-600 text-xl font-bold mt-2">
+                    <p className="text-[#A84F40] text-xl font-bold mt-2">
                       ₹{item.price}
                     </p>
 
                     <div className="flex items-center gap-4 mt-5">
 
-                      <span className="font-medium">
+                      <span className="font-medium text-[#5F4A40]">
                         Quantity
                       </span>
 
-                      <div className="flex items-center border rounded-full overflow-hidden">
+                      <div className="flex items-center border border-[#EED2BD] rounded-full overflow-hidden">
 
                         <button
                           onClick={() =>
                             updateQuantity(item.id, "decrease")
                           }
-                          className="px-4 py-2 bg-pink-100 hover:bg-pink-200 font-bold"
+                          className="px-4 py-2 bg-[#F8EEE4] hover:bg-[#EED2BD] font-bold text-[#4A3024]"
                         >
                           −
                         </button>
 
-                        <span className="px-5 font-bold text-lg">
+                        <span className="px-5 font-bold text-lg text-[#4A3024]">
                           {item.quantity}
                         </span>
 
@@ -160,7 +160,7 @@ export default function CartPage() {
                           onClick={() =>
                             updateQuantity(item.id, "increase")
                           }
-                          className="px-4 py-2 bg-pink-100 hover:bg-pink-200 font-bold"
+                          className="px-4 py-2 bg-[#F8EEE4] hover:bg-[#EED2BD] font-bold text-[#4A3024]"
                         >
                           +
                         </button>
@@ -170,11 +170,11 @@ export default function CartPage() {
                     </div>
 
                     <p className="mt-4 text-lg">
-                      <span className="text-gray-600">
+                      <span className="text-[#5F4A40]">
                         Subtotal :
                       </span>
 
-                      <span className="ml-2 font-bold text-pink-700">
+                      <span className="ml-2 font-bold text-[#4A3024]">
                         ₹{item.price * item.quantity}
                       </span>
                     </p>
@@ -194,31 +194,31 @@ export default function CartPage() {
 
             </div>
 
-            <div className="bg-white rounded-3xl shadow-lg p-8 h-fit sticky top-8">
+            <div className="bg-white rounded-3xl shadow-lg p-8 h-fit sticky top-8 border border-[#EED2BD]">
 
-              <h2 className="text-3xl font-bold text-pink-700 mb-6">
+              <h2 className="text-3xl font-bold text-[#4A3024] mb-6">
                 Order Summary
               </h2>
 
-              <div className="flex justify-between mb-4">
+              <div className="flex justify-between mb-4 text-[#5F4A40]">
                 <span>Subtotal</span>
                 <span>₹{subtotal}</span>
               </div>
 
-              <div className="flex justify-between mb-4">
+              <div className="flex justify-between mb-4 text-[#5F4A40]">
                 <span>Delivery</span>
                 <span>₹{deliveryCharge}</span>
               </div>
 
-              <hr className="my-5" />
+              <hr className="my-5 border-[#EED2BD]" />
 
-              <div className="flex justify-between text-2xl font-bold">
+              <div className="flex justify-between text-2xl font-bold text-[#4A3024]">
                 <span>Total</span>
                 <span>₹{total}</span>
               </div>
 
               <Link
-              className="w-full mt-8 bg-pink-500 hover:bg-pink-600 text-white py-4 rounded-2xl text-lg font-semibold transition border border-pink-600 text-center "
+              className="w-full mt-8 bg-[#A84F40] hover:bg-[#923F31] text-white py-4 rounded-2xl text-lg font-semibold transition text-center block"
   href="/checkout"
   onClick={() => {
 localStorage.setItem("checkoutCart", JSON.stringify(cart));

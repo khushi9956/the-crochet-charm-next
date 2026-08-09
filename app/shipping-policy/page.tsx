@@ -1,12 +1,13 @@
 export default function ShippingPolicy() {
   return (
-    <main className="max-w-5xl mx-auto px-6 py-12">
+    <main className="min-h-screen bg-[#FFF9F3]">
+      <div className="max-w-5xl mx-auto px-6 py-12">
 
-      <h1 className="text-4xl font-bold text-pink-600 mb-8">
-        Shipping Policy
-      </h1>
+        <h1 className="text-4xl font-bold text-[#A84F40] mb-8">
+          Shipping Policy
+        </h1>
 
-      <div className="space-y-6 text-gray-700 leading-8">
+        <div className="space-y-6 text-[#5F4A40] leading-8">
 
         <p>
           Every crochet product is handmade with care.
@@ -25,7 +26,7 @@ export default function ShippingPolicy() {
         </ul>
 
       </div>
-
+      </div>
     </main>
   );
 }

@@ -1,12 +1,13 @@
 export default function RefundPolicy() {
   return (
-    <main className="max-w-5xl mx-auto px-6 py-12">
+    <main className="min-h-screen bg-[#FFF9F3]">
+      <div className="max-w-5xl mx-auto px-6 py-12">
 
-      <h1 className="text-4xl font-bold text-pink-600 mb-8">
-        Refund Policy
-      </h1>
+        <h1 className="text-4xl font-bold text-[#A84F40] mb-8">
+          Refund Policy
+        </h1>
 
-      <div className="space-y-6 text-gray-700 leading-8">
+        <div className="space-y-6 text-[#5F4A40] leading-8">
 
         <p>
           Since every product is handmade, refunds are only available for damaged or incorrect products.
@@ -23,7 +24,7 @@ export default function RefundPolicy() {
         </ul>
 
       </div>
-
+      </div>
     </main>
   );
 }

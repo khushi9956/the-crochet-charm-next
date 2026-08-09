@@ -197,7 +197,7 @@ const marqueeText = "🎀 RAKHI SPECIAL SALE ✦ HANDCRAFTED WITH LOVE ✦ FREE 
                             className="flex items-center gap-3 p-3 hover:bg-[#FFF5F7] transition-colors border-b border-[#F5EEF0] last:border-b-0"
                             onClick={() => { setSearch(""); setSearchOpen(false); }}
                           >
-                            <img src={product.image} alt={product.name} className="w-10 h-10 rounded-md object-cover" />
+                            <img src={product.image} alt={product.name} className="w-10 h-10 rounded-md object-cover" />openc
                             <div>
                               <p className="text-[13px] font-medium text-[#2F2A2A]">{product.name}</p>
                               <p className="text-[12px] text-[#C94B6A] font-semibold">&#8377;{product.price}</p>
