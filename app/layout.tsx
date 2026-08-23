@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import Navbar from "./components/Navbar";
+import { ClerkProvider } from "@clerk/nextjs";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -79,20 +80,23 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">
-        <Navbar />
-        <main className="flex-1">
-          {children}
-        </main>
+   return (
+    <ClerkProvider>
+      <html
+        lang="en"
+        className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      >
+        <body className="min-h-full flex flex-col">
+          <Navbar />
 
-        <Script src="https://checkout.razorpay.com/v1/checkout.js" />
-        <GoogleAnalytics gaId="G-0C5LF2GLS2" />
-      </body>
-    </html>
+          <main className="flex-1">
+            {children}
+          </main>
+
+          <Script src="https://checkout.razorpay.com/v1/checkout.js" />
+          <GoogleAnalytics gaId="G-0C5LF2GLS2" />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

@@ -3,12 +3,12 @@
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa";
 import {
-  SignIn,
+  SignUp,
   ClerkLoaded,
   ClerkLoading,
 } from "@clerk/nextjs";
 
-export default function LoginPage() {
+export default function SignupPage() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-white flex items-center justify-center px-4 py-10">
 
@@ -32,9 +32,9 @@ export default function LoginPage() {
             </h1>
 
             <p className="text-pink-100 text-lg mt-4 leading-8">
-              Handmade creations crafted with love,
+              Create your account and start
               <br />
-              specially made for you. 🧶💖
+              your Crochet Charm journey. 🧶💖
             </p>
 
             <div className="mt-8 flex justify-center gap-3 text-2xl">
@@ -55,7 +55,7 @@ export default function LoginPage() {
             Back to Home
           </Link>
 
-          <div className="text-center">
+          <div className="text-center md:text-left">
 
             <div className="md:hidden flex justify-center mb-6">
               <img
@@ -65,12 +65,12 @@ export default function LoginPage() {
               />
             </div>
 
-            <h2 className="text-3xl sm:text-4xl font-bold text-pink-700">
-              Welcome to The Crochet Charm 💖
+            <h2 className="text-4xl font-bold text-pink-700">
+              Create Account 💖
             </h2>
 
             <p className="text-gray-500 mt-3">
-              Login or create your account to continue.
+              Join The Crochet Charm family.
             </p>
 
           </div>
@@ -84,58 +84,24 @@ export default function LoginPage() {
             </ClerkLoading>
 
             <ClerkLoaded>
-              <SignIn
+              <SignUp
                 routing="hash"
                 appearance={{
-                  variables: {
-                    colorPrimary: "#db2777",
-                    colorText: "#4A3024",
-                    colorTextSecondary: "#6B7280",
-                    borderRadius: "1rem",
-                  },
-
                   elements: {
                     rootBox: "w-full",
                     card: "w-full shadow-none border-0 p-0",
-
                     headerTitle: "hidden",
                     headerSubtitle: "hidden",
-
                     socialButtonsBlockButton:
                       "w-full py-4 rounded-2xl border-2 border-pink-100 text-gray-700 font-semibold hover:bg-pink-50 transition",
-
-                    socialButtonsProviderIcon:
-                      "w-5 h-5",
-
-                    dividerLine:
-                      "bg-pink-100",
-
-                    dividerText:
-                      "text-gray-400",
-
+                    formButtonPrimary:
+                      "bg-pink-600 hover:bg-pink-700 text-white rounded-2xl py-4",
+                    formFieldInput:
+                      "rounded-2xl border-pink-200 bg-pink-50/40",
                     formFieldLabel:
                       "text-gray-700 font-semibold",
-
-                    formFieldInput:
-                      "rounded-2xl border border-pink-200 bg-pink-50/40 px-5 py-4 focus:border-pink-400 focus:ring-2 focus:ring-pink-200",
-
-                    formButtonPrimary:
-                      "w-full bg-pink-600 hover:bg-pink-700 text-white rounded-2xl py-4 font-bold text-base shadow-lg",
-
                     footerActionLink:
                       "text-pink-600 hover:text-pink-700 font-bold",
-
-                    identityPreviewEditButton:
-                      "text-pink-600",
-
-                    otpCodeFieldInput:
-                      "rounded-xl border-pink-200 text-center",
-
-                    formResendCodeLink:
-                      "text-pink-600 font-semibold",
-
-                    alert:
-                      "rounded-xl",
                   },
                 }}
               />

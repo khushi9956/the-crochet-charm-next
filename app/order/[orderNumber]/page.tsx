@@ -1,31 +1,94 @@
-interface PageProps {
-  params: Promise<{
-    orderNumber: string;
-  }>;
+"use client";
+
+import { useAuth } from "@clerk/nextjs";
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+
+export default function OrderDetailsPage() {
+  const { getToken, isLoaded, isSignedIn } = useAuth();
+  const params = useParams();
+
+  const orderNumber = params.orderNumber as string;
+
+  const [data, setData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (!isLoaded || !orderNumber) return;
+
+    if (!isSignedIn) {
+      setError("Please sign in to view this order.");
+      setLoading(false);
+      return;
+    }
+
+    const token = await getToken();
+
+if (!token) {
+  setError("Please sign in to view your orders.");
+  return;
 }
 
-export default async function OrderDetailsPage({
-  params,
-}: PageProps) {
-  const { orderNumber } = await params;
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/order/${orderNumber}/`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+            cache: "no-store",
+          }
+        );
 
-  const res = await fetch(
-    `http://127.0.0.1:8000/api/order/${orderNumber}/`,
-    {
-      cache: "no-store",
-    }
-  );
+        const result = await res.json();
 
-  const data = await res.json();
+        if (!res.ok) {
+          setError(
+            result?.error ||
+              result?.detail ||
+              "Unable to load order."
+          );
+          return;
+        }
 
-  if (!res.ok) {
+        setData(result);
+      } catch (err) {
+        console.error(err);
+        setError("Something went wrong while loading the order.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOrder();
+  }, [isLoaded, isSignedIn, orderNumber, getToken]);
+
+  if (!isLoaded || loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <h1 className="text-2xl font-semibold text-red-600">
-          {data.error}
+      <div className="min-h-screen flex items-center justify-center bg-pink-50">
+        <h1 className="text-xl font-semibold text-pink-600">
+          Loading order...
         </h1>
       </div>
     );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-pink-50 px-4">
+        <div className="bg-white rounded-2xl shadow-md p-8 text-center">
+          <h1 className="text-2xl font-semibold text-red-600">
+            {error}
+          </h1>
+        </div>
+      </div>
+    );
+  }
+
+  if (!data) {
+    return null;
   }
 
   return (
@@ -55,12 +118,29 @@ export default async function OrderDetailsPage({
             Customer Details
           </h2>
 
-          <p><strong>Name:</strong> {data.customer_name}</p>
-          <p><strong>Phone:</strong> {data.phone}</p>
-          <p><strong>Address:</strong> {data.address}</p>
-          <p><strong>City:</strong> {data.city}</p>
-          <p><strong>State:</strong> {data.state}</p>
-          <p><strong>Pincode:</strong> {data.pincode}</p>
+          <p>
+            <strong>Name:</strong> {data.customer_name}
+          </p>
+
+          <p>
+            <strong>Phone:</strong> {data.phone}
+          </p>
+
+          <p>
+            <strong>Address:</strong> {data.address}
+          </p>
+
+          <p>
+            <strong>City:</strong> {data.city}
+          </p>
+
+          <p>
+            <strong>State:</strong> {data.state}
+          </p>
+
+          <p>
+            <strong>Pincode:</strong> {data.pincode}
+          </p>
         </div>
 
         {/* Products */}
@@ -70,20 +150,24 @@ export default async function OrderDetailsPage({
             Products
           </h2>
 
-          {data.items.map((item: any, index: number) => (
+          {data.items?.map((item: any, index: number) => (
             <div
               key={index}
               className="flex items-center gap-4 mb-4"
             >
               <img
-                src={`http://127.0.0.1:8000${item.image}`}
-                alt={item.name}
+                src={
+                  item.image?.startsWith("http")
+                    ? item.image
+                    : `${process.env.NEXT_PUBLIC_API_URL}${item.image}`
+                }
+                alt={item.product_name || "Product"}
                 className="w-24 h-24 rounded-xl object-cover"
               />
 
               <div>
                 <h3 className="font-semibold">
-                  {item.name}
+                  {item.product_name}
                 </h3>
 
                 <p>₹{item.price}</p>

@@ -13,11 +13,18 @@ import {
   FaTimes,
   FaBoxOpen,
 } from "react-icons/fa";
+import { Show, SignInButton, useUser, useClerk } from "@clerk/nextjs";
 
 export default function Navbar() {
   const pathname = usePathname();
   const isHome = pathname === "/";
-
+const { signOut } = useClerk();
+const { user, isSignedIn } = useUser();
+const [accountOpen, setAccountOpen] = useState(false);
+const [nameModalOpen, setNameModalOpen] = useState(false);
+const [firstName, setFirstName] = useState("");
+const [lastName, setLastName] = useState("");
+const [savingName, setSavingName] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [search, setSearch] = useState("");
@@ -58,7 +65,35 @@ export default function Navbar() {
   const filteredProducts = products.filter((product: any) =>
     product.name.toLowerCase().includes(search.toLowerCase())
   );
+useEffect(() => {
+  if (user && !user.firstName) {
+    setNameModalOpen(true);
+  }
+}, [user]);
+const saveName = async () => {
+  if (!firstName.trim()) {
+    alert("Please enter your name.");
+    return;
+  }
 
+  try {
+    setSavingName(true);
+
+    await user?.update({
+      firstName: firstName.trim(),
+      lastName: lastName.trim() || undefined,
+    });
+
+    await user?.reload();
+
+    setNameModalOpen(false);
+  } catch (error) {
+    console.error(error);
+    alert("Unable to save your name. Please try again.");
+  } finally {
+    setSavingName(false);
+  }
+};
   useEffect(() => {
     const updateCounts = () => {
       const cart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -254,13 +289,91 @@ const marqueeText = "🎀 RAKHI SPECIAL SALE ✦ HANDCRAFTED WITH LOVE ✦ FREE 
                     When auth is implemented:
                     - Logged out: icon -> Sign In / Sign Up
                     - Logged in: avatar/initials -> Profile, My Orders, Sign Out */}
-                <button
-                  className="flex items-center justify-center w-9 h-9 rounded-full bg-[#F7E9EC] text-[#7B1E3A]/60 hover:bg-[#C94B6A] hover:text-white transition-all duration-200"
-                  aria-label="Account"
-                >
-                  <FaUser size={14} />
-                </button>
+                {/* Account */}
+<Show when="signed-out">
+  <Link
+    href="/login"
+    className="flex items-center justify-center w-9 h-9 rounded-full bg-[#F7E9EC] text-[#7B1E3A]/60 hover:bg-[#C94B6A] hover:text-white transition-all duration-200"
+    aria-label="Sign in"
+  >
+    <FaUser size={14} />
+  </Link>
+</Show>
+
+
+<Show when="signed-in">
+  <div className="relative">
+
+    <button
+      onClick={() => setAccountOpen(!accountOpen)}
+      className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-[#FFF5F7] transition-colors"
+      aria-expanded={accountOpen}
+    >
+      <div className="w-9 h-9 rounded-full overflow-hidden bg-[#F7E9EC] flex items-center justify-center text-[#7B1E3A] font-bold">
+        {user?.imageUrl ? (
+          <img
+            src={user.imageUrl}
+            alt="Profile"
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          user?.firstName?.charAt(0)?.toUpperCase() || "U"
+        )}
+      </div>
+
+      <div className="hidden xl:block text-left">
+        <p className="text-[11px] text-[#7B1E3A]/50 leading-none">
+          Hello,
+        </p>
+
+        <p className="text-[13px] font-bold text-[#7B1E3A]">
+          {user?.firstName || "User"}
+        </p>
+      </div>
+
+      <span className="text-[#7B1E3A]/50 text-xs">
+        ▾
+      </span>
+    </button>
+
+    {accountOpen && (
+      <div className="absolute right-0 top-full mt-2 w-56 bg-white rounded-xl shadow-[0_8px_30px_rgba(123,30,58,0.15)] border border-[#F0E0D8] overflow-hidden z-[70]">
+
+        <div className="px-4 py-4 bg-[#FFF5F7] border-b border-[#F0E0D8]">
+          <p className="text-sm font-bold text-[#7B1E3A]">
+            Hi, {user?.firstName || "User"}!
+          </p>
+
+          <p className="text-xs text-[#7B1E3A]/50 mt-1 truncate">
+            {user?.primaryEmailAddress?.emailAddress}
+          </p>
+        </div>
+
+        <Link
+          href="/profile"
+          onClick={() => setAccountOpen(false)}
+          className="block px-4 py-3 text-sm text-[#2F2A2A] hover:bg-[#FFF5F7] hover:text-[#C94B6A]"
+        >
+          My Profile
+        </Link>
+
+
+        <div className="border-t border-[#F0E0D8]" />
+
+        <button
+          onClick={() => signOut({ redirectUrl: "/" })}
+          className="w-full text-left px-4 py-3 text-sm font-semibold text-red-500 hover:bg-red-50"
+        >
+          Sign Out
+        </button>
+
+      </div>
+    )}
+
+  </div>
+</Show>
               </div>
+              
 
               {/* Mobile Actions */}
               <div className="flex lg:hidden items-center gap-1">
@@ -454,6 +567,74 @@ const marqueeText = "🎀 RAKHI SPECIAL SALE ✦ HANDCRAFTED WITH LOVE ✦ FREE 
                 Handmade with love
               </p>
             </div>
+            {nameModalOpen && user && (
+  <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm px-4">
+
+    <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl p-8">
+
+      <div className="text-center">
+
+        <div className="mx-auto w-20 h-20 rounded-full bg-[#FFF0F4] flex items-center justify-center text-4xl mb-5">
+          💖
+        </div>
+
+        <h2 className="text-2xl font-bold text-[#7B1E3A]">
+          Welcome to The Crochet Charm!
+        </h2>
+
+        <p className="text-sm text-gray-500 mt-2">
+          Before we continue, tell us your name.
+        </p>
+
+      </div>
+
+      <div className="mt-7 space-y-5">
+
+        <div>
+          <label className="block text-sm font-semibold text-[#4A3024] mb-2">
+            First Name
+          </label>
+
+          <input
+            type="text"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            placeholder="Enter your first name"
+            className="w-full px-4 py-3 rounded-xl border border-pink-200 bg-pink-50/30 focus:outline-none focus:ring-2 focus:ring-pink-400"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-semibold text-[#4A3024] mb-2">
+            Last Name
+            <span className="text-gray-400 font-normal">
+              {" "} (optional)
+            </span>
+          </label>
+
+          <input
+            type="text"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            placeholder="Enter your last name"
+            className="w-full px-4 py-3 rounded-xl border border-pink-200 bg-pink-50/30 focus:outline-none focus:ring-2 focus:ring-pink-400"
+          />
+        </div>
+
+        <button
+          onClick={saveName}
+          disabled={savingName}
+          className="w-full py-3.5 rounded-xl bg-pink-600 hover:bg-pink-700 disabled:opacity-60 text-white font-bold transition"
+        >
+          {savingName ? "Saving..." : "Continue 💖"}
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+)}
           </div>
         </div>
       )}
