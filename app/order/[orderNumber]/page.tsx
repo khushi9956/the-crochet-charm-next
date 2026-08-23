@@ -17,18 +17,21 @@ export default function OrderDetailsPage() {
   useEffect(() => {
     if (!isLoaded || !orderNumber) return;
 
-    if (!isSignedIn) {
-      setError("Please sign in to view this order.");
-      setLoading(false);
-      return;
-    }
+    const fetchOrder = async () => {
+      if (!isSignedIn) {
+        setError("Please sign in to view this order.");
+        setLoading(false);
+        return;
+      }
 
-    const token = await getToken();
+      try {
+        const token = await getToken();
 
-if (!token) {
-  setError("Please sign in to view your orders.");
-  return;
-}
+        if (!token) {
+          setError("Please sign in to view your orders.");
+          setLoading(false);
+          return;
+        }
 
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/api/order/${orderNumber}/`,
@@ -56,7 +59,9 @@ if (!token) {
         setData(result);
       } catch (err) {
         console.error(err);
-        setError("Something went wrong while loading the order.");
+        setError(
+          "Something went wrong while loading the order."
+        );
       } finally {
         setLoading(false);
       }
@@ -150,32 +155,38 @@ if (!token) {
             Products
           </h2>
 
-          {data.items?.map((item: any, index: number) => (
-            <div
-              key={index}
-              className="flex items-center gap-4 mb-4"
-            >
-              <img
-                src={
-                  item.image?.startsWith("http")
-                    ? item.image
-                    : `${process.env.NEXT_PUBLIC_API_URL}${item.image}`
-                }
-                alt={item.product_name || "Product"}
-                className="w-24 h-24 rounded-xl object-cover"
-              />
+          {data.items?.map(
+            (item: any, index: number) => (
+              <div
+                key={index}
+                className="flex items-center gap-4 mb-4"
+              >
+                <img
+                  src={
+                    item.image?.startsWith("http")
+                      ? item.image
+                      : `${process.env.NEXT_PUBLIC_API_URL}${item.image}`
+                  }
+                  alt={
+                    item.product_name || "Product"
+                  }
+                  className="w-24 h-24 rounded-xl object-cover"
+                />
 
-              <div>
-                <h3 className="font-semibold">
-                  {item.product_name}
-                </h3>
+                <div>
+                  <h3 className="font-semibold">
+                    {item.product_name}
+                  </h3>
 
-                <p>₹{item.price}</p>
+                  <p>₹{item.price}</p>
 
-                <p>Qty : {item.quantity}</p>
+                  <p>
+                    Qty : {item.quantity}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          )}
 
         </div>
 
