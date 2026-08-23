@@ -10,6 +10,7 @@ export default function ClerkTestPage() {
   const [result, setResult] = useState<string>("");
   const [loading, setLoading] = useState(false);
 
+  // Test Django Authentication
   const testBackend = async () => {
     setLoading(true);
     setResult("");
@@ -32,42 +33,45 @@ export default function ClerkTestPage() {
           },
         }
       );
-const testMyOrders = async () => {
-  setLoading(true);
-  setResult("");
 
-  try {
-    const token = await getToken();
+      const data = await response.json();
 
-    if (!token) {
-      setResult("No Clerk token found. Please sign in first.");
-      return;
+      setResult(JSON.stringify(data, null, 2));
+    } catch (error) {
+      setResult(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong."
+      );
+    } finally {
+      setLoading(false);
     }
+  };
 
-    const response = await fetch(
-      "http://127.0.0.1:8000/api/my-orders/",
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
+  // Test My Orders
+  const testMyOrders = async () => {
+    setLoading(true);
+    setResult("");
+
+    try {
+      const token = await getToken();
+
+      if (!token) {
+        setResult("No Clerk token found. Please sign in first.");
+        return;
       }
-    );
 
-    const data = await response.json();
+      const response = await fetch(
+        "http://127.0.0.1:8000/api/my-orders/",
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-    setResult(JSON.stringify(data, null, 2));
-  } catch (error) {
-    setResult(
-      error instanceof Error
-        ? error.message
-        : "Something went wrong."
-    );
-  } finally {
-    setLoading(false);
-  }
-};
       const data = await response.json();
 
       setResult(JSON.stringify(data, null, 2));
@@ -118,6 +122,7 @@ const testMyOrders = async () => {
               </p>
             </div>
 
+            {/* Test Django Authentication */}
             <button
               onClick={testBackend}
               disabled={loading}
@@ -127,13 +132,17 @@ const testMyOrders = async () => {
                 ? "Testing..."
                 : "Test Django Authentication"}
             </button>
+
+            {/* Test My Orders */}
             <button
-  onClick={testMyOrders}
-  disabled={loading}
-  className="w-full mt-4 py-4 rounded-2xl bg-gray-800 hover:bg-gray-900 disabled:opacity-50 text-white font-bold transition"
->
-  {loading ? "Testing..." : "Test My Orders"}
-</button>
+              onClick={testMyOrders}
+              disabled={loading}
+              className="w-full mt-4 py-4 rounded-2xl bg-gray-800 hover:bg-gray-900 disabled:opacity-50 text-white font-bold transition"
+            >
+              {loading
+                ? "Testing..."
+                : "Test My Orders"}
+            </button>
 
             {result && (
               <pre className="mt-6 p-4 rounded-2xl bg-gray-900 text-green-400 text-sm overflow-auto">

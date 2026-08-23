@@ -88,11 +88,9 @@ export default function LoginPage() {
                 routing="hash"
                 appearance={{
                   variables: {
-                    colorPrimary: "#db2777",
-                    colorText: "#4A3024",
-                    colorTextSecondary: "#6B7280",
-                    borderRadius: "1rem",
-                  },
+  colorPrimary: "#db2777",
+  borderRadius: "1rem",
+},
 
                   elements: {
                     rootBox: "w-full",
