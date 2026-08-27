@@ -42,7 +42,14 @@ const [savingName, setSavingName] = useState(false);
   useEffect(() => {
     const handleLoaderComplete = () => setHeaderVisible(true);
     window.addEventListener("loaderComplete", handleLoaderComplete);
-    return () => window.removeEventListener("loaderComplete", handleLoaderComplete);
+
+    // Fallback: if loader event never fires (direct page load), show header after timeout
+    const fallback = setTimeout(() => setHeaderVisible(true), 2000);
+
+    return () => {
+      window.removeEventListener("loaderComplete", handleLoaderComplete);
+      clearTimeout(fallback);
+    };
   }, []);
 
   // Measure header height for spacer
