@@ -47,7 +47,10 @@ verification: {
 
   icons: {
     icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
   },
+
 
   openGraph: {
     title: "The Crochet Charm",

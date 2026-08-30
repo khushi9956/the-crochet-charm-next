@@ -6,6 +6,18 @@ import { FaArrowLeft } from "react-icons/fa";
 import { useSignIn, useAuth } from "@clerk/nextjs";
 import { useState } from "react";
 
+// ── Brand style tokens (matching policy pages) ───────────────────────────────
+const C = {
+  cream:           "#FFF9F3",
+  creamLight:      "#FFF3E6",
+  terracotta:      "#A84F40",
+  terracottaLight: "#C77B70",
+  darkBrown:       "#4A3024",
+  bodyBrown:       "#5F4A40",
+  peach:           "#FBF0EB",
+  border:          "rgba(168,79,64,0.12)",
+};
+
 export default function LoginPage() {
   const router = useRouter();
   const { signIn } = useSignIn();
@@ -168,49 +180,239 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-white flex items-center justify-center px-4 py-10">
-      <div className="w-full max-w-5xl grid md:grid-cols-2 bg-white rounded-[32px] shadow-2xl overflow-hidden">
-        {/* Left Side — branding */}
-        <div className="hidden md:flex relative bg-gradient-to-br from-pink-600 via-rose-500 to-pink-400 text-white p-12 flex-col justify-center items-center text-center">
-          <div className="absolute inset-0 bg-[url('/images/background.jpg')] bg-cover bg-center opacity-20" />
-          <div className="relative z-10">
-            <img src="/images/logo.png" alt="The Crochet Charm" className="w-36 h-36 rounded-full bg-white p-2 shadow-2xl mx-auto" />
-            <h1 className="text-4xl font-bold mt-8">The Crochet Charm</h1>
-            <p className="text-pink-100 text-lg mt-4 leading-8">
-              Handmade creations crafted with love,<br />specially made for you.
+    <main
+      style={{
+        minHeight: "100vh",
+        background: C.cream,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "40px 16px",
+      }}
+    >
+      {/* ── Responsive grid container ─────────────────────────────────── */}
+      <div
+        style={{
+          width: "100%",
+          maxWidth: "960px",
+          background: "#fff",
+          borderRadius: "24px",
+          boxShadow: "0 8px 40px rgba(74,48,36,0.10)",
+          border: `1px solid ${C.border}`,
+          overflow: "hidden",
+          display: "grid",
+          gridTemplateColumns: "1fr",
+        }}
+        className="cc-login-grid"
+      >
+        {/* ── Left — branding panel ───────────────────────────────────── */}
+        <div
+          className="cc-login-left"
+          style={{
+            position: "relative",
+            background: C.creamLight,
+            padding: "56px 48px",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
+            borderRight: `1px solid ${C.border}`,
+            display: "none",
+          }}
+        >
+          {/* Subtle background texture */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundImage: "url('/images/background.jpg')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              opacity: 0.07,
+            }}
+          />
+          <div style={{ position: "relative", zIndex: 2 }}>
+            <img
+              src="/images/logo.png"
+              alt="The Crochet Charm"
+              style={{
+                width: "136px",
+                height: "136px",
+                borderRadius: "50%",
+                background: "#fff",
+                padding: "6px",
+                boxShadow: "0 8px 32px rgba(74,48,36,0.14)",
+                border: `2px solid ${C.border}`,
+              }}
+            />
+            <h1
+              style={{
+                fontFamily: "'Playfair Display', Georgia, serif",
+                fontSize: "2.1rem",
+                fontWeight: 700,
+                color: C.darkBrown,
+                marginTop: "28px",
+                marginBottom: "12px",
+              }}
+            >
+              The Crochet Charm
+            </h1>
+            <p
+              style={{
+                fontSize: "15px",
+                lineHeight: 1.75,
+                color: C.bodyBrown,
+                maxWidth: "260px",
+                margin: "0 auto 24px",
+              }}
+            >
+              Handmade creations crafted with love,
+              <br />
+              especially made for you.
             </p>
-            <div className="mt-8 flex justify-center gap-3 text-2xl">🌸 🧶 🎁 💖</div>
+            {/* Heart divider */}
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>
+              <span style={{ display: "block", width: "40px", height: "2px", background: C.terracottaLight, borderRadius: "1px" }} />
+              <span style={{ color: C.terracottaLight, fontSize: "12px" }}>&#9829;</span>
+              <span style={{ display: "block", width: "40px", height: "2px", background: C.terracottaLight, borderRadius: "1px" }} />
+            </div>
           </div>
         </div>
 
-        {/* Right Side — Login Form */}
-        <div className="p-8 sm:p-12 md:p-14">
-          <Link href="/" className="inline-flex items-center gap-2 text-gray-500 hover:text-pink-600 transition mb-8">
-            <FaArrowLeft /> Back to Home
+        {/* ── Right — login form ──────────────────────────────────────── */}
+        <div className="cc-login-right" style={{ padding: "48px 40px" }}>
+
+          {/* Back link */}
+          <Link
+            href="/"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "8px",
+              color: C.bodyBrown,
+              fontSize: "13.5px",
+              fontWeight: 500,
+              textDecoration: "none",
+              marginBottom: "32px",
+              opacity: 0.7,
+            }}
+          >
+            <FaArrowLeft style={{ fontSize: "11px" }} /> Back to Home
           </Link>
-          <div className="text-center">
-            <div className="md:hidden flex justify-center mb-6">
-              <img src="/images/logo.png" alt="The Crochet Charm" className="w-24 h-24 rounded-full shadow-lg" />
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-pink-700">Welcome to The Crochet Charm 💖</h2>
-            <p className="text-gray-500 mt-3">Login to your account to continue.</p>
+
+          {/* Mobile logo */}
+          <div className="cc-mobile-logo" style={{ display: "none", justifyContent: "center", marginBottom: "24px" }}>
+            <img
+              src="/images/logo.png"
+              alt="The Crochet Charm"
+              style={{
+                width: "80px",
+                height: "80px",
+                borderRadius: "50%",
+                boxShadow: "0 4px 16px rgba(74,48,36,0.12)",
+                border: `2px solid ${C.border}`,
+              }}
+            />
           </div>
 
-          <div className="mt-8">
+          {/* Heading block */}
+          <div style={{ textAlign: "center", marginBottom: "32px" }}>
+            {/* Eyebrow pill */}
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                background: "rgba(168,79,64,0.08)",
+                border: "1px solid rgba(168,79,64,0.15)",
+                borderRadius: "40px",
+                padding: "6px 16px 6px 10px",
+                marginBottom: "16px",
+              }}
+            >
+              <span
+                style={{
+                  width: "26px",
+                  height: "26px",
+                  borderRadius: "50%",
+                  background: `linear-gradient(135deg, ${C.terracotta}, ${C.terracottaLight})`,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "#fff",
+                  fontSize: "13px",
+                  flexShrink: 0,
+                }}
+              >
+                🧶
+              </span>
+              <span
+                style={{
+                  fontSize: "11px",
+                  fontWeight: 600,
+                  letterSpacing: "0.10em",
+                  textTransform: "uppercase",
+                  color: C.terracotta,
+                }}
+              >
+                Welcome Back
+              </span>
+            </div>
+
+            <h2
+              style={{
+                fontFamily: "'Playfair Display', Georgia, serif",
+                fontSize: "clamp(1.6rem, 3.5vw, 2rem)",
+                fontWeight: 700,
+                color: C.darkBrown,
+                margin: "0 0 8px",
+              }}
+            >
+              Sign In to Your Account
+            </h2>
+            <p style={{ fontSize: "14px", color: C.bodyBrown, opacity: 0.8, margin: 0 }}>
+              Login to continue your Crochet Charm journey.
+            </p>
+          </div>
+
+          {/* Forms */}
+          <div>
             {!isLoaded ? (
-              <div className="w-full flex justify-center py-10">
-                <div className="h-8 w-8 rounded-full border-4 border-pink-200 border-t-pink-600 animate-spin" />
+              <div style={{ display: "flex", justifyContent: "center", padding: "40px 0" }}>
+                <div
+                  style={{
+                    width: "32px",
+                    height: "32px",
+                    borderRadius: "50%",
+                    border: `3px solid ${C.peach}`,
+                    borderTopColor: C.terracotta,
+                    animation: "cc-spin 0.8s linear infinite",
+                  }}
+                />
               </div>
             ) : (
               <>
                 {error && (
-                  <div className="mb-5 p-4 rounded-2xl bg-red-50 border border-red-200 text-red-600 text-sm flex items-start gap-2">
-                    <span className="mt-0.5">⚠️</span>
+                  <div
+                    style={{
+                      marginBottom: "20px",
+                      padding: "14px 16px",
+                      borderRadius: "12px",
+                      background: "#FEF2F0",
+                      border: "1px solid rgba(168,79,64,0.20)",
+                      color: C.terracotta,
+                      fontSize: "13.5px",
+                      display: "flex",
+                      alignItems: "flex-start",
+                      gap: "8px",
+                    }}
+                  >
+                    <span style={{ marginTop: "1px" }}>⚠️</span>
                     <div>
                       {error}
                       {error.includes("doesn't exist") && (
                         <>{" "}
-                          <Link href="/signup" className="font-bold underline hover:text-red-700">
+                          <Link href="/signup" style={{ fontWeight: 700, textDecoration: "underline", color: C.terracotta }}>
                             Sign Up
                           </Link>
                         </>
@@ -220,9 +422,9 @@ export default function LoginPage() {
                 )}
 
                 {step === "identifier" && (
-                  <form onSubmit={handleIdentifierSubmit} className="space-y-5">
+                  <form onSubmit={handleIdentifierSubmit} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      <label style={{ display: "block", fontSize: "13px", fontWeight: 600, color: C.darkBrown, marginBottom: "8px" }}>
                         Email or Username
                       </label>
                       <input
@@ -230,21 +432,44 @@ export default function LoginPage() {
                         value={identifier}
                         onChange={(e) => setIdentifier(e.target.value)}
                         placeholder="Enter your email or username"
-                        className="w-full rounded-2xl border border-pink-200 bg-pink-50/40 px-5 py-4 focus:border-pink-400 focus:ring-2 focus:ring-pink-200 focus:outline-none text-gray-700 placeholder:text-gray-400"
                         autoFocus
+                        className="cc-input"
+                        style={{
+                          width: "100%",
+                          borderRadius: "12px",
+                          border: `1px solid ${C.border}`,
+                          background: C.cream,
+                          padding: "14px 16px",
+                          fontSize: "14px",
+                          color: C.darkBrown,
+                          outline: "none",
+                          boxSizing: "border-box",
+                        }}
                       />
                     </div>
                     <button
                       type="submit"
                       disabled={loading || !identifier.trim()}
-                      className="w-full bg-pink-600 hover:bg-pink-700 disabled:opacity-60 text-white rounded-2xl py-4 font-bold text-base shadow-lg transition"
+                      style={{
+                        width: "100%",
+                        background: `linear-gradient(135deg, ${C.terracotta}, #BF6055)`,
+                        color: "#fff",
+                        border: "none",
+                        borderRadius: "12px",
+                        padding: "15px",
+                        fontWeight: 700,
+                        fontSize: "15px",
+                        cursor: loading || !identifier.trim() ? "not-allowed" : "pointer",
+                        opacity: loading || !identifier.trim() ? 0.6 : 1,
+                        boxShadow: "0 4px 16px rgba(168,79,64,0.25)",
+                      }}
                     >
                       {loading ? "Checking..." : "Continue"}
                     </button>
-                    <div className="text-center mt-4">
-                      <p className="text-sm text-gray-500">
+                    <div style={{ textAlign: "center" }}>
+                      <p style={{ fontSize: "13px", color: C.bodyBrown, margin: 0 }}>
                         Don&apos;t have an account?{" "}
-                        <Link href="/signup" className="text-pink-600 hover:text-pink-700 font-bold">
+                        <Link href="/signup" style={{ color: C.terracotta, fontWeight: 700, textDecoration: "none" }}>
                           Sign Up
                         </Link>
                       </p>
@@ -253,12 +478,12 @@ export default function LoginPage() {
                 )}
 
                 {step === "password" && (
-                  <form onSubmit={handlePasswordSubmit} className="space-y-5">
-                    <p className="text-sm text-gray-500">
-                      Signing in as <span className="font-semibold text-gray-700">{safeIdentifier}</span>
+                  <form onSubmit={handlePasswordSubmit} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+                    <p style={{ fontSize: "13px", color: C.bodyBrown, margin: 0 }}>
+                      Signing in as <span style={{ fontWeight: 600, color: C.darkBrown }}>{safeIdentifier}</span>
                     </p>
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      <label style={{ display: "block", fontSize: "13px", fontWeight: 600, color: C.darkBrown, marginBottom: "8px" }}>
                         Password
                       </label>
                       <input
@@ -266,21 +491,53 @@ export default function LoginPage() {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="Enter your password"
-                        className="w-full rounded-2xl border border-pink-200 bg-pink-50/40 px-5 py-4 focus:border-pink-400 focus:ring-2 focus:ring-pink-200 focus:outline-none text-gray-700 placeholder:text-gray-400"
                         autoFocus
+                        className="cc-input"
+                        style={{
+                          width: "100%",
+                          borderRadius: "12px",
+                          border: `1px solid ${C.border}`,
+                          background: C.cream,
+                          padding: "14px 16px",
+                          fontSize: "14px",
+                          color: C.darkBrown,
+                          outline: "none",
+                          boxSizing: "border-box",
+                        }}
                       />
                     </div>
                     <button
                       type="submit"
                       disabled={loading || !password}
-                      className="w-full bg-pink-600 hover:bg-pink-700 disabled:opacity-60 text-white rounded-2xl py-4 font-bold text-base shadow-lg transition"
+                      style={{
+                        width: "100%",
+                        background: `linear-gradient(135deg, ${C.terracotta}, #BF6055)`,
+                        color: "#fff",
+                        border: "none",
+                        borderRadius: "12px",
+                        padding: "15px",
+                        fontWeight: 700,
+                        fontSize: "15px",
+                        cursor: loading || !password ? "not-allowed" : "pointer",
+                        opacity: loading || !password ? 0.6 : 1,
+                        boxShadow: "0 4px 16px rgba(168,79,64,0.25)",
+                      }}
                     >
                       {loading ? "Signing in..." : "Sign In"}
                     </button>
                     <button
                       type="button"
                       onClick={resetToIdentifier}
-                      className="w-full text-sm text-gray-500 hover:text-pink-600 transition"
+                      style={{
+                        width: "100%",
+                        background: "transparent",
+                        border: "none",
+                        color: C.bodyBrown,
+                        fontSize: "13px",
+                        cursor: "pointer",
+                        padding: "6px",
+                        opacity: 0.8,
+                      }}
                     >
                       ← Use a different email
                     </button>
@@ -288,12 +545,12 @@ export default function LoginPage() {
                 )}
 
                 {step === "otp" && (
-                  <form onSubmit={handleOtpSubmit} className="space-y-5">
-                    <p className="text-sm text-gray-500">
-                      We sent a verification code to <span className="font-semibold text-gray-700">{safeIdentifier}</span>
+                  <form onSubmit={handleOtpSubmit} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+                    <p style={{ fontSize: "13px", color: C.bodyBrown, margin: 0 }}>
+                      We sent a verification code to <span style={{ fontWeight: 600, color: C.darkBrown }}>{safeIdentifier}</span>
                     </p>
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      <label style={{ display: "block", fontSize: "13px", fontWeight: 600, color: C.darkBrown, marginBottom: "8px" }}>
                         Verification Code
                       </label>
                       <input
@@ -301,29 +558,73 @@ export default function LoginPage() {
                         value={otpCode}
                         onChange={(e) => setOtpCode(e.target.value)}
                         placeholder="Enter the code"
-                        className="w-full rounded-2xl border border-pink-200 bg-pink-50/40 px-5 py-4 focus:border-pink-400 focus:ring-2 focus:ring-pink-200 focus:outline-none text-gray-700 placeholder:text-gray-400 text-center text-lg tracking-widest"
                         autoFocus
                         maxLength={8}
+                        className="cc-input"
+                        style={{
+                          width: "100%",
+                          borderRadius: "12px",
+                          border: `1px solid ${C.border}`,
+                          background: C.cream,
+                          padding: "14px 16px",
+                          fontSize: "18px",
+                          color: C.darkBrown,
+                          outline: "none",
+                          boxSizing: "border-box",
+                          textAlign: "center",
+                          letterSpacing: "0.3em",
+                        }}
                       />
                     </div>
                     <button
                       type="submit"
                       disabled={loading || !otpCode}
-                      className="w-full bg-pink-600 hover:bg-pink-700 disabled:opacity-60 text-white rounded-2xl py-4 font-bold text-base shadow-lg transition"
+                      style={{
+                        width: "100%",
+                        background: `linear-gradient(135deg, ${C.terracotta}, #BF6055)`,
+                        color: "#fff",
+                        border: "none",
+                        borderRadius: "12px",
+                        padding: "15px",
+                        fontWeight: 700,
+                        fontSize: "15px",
+                        cursor: loading || !otpCode ? "not-allowed" : "pointer",
+                        opacity: loading || !otpCode ? 0.6 : 1,
+                        boxShadow: "0 4px 16px rgba(168,79,64,0.25)",
+                      }}
                     >
                       {loading ? "Verifying..." : "Verify"}
                     </button>
                     <button
                       type="button"
                       onClick={handleResendCode}
-                      className="w-full text-sm text-pink-600 font-semibold hover:text-pink-700 transition"
+                      style={{
+                        width: "100%",
+                        background: "transparent",
+                        border: `1px solid ${C.border}`,
+                        borderRadius: "12px",
+                        color: C.terracotta,
+                        fontSize: "13px",
+                        fontWeight: 600,
+                        cursor: "pointer",
+                        padding: "10px",
+                      }}
                     >
                       Resend code
                     </button>
                     <button
                       type="button"
                       onClick={resetToIdentifier}
-                      className="w-full text-sm text-gray-500 hover:text-pink-600 transition"
+                      style={{
+                        width: "100%",
+                        background: "transparent",
+                        border: "none",
+                        color: C.bodyBrown,
+                        fontSize: "13px",
+                        cursor: "pointer",
+                        padding: "6px",
+                        opacity: 0.8,
+                      }}
                     >
                       ← Use a different email
                     </button>
@@ -333,11 +634,51 @@ export default function LoginPage() {
             )}
           </div>
 
-          <p className="text-center text-xs text-gray-400 mt-6">
+          <p style={{ textAlign: "center", fontSize: "11.5px", color: C.bodyBrown, opacity: 0.5, marginTop: "28px" }}>
             Your account information is kept secure and private.
           </p>
         </div>
       </div>
+
+      {/* ── Scoped styles ────────────────────────────────────────────── */}
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+
+        @keyframes cc-spin {
+          to { transform: rotate(360deg); }
+        }
+
+        @media (min-width: 768px) {
+          .cc-login-grid {
+            grid-template-columns: 1fr 1fr !important;
+          }
+          .cc-login-left {
+            display: flex !important;
+          }
+          .cc-mobile-logo {
+            display: none !important;
+          }
+        }
+
+        @media (max-width: 767px) {
+          .cc-login-right {
+            padding: 36px 24px !important;
+          }
+          .cc-mobile-logo {
+            display: flex !important;
+          }
+        }
+
+        .cc-input:focus {
+          border-color: ${C.terracottaLight} !important;
+          box-shadow: 0 0 0 3px rgba(168,79,64,0.10) !important;
+        }
+
+        .cc-input::placeholder {
+          color: ${C.bodyBrown};
+          opacity: 0.45;
+        }
+      `}</style>
     </main>
   );
 }
