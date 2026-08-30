@@ -295,13 +295,15 @@ const marqueeText = "🎀 RAKHI SPECIAL SALE ✦ HANDCRAFTED WITH LOVE ✦ FREE 
                       className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-[#FFF5F7] transition-colors"
                       aria-expanded={accountOpen}
                     >
-                      <div className="w-9 h-9 rounded-full overflow-hidden bg-[#F7E9EC] flex items-center justify-center text-[#7B1E3A] font-bold">
-                        {user?.imageUrl ? (
-                          <img src={user.imageUrl} alt="Profile" className="w-full h-full object-cover" />
-                        ) : (
-                          user?.firstName?.charAt(0)?.toUpperCase() || "U"
-                        )}
-                      </div>
+                        <div className="w-9 h-9 rounded-full p-[2px] bg-gradient-to-br from-[#C94B6A] to-[#7B1E3A]">
+                          <div className="w-full h-full rounded-full overflow-hidden bg-[#F7E9EC] flex items-center justify-center text-[#7B1E3A] font-bold">
+                            {user?.imageUrl ? (
+                              <img src={user.imageUrl} alt="Profile" className="w-full h-full object-cover" />
+                            ) : (
+                              user?.firstName?.charAt(0)?.toUpperCase() || "U"
+                            )}
+                          </div>
+                        </div>
                       <div className="hidden xl:block text-left">
                         <p className="text-[11px] text-[#7B1E3A]/50 leading-none">Hello,</p>
                         <p className="text-[13px] font-bold text-[#7B1E3A]">{user?.firstName || "User"}</p>
@@ -321,10 +323,11 @@ const marqueeText = "🎀 RAKHI SPECIAL SALE ✦ HANDCRAFTED WITH LOVE ✦ FREE 
                     )}
                   </div>
                 ) : (
-                  <div className="flex items-center gap-3">
-                    <Link href="/login" className="text-[13px] font-semibold tracking-[0.08em] uppercase text-[#7B1E3A]/70 hover:text-[#C94B6A] transition-colors duration-200">Login</Link>
-                    <Link href="/signup" className="px-4 py-2 bg-[#C94B6A] hover:bg-[#7B1E3A] text-white text-[13px] font-semibold tracking-[0.08em] uppercase rounded-lg transition-colors duration-200">Sign Up</Link>
-                  </div>
+                  <Link href="/login" className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-[#FFF5F7] transition-colors" aria-label="Login">
+                    <div className="w-9 h-9 rounded-full bg-[#F7E9EC] flex items-center justify-center text-[#7B1E3A]">
+                      <FaUser size={16} />
+                    </div>
+                  </Link>
                 )}
               </div>
               
@@ -529,10 +532,10 @@ const marqueeText = "🎀 RAKHI SPECIAL SALE ✦ HANDCRAFTED WITH LOVE ✦ FREE 
                     </button>
                   </div>
                 ) : (
-                  <div className="flex items-center gap-3">
-                    <Link href="/login" onClick={() => setMenuOpen(false)} className="flex-1 text-center py-2.5 text-[13px] font-semibold tracking-[0.08em] uppercase border border-[#C94B6A] text-[#C94B6A] hover:bg-[#C94B6A] hover:text-white rounded-lg transition-colors duration-200">Login</Link>
-                    <Link href="/signup" onClick={() => setMenuOpen(false)} className="flex-1 text-center py-2.5 text-[13px] font-semibold tracking-[0.08em] uppercase bg-[#C94B6A] hover:bg-[#7B1E3A] text-white rounded-lg transition-colors duration-200">Sign Up</Link>
-                  </div>
+                  <Link href="/login" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 px-3 py-3 text-[14px] font-medium text-[#2F2A2A] hover:bg-[#FFF5F7] hover:text-[#C94B6A] rounded-lg transition-colors">
+                    <FaUser size={15} className="text-[#C94B6A]/50" />
+                    Login / Sign Up
+                  </Link>
                 )
               )}
               <p className="text-[11px] text-[#7B1E3A]/30 text-center tracking-wide mt-3">
