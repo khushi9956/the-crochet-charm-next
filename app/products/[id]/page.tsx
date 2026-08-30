@@ -1,12 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useEffect, useState, useCallback } from "react";
+import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import Swal from "sweetalert2";
+import { useAuth } from "@clerk/nextjs";
 
 export default function ProductDetails() {
   const { id } = useParams();
+  const router = useRouter();
+  const { isLoaded, isSignedIn } = useAuth();
   const [product, setProduct] = useState<any>(null);
 
   useEffect(() => {
@@ -16,7 +19,17 @@ export default function ProductDetails() {
       .catch((err) => console.log(err));
   }, [id]);
 
+  const requireAuth = useCallback(() => {
+    if (!isLoaded) return false;
+    if (!isSignedIn) {
+      router.push("/login");
+      return false;
+    }
+    return true;
+  }, [isLoaded, isSignedIn, router]);
+
   const handleAddToCart = () => {
+    if (!requireAuth()) return;
     if (!product) return;
 
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -50,6 +63,14 @@ export default function ProductDetails() {
       timer: 1500,
       showConfirmButton: false,
     });
+  };
+
+  const handleBuyNow = (e: React.MouseEvent) => {
+    if (!requireAuth()) {
+      e.preventDefault();
+      return;
+    }
+    localStorage.setItem("buyNow", JSON.stringify(product));
   };
 
   if (!product) {
@@ -131,20 +152,19 @@ export default function ProductDetails() {
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
               <button
                 onClick={handleAddToCart}
-                className="flex-1 text-white py-4 rounded-2xl font-semibold text-lg shadow-lg transition"
+                disabled={!isLoaded}
+                className="flex-1 text-white py-4 rounded-2xl font-semibold text-lg shadow-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
                 style={{ background: "#A84F40" }}
               >
-                🛒 Add to Cart
+                {isLoaded ? "🛒 Add to Cart" : "Loading..."}
               </button>
 
               <Link
                 href="/checkout"
-                onClick={() => {
-                  localStorage.setItem("buyNow", JSON.stringify(product));
-                }}
-                className="flex-1 bg-green-600 hover:bg-green-700 text-white py-4 rounded-2xl text-center font-semibold text-lg shadow-lg transition"
+                onClick={handleBuyNow}
+                className={`flex-1 text-white py-4 rounded-2xl text-center font-semibold text-lg shadow-lg transition ${!isLoaded ? "opacity-50 pointer-events-none" : "bg-green-600 hover:bg-green-700"}`}
               >
-                💚 Buy Now
+                {isLoaded ? "💚 Buy Now" : "Loading..."}
               </Link>
             </div>
 

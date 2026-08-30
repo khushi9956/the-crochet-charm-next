@@ -1,11 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@clerk/nextjs";
 
 
 export default function CheckoutPage() {
 
-
+  const router = useRouter();
+  const { isLoaded, isSignedIn } = useAuth();
 
   const [products, setProducts] = useState<any[]>([]);
 
@@ -40,6 +43,12 @@ export default function CheckoutPage() {
 
     setLoading(false);
   }, []);
+
+  useEffect(() => {
+    if (isLoaded && !isSignedIn) {
+      router.push("/login");
+    }
+  }, [isLoaded, isSignedIn, router]);
 
 
 
@@ -82,6 +91,10 @@ export default function CheckoutPage() {
 
   };
   const handlePayment = async () => {
+    if (!isSignedIn) {
+      router.push("/login");
+      return;
+    }
 
     if (
       !form.name ||
@@ -206,7 +219,7 @@ export default function CheckoutPage() {
 
 
   };
-  if (loading) {
+  if (loading || !isLoaded) {
 
     return (
 
@@ -218,6 +231,10 @@ export default function CheckoutPage() {
 
     );
 
+  }
+
+  if (!isSignedIn) {
+    return null;
   }
   return (
 

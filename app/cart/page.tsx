@@ -1,9 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@clerk/nextjs";
 
 export default function CartPage() {
+  const router = useRouter();
+  const { isLoaded, isSignedIn } = useAuth();
   const [cart, setCart] = useState<any[]>([]);
 
   useEffect(() => {
@@ -17,6 +21,23 @@ export default function CartPage() {
     setCart(updatedData);
     localStorage.setItem("cart", JSON.stringify(updatedData));
   }, []);
+
+  const requireAuth = useCallback(() => {
+    if (!isLoaded) return false;
+    if (!isSignedIn) {
+      router.push("/login");
+      return false;
+    }
+    return true;
+  }, [isLoaded, isSignedIn, router]);
+
+  const handleCheckout = (e: React.MouseEvent) => {
+    if (!requireAuth()) {
+      e.preventDefault();
+      return;
+    }
+    localStorage.setItem("checkoutCart", JSON.stringify(cart));
+  };
 
   const deliveryCharge = 60;
 
@@ -218,13 +239,11 @@ export default function CartPage() {
               </div>
 
               <Link
-              className="w-full mt-8 bg-[#A84F40] hover:bg-[#923F31] text-white py-4 rounded-2xl text-lg font-semibold transition text-center block"
+              className={`w-full mt-8 text-white py-4 rounded-2xl text-lg font-semibold transition text-center block ${!isLoaded ? "opacity-50 pointer-events-none bg-gray-400" : "bg-[#A84F40] hover:bg-[#923F31]"}`}
   href="/checkout"
-  onClick={() => {
-localStorage.setItem("checkoutCart", JSON.stringify(cart));
-  }}
+  onClick={handleCheckout}
 >
-                Proceed to Checkout 💚
+                {isLoaded ? "Proceed to Checkout 💚" : "Loading..."}
               </Link>
 
             </div>
