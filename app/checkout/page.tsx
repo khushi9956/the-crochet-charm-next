@@ -98,7 +98,7 @@ export default function CheckoutPage() {
     try {
 
       const response = await fetch(
-        "https://the-crochet-charm-api.onrender.com/api/create-order/",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/create-order/`,
         {
           method: "POST",
           headers: {
@@ -151,7 +151,7 @@ export default function CheckoutPage() {
         },
         handler: async (response: any) => {
           const verify = await fetch(
-            "https://the-crochet-charm-api.onrender.com/api/verify-payment/",
+            `${process.env.NEXT_PUBLIC_API_URL}/api/verify-payment/`,
             {
               method: "POST",
               headers: {

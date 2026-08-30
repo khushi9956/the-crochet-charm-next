@@ -10,7 +10,7 @@ export default function ProductDetails() {
   const [product, setProduct] = useState<any>(null);
 
   useEffect(() => {
-    fetch(`https://the-crochet-charm-api.onrender.com/api/products/${id}/`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products/${id}/`)
       .then((res) => res.json())
       .then((data) => setProduct(data))
       .catch((err) => console.log(err));

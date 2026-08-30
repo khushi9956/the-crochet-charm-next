@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 
-const API_URL = "https://the-crochet-charm-api.onrender.com/api/products/";
+const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/products/`;
 const MAX_RETRIES = 3;
 const BASE_DELAY_MS = 1200;
 const FETCH_TIMEOUT_MS = 12000;
