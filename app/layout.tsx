@@ -5,6 +5,15 @@ import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import Navbar from "./components/Navbar";
 import { ClerkProvider } from "@clerk/nextjs";
+import {
+  ORGANIZATION_JSON_LD,
+  OG_IMAGE,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_URL,
+  serializeJsonLd,
+} from "./lib/seo";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -15,14 +24,28 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "The Crochet Charm | Handmade Crochet Gifts & Bouquets",
+const HOME_TITLE = `${SITE_NAME} | Handmade Crochet Bouquets, Gifts & Keychains`;
 
-  description:
-    "Shop premium handmade crochet bouquets, flowers, keychains, hair accessories and personalized gifts. Custom crochet orders available across India.",
-verification: {
-  google: "sgF4PuKskRteLC1UNuG1dayioUqNth5WnNcVnuhas6c",
-},
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+
+  // Only the homepage inherits this canonical — every other route declares its
+  // own, so no page ever points at the homepage by accident.
+  alternates: {
+    canonical: "/",
+  },
+
+  // `template` only applies to child segments, so the homepage falls back to
+  // `default`.
+  title: {
+    default: HOME_TITLE,
+    template: `%s | ${SITE_NAME}`,
+  },
+
+  description: SITE_DESCRIPTION,
+
+  applicationName: SITE_NAME,
+
   keywords: [
     "crochet",
     "handmade gifts",
@@ -30,20 +53,28 @@ verification: {
     "crochet flowers",
     "crochet keychain",
     "crochet hair accessories",
+    "crochet pouches",
     "custom crochet gifts",
+    "handmade crochet India",
+    "crochet gifts India",
     "The Crochet Charm",
-    "crochet India",
   ],
+
+  category: "shopping",
 
   authors: [
     {
-      name: "The Crochet Charm",
+      name: SITE_NAME,
+      url: SITE_URL,
     },
   ],
 
-  creator: "The Crochet Charm",
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
 
-  metadataBase: new URL("https://the-crochet-charm-next.vercel.app"),
+  verification: {
+    google: "sgF4PuKskRteLC1UNuG1dayioUqNth5WnNcVnuhas6c",
+  },
 
   icons: {
     icon: "/favicon.png",
@@ -51,30 +82,39 @@ verification: {
     apple: "/favicon.png",
   },
 
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
 
   openGraph: {
-    title: "The Crochet Charm",
-    description:
-      "Premium Handmade Crochet Gifts & Bouquets.",
-    url: "https://the-crochet-charm-next.vercel.app",
-    siteName: "The Crochet Charm",
-    images: [
-      {
-        url: "/images/logo.png",
-        width: 1200,
-        height: 630,
-      },
-    ],
-    locale: "en_IN",
     type: "website",
+    locale: "en_IN",
+    url: "/",
+    siteName: SITE_NAME,
+    title: HOME_TITLE,
+    description: SITE_DESCRIPTION,
+    images: [OG_IMAGE],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "The Crochet Charm",
-    description:
-      "Premium Handmade Crochet Gifts & Bouquets.",
-    images: ["/images/logo.png"],
+    title: HOME_TITLE,
+    description: SITE_DESCRIPTION,
+    images: [OG_IMAGE.url],
+  },
+
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
   },
 };
 
@@ -83,7 +123,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-   return (
+  return (
     <ClerkProvider>
       <html
         lang="en"
@@ -95,6 +135,13 @@ export default function RootLayout({
           <main className="flex-1">
             {children}
           </main>
+
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: serializeJsonLd(ORGANIZATION_JSON_LD),
+            }}
+          />
 
           <Script src="https://checkout.razorpay.com/v1/checkout.js" />
           <GoogleAnalytics gaId="G-0C5LF2GLS2" />

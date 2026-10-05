@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
   FaTruck,
   FaClock,
@@ -10,6 +11,14 @@ import {
   FaStickyNote,
 } from "react-icons/fa";
 import Footer from "../components/Footer";
+import { pageMetadata } from "../lib/seo";
+
+export const metadata: Metadata = pageMetadata({
+  title: "Shipping Policy",
+  description:
+    "How The Crochet Charm ships handmade crochet orders in India: 2–5 business days processing, 4–8 business days delivery, and tracking once dispatched.",
+  path: "/shipping-policy",
+});
 
 export default function ShippingPolicy() {
   return (

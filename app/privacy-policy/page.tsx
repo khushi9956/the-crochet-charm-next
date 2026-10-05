@@ -1,3 +1,6 @@
+
+import type { Metadata } from "next";
+
 import {
   FaShieldAlt,
   FaClipboardList,
@@ -11,13 +14,17 @@ import {
   FaMapMarkerAlt,
   FaCheckCircle,
 } from "react-icons/fa";
+
 import Footer from "../components/Footer";
 
-export const metadata = {
-  title: "Privacy Policy | The Crochet Charm",
+import { pageMetadata } from "../lib/seo";
+
+export const metadata: Metadata = pageMetadata({
+  title: "Privacy Policy",
   description:
-    "Read our Privacy Policy to understand how The Crochet Charm collects, uses, and protects your personal information.",
-};
+    "How The Crochet Charm uses your data — name, email, phone and shipping address — to process orders, provide support and send order updates.",
+  path: "/privacy-policy",
+});
 
 export default function PrivacyPolicy() {
   return (

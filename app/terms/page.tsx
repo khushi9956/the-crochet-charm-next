@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   FaShieldAlt,
@@ -8,12 +9,14 @@ import {
   FaFileAlt,
 } from "react-icons/fa";
 import Footer from "../components/Footer";
+import { pageMetadata } from "../lib/seo";
 
-export const metadata = {
-  title: "Terms & Conditions | The Crochet Charm",
+export const metadata: Metadata = pageMetadata({
+  title: "Terms & Conditions",
   description:
-    "Read the Terms & Conditions of The Crochet Charm. By placing an order, you agree to our terms regarding orders, pricing, shipping, returns, and website content.",
-};
+    "The terms that apply when you order from The Crochet Charm, including pricing changes, order cancellation after dispatch and content ownership.",
+  path: "/terms",
+});
 
 // ── Reusable style tokens ────────────────────────────────────────────────────
 const terracotta = "#A84F40";
