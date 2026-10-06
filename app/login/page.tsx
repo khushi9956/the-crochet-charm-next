@@ -28,15 +28,19 @@ export default function LoginPage() {
   const [otpCode, setOtpCode] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [step, setStep] = useState<"identifier" | "password" | "otp">("identifier");
+  const [step, setStep] = useState<"identifier" | "password" | "otp" | "reset">("identifier");
   const [safeIdentifier, setSafeIdentifier] = useState("");
   const [otpIsEmail, setOtpIsEmail] = useState(true);
+  const [resetCode, setResetCode] = useState("");
+  const [newPassword, setNewPassword] = useState("");
 
   const resetToIdentifier = () => {
     setStep("identifier");
     setError("");
     setPassword("");
     setOtpCode("");
+    setResetCode("");
+    setNewPassword("");
   };
 
   const handleIdentifierSubmit = async (e: React.FormEvent) => {
@@ -176,6 +180,64 @@ export default function LoginPage() {
       }
     } catch {
       // Ignore resend errors
+    }
+  };
+
+  const handleForgotPassword = async () => {
+    if (!isLoaded || !signIn) return;
+
+    setLoading(true);
+    setError("");
+
+    try {
+      const { error: sendError } = await signIn.resetPasswordEmailCode.sendCode();
+      if (sendError) {
+        setError(sendError.longMessage || "Failed to send the password reset code.");
+        return;
+      }
+      setStep("reset");
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleResetSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!isLoaded || !signIn || !resetCode || !newPassword) return;
+
+    setLoading(true);
+    setError("");
+
+    try {
+      const { error: verifyError } = await signIn.resetPasswordEmailCode.verifyCode({ code: resetCode });
+      if (verifyError) {
+        if (verifyError.code === "incorrect_code") {
+          setError("Incorrect code. Please try again.");
+        } else {
+          setError(verifyError.longMessage || "Something went wrong. Please try again.");
+        }
+        return;
+      }
+
+      const { error: submitError } = await signIn.resetPasswordEmailCode.submitPassword({ password: newPassword });
+      if (submitError) {
+        setError(submitError.longMessage || "Failed to reset your password.");
+        return;
+      }
+
+      const { error: finalizeError } = await signIn.finalize();
+      if (finalizeError) {
+        setError(finalizeError.longMessage || "Failed to complete password reset.");
+        return;
+      }
+
+      router.push("/");
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -506,6 +568,26 @@ export default function LoginPage() {
                         }}
                       />
                     </div>
+                    <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "-8px" }}>
+                      <button
+                        type="button"
+                        onClick={handleForgotPassword}
+                        disabled={loading}
+                        style={{
+                          background: "transparent",
+                          border: "none",
+                          padding: "0",
+                          color: C.terracotta,
+                          fontSize: "13px",
+                          fontWeight: 600,
+                          cursor: loading ? "not-allowed" : "pointer",
+                          opacity: loading ? 0.6 : 1,
+                          textDecoration: "none",
+                        }}
+                      >
+                        Forgot Password?
+                      </button>
+                    </div>
                     <button
                       type="submit"
                       disabled={loading || !password}
@@ -611,6 +693,100 @@ export default function LoginPage() {
                       }}
                     >
                       Resend code
+                    </button>
+                    <button
+                      type="button"
+                      onClick={resetToIdentifier}
+                      style={{
+                        width: "100%",
+                        background: "transparent",
+                        border: "none",
+                        color: C.bodyBrown,
+                        fontSize: "13px",
+                        cursor: "pointer",
+                        padding: "6px",
+                        opacity: 0.8,
+                      }}
+                    >
+                      ← Use a different email
+                    </button>
+                  </form>
+                )}
+
+                {step === "reset" && (
+                  <form onSubmit={handleResetSubmit} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+                    <p style={{ fontSize: "13px", color: C.bodyBrown, margin: 0 }}>
+                      We sent a password reset code to{" "}
+                      <span style={{ fontWeight: 600, color: C.darkBrown }}>{safeIdentifier}</span>
+                    </p>
+                    <div>
+                      <label style={{ display: "block", fontSize: "13px", fontWeight: 600, color: C.darkBrown, marginBottom: "8px" }}>
+                        Verification Code
+                      </label>
+                      <input
+                        type="text"
+                        value={resetCode}
+                        onChange={(e) => setResetCode(e.target.value)}
+                        placeholder="Enter the code"
+                        autoFocus
+                        maxLength={8}
+                        className="cc-input"
+                        style={{
+                          width: "100%",
+                          borderRadius: "12px",
+                          border: `1px solid ${C.border}`,
+                          background: C.cream,
+                          padding: "14px 16px",
+                          fontSize: "18px",
+                          color: C.darkBrown,
+                          outline: "none",
+                          boxSizing: "border-box",
+                          textAlign: "center",
+                          letterSpacing: "0.3em",
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <label style={{ display: "block", fontSize: "13px", fontWeight: 600, color: C.darkBrown, marginBottom: "8px" }}>
+                        New Password
+                      </label>
+                      <input
+                        type="password"
+                        value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                        placeholder="Enter a new password"
+                        className="cc-input"
+                        style={{
+                          width: "100%",
+                          borderRadius: "12px",
+                          border: `1px solid ${C.border}`,
+                          background: C.cream,
+                          padding: "14px 16px",
+                          fontSize: "14px",
+                          color: C.darkBrown,
+                          outline: "none",
+                          boxSizing: "border-box",
+                        }}
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      disabled={loading || !resetCode || !newPassword}
+                      style={{
+                        width: "100%",
+                        background: `linear-gradient(135deg, ${C.terracotta}, #BF6055)`,
+                        color: "#fff",
+                        border: "none",
+                        borderRadius: "12px",
+                        padding: "15px",
+                        fontWeight: 700,
+                        fontSize: "15px",
+                        cursor: loading || !resetCode || !newPassword ? "not-allowed" : "pointer",
+                        opacity: loading || !resetCode || !newPassword ? 0.6 : 1,
+                        boxShadow: "0 4px 16px rgba(168,79,64,0.25)",
+                      }}
+                    >
+                      {loading ? "Resetting..." : "Reset Password"}
                     </button>
                     <button
                       type="button"
