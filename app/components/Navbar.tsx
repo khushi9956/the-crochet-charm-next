@@ -155,7 +155,7 @@ const saveName = async () => {
     return isHome ? anchor : `/${anchor}`;
   };
 
-const marqueeText = "🎀 RAKHI SPECIAL SALE ✦ HANDCRAFTED WITH LOVE ✦ FREE SHIPPING ON ORDERS ABOVE ₹1500 ✦ CUSTOM ORDERS WELCOME ✦ ";
+const marqueeText = "✦ 🪔 Diwali Special ✨ Shop Handmade Gifts HANDCRAFTED WITH LOVE ✦ 🚚 Free Shipping Above ₹899 ✦ CUSTOM ORDERS WELCOME ✦ ";
   return (
     <>
       {/* Fixed Header — announcement + navbar */}

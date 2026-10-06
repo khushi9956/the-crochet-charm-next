@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@clerk/nextjs";
+import { getTotals } from "../lib/shipping";
 
 
 export default function CheckoutPage() {
@@ -52,23 +53,7 @@ export default function CheckoutPage() {
 
 
 
-  const deliveryCharge =
-    products.length > 0 ? 40 : 0;
-
-  const subtotal = products.reduce(
-
-    (sum, item) =>
-
-      sum +
-      Number(item.price) *
-      (item.quantity || 1),
-
-    0
-
-  );
-
-  const total =
-    subtotal + deliveryCharge;
+  const { subtotal, deliveryCharge, total } = getTotals(products);
 
   const handleChange = (
 

@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@clerk/nextjs";
+import { getTotals } from "../lib/shipping";
 
 export default function CartPage() {
   const router = useRouter();
@@ -39,15 +40,7 @@ export default function CartPage() {
     localStorage.setItem("checkoutCart", JSON.stringify(cart));
   };
 
-  const deliveryCharge = 60;
-
-  const subtotal = cart.reduce(
-    (sum, item) => sum + Number(item.price) * item.quantity,
-    0
-  );
-
-  const total =
-    subtotal + (cart.length > 0 ? deliveryCharge : 0);
+  const { subtotal, deliveryCharge, total } = getTotals(cart);
 
   const removeItem = (id: number) => {
     const updatedCart = cart.filter(
