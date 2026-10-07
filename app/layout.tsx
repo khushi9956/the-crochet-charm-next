@@ -127,8 +127,12 @@ export default function RootLayout({
     <ClerkProvider>
       <html
         lang="en"
+        
         className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-      >
+      > <head>
+   <meta name="google-site-verification" content="ltkZGTXdIW1ZLh2ZMAlZLNZ9Cfp_Md2YV5_hKvOO5HI" />
+  </head>
+
         <body className="min-h-full flex flex-col">
           <Navbar />
 
